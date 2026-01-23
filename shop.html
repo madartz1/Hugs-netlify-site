@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop | HUGS</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              hugs: {
+                light: "#6ED3F5",
+                mid: "#3BAEDC",
+                navy: "#0B2A4A",
+                dark: "#0A1A2A",
+                silver: "#C9CCD1",
+                bg: "#0A1A2A",
+                card: "rgba(255,255,255,0.06)",
+                border: "rgba(255,255,255,0.14)",
+                glow: "rgba(110,211,245,0.45)",
+                text: "rgba(255,255,255,0.92)",
+                muted: "rgba(255,255,255,0.70)"
+              }
+            },
+            boxShadow: { soft: "0 20px 55px rgba(0,0,0,0.45)" }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      .bg-grid {
+        background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
+        background-size: 26px 26px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-hugs-bg text-white min-h-screen">
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 border-b border-hugs-border bg-hugs-bg/80 backdrop-blur">
+      <nav class="mx-auto max-w-6xl flex items-center justify-between px-4 py-3">
+        <div class="flex items-center gap-3">
+          <a href="/index.html" class="flex items-center gap-3">
+            <img src="./assets/hugs_logo.jpg" alt="HUGS logo" class="h-9 w-auto rounded-lg bg-white/10 p-1 ring-1 ring-hugs-border">
+            <span class="font-semibold">HUGS</span>
+          </a>
+        </div>
+
+        <div class="hidden md:flex gap-6 text-sm">
+          <a href="/index.html#about" class="text-hugs-muted hover:text-white">About</a>
+          <a href="/index.html#how" class="text-hugs-muted hover:text-white">How We Help</a>
+          <a href="/index.html#funds" class="text-hugs-muted hover:text-white">Funds</a>
+          <a href="/receipt-rewards" class="text-hugs-muted hover:text-white">Rewards</a>
+          <a href="/shop.html" class="text-hugs-light font-medium hover:text-white">Shop</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-grid opacity-60"></div>
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 h-72 w-[40rem] bg-hugs-glow blur-3xl rounded-full"></div>
+
+      <div class="relative max-w-6xl mx-auto px-4 py-16">
+        <h1 class="text-4xl md:text-5xl font-semibold max-w-3xl">Shop HUGS Merchandise</h1>
+        <p class="mt-4 max-w-xl text-hugs-muted">
+          Every purchase supports real outreach, programs, and infrastructure.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <!-- Replace SHOP_URL with your real shop link -->
+          <a href="SHOP_URL" target="_blank" rel="noopener noreferrer"
+             class="px-6 py-3 rounded-full bg-hugs-light text-black font-semibold hover:opacity-90">
+            Open Store
+          </a>
+
+          <a href="/receipt-rewards" class="px-6 py-3 rounded-full border border-hugs-border bg-white/5 hover:bg-white/10">
+            Receipt Rewards Info
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-hugs-border py-10">
+      <div class="max-w-6xl mx-auto px-4 flex items-center gap-3">
+        <img src="./assets/hugs_logo.jpg" class="h-8 w-auto rounded-lg bg-white/10 p-1 ring-1 ring-hugs-border">
+        <p class="text-sm text-hugs-muted">
+          © HUGS — "Help Under Good Service"
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
