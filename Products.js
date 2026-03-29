@@ -1,4 +1,4 @@
-const products = [
+window.products = [
   {
     id: "time-4-healing-hoodie",
     name: "HUGS – Time 4 Healing Hoodie",
@@ -12,8 +12,9 @@ const products = [
     ],
     description:
       "A premium hoodie designed to represent patience, recovery, and personal healing. Proceeds help support community wellness initiatives.",
-    buyLink: "https://buy.stripe.com/YOUR_STRIPE_LINK_1"
+    buyLink: "https://buy.stripe.com/REPLACE_WITH_STRIPE_LINK_1"
   },
+
   {
     id: "hugs-community-hoodie",
     name: "HUGS Community Hoodie",
@@ -27,6 +28,6 @@ const products = [
     ],
     description:
       "A community-first hoodie built around dignity, care, and visible impact. HUGS stands for Help Under Good Service.",
-    buyLink: "https://buy.stripe.com/YOUR_STRIPE_LINK_2"
+    buyLink: "https://buy.stripe.com/REPLACE_WITH_STRIPE_LINK_2"
   }
 ];
