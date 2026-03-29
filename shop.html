@@ -138,5 +138,19 @@
       }
       window.openGallery = openGallery;
     </script>
+    <script src="/products.js"></script>
+
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
+<script>
+  // footer year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // render products
+  const grid = document.getElementById("productGrid");
+
+  function money(n) {
+    return `$${Number(n).toFixed(0)}`;
+  }
   </body>
 </html>
