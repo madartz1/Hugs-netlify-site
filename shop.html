@@ -143,14 +143,74 @@
 <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 
 <script>
-  // footer year
-  document.getElementById("year").textContent = new Date().getFullYear();
 
-  // render products
-  const grid = document.getElementById("productGrid");
+// footer year
+document.getElementById("year").textContent = new Date().getFullYear();
 
-  function money(n) {
-    return `$${Number(n).toFixed(0)}`;
-  }
-  </body>
-</html>
+// render products
+const grid = document.getElementById("productGrid");
+
+function money(n) {
+  return `$${Number(n).toFixed(0)}`;
+}
+
+function card(p) {
+  return `
+    <article class="card">
+      <a class="card-img" href="${p.buyLink}" target="_blank" rel="noopener">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" />
+      </a>
+
+      <div class="card-body">
+        <div class="card-top">
+          <h3>${p.name}</h3>
+          <div class="price">${money(p.price)}</div>
+        </div>
+
+        <p class="muted">${p.description}</p>
+
+        <div class="card-actions">
+          <a class="btn primary" href="${p.buyLink}" target="_blank">Buy Now</a>
+
+          <button class="btn" onclick='openGallery(${JSON.stringify(p.gallery)})'>
+            View
+          </button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+if (typeof products !== "undefined") {
+  grid.innerHTML = products.map(card).join("");
+}
+
+// simple gallery modal
+function openGallery(images) {
+
+const modal = document.createElement("div");
+modal.className = "modal";
+
+modal.innerHTML = `
+<div class="modal-backdrop" onclick="this.parentElement.remove()"></div>
+
+<div class="modal-panel">
+
+<button class="modal-close" onclick="this.closest('.modal').remove()">✕</button>
+
+<div class="modal-strip">
+
+${images.map(src => `<img src="${src}" loading="lazy">`).join("")}
+
+</div>
+
+</div>
+`;
+
+document.body.appendChild(modal);
+
+}
+
+window.openGallery = openGallery;
+
+</script>
