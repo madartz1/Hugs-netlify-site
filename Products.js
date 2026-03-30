@@ -12,7 +12,7 @@ const products = [
     ],
     description:
       "A premium hoodie designed to represent patience, recovery, and personal healing. Proceeds help support community wellness initiatives.",
-    buyLink: "https://buy.stripe.com/8x2bJ06SU6Qo4ujg368ww02"
+    buyLink: "https://buy.stripe.com/aFabJ0fpq1w4d0P18c8ww01"
   },
   {
     id: "hugs-community-hoodie",
