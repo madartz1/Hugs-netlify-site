@@ -27,7 +27,7 @@ const products = [
     ],
     description:
       "A community-first hoodie built around dignity, care, and visible impact. HUGS stands for Help Under Good Service.",
-    buyLink: "https://buy.stripe.com/YOUR_STRIPE_LINK_2"
+    buyLink: "https://buy.stripe.com/aFabJ0fpq1w4d0P18c8ww01"
   }
 ];
 
