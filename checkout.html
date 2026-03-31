@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complete Your Hug</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#F7F6F3;
+text-align:center;
+padding:60px;
+color:#2B2B2B;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+background:white;
+padding:40px;
+border-radius:12px;
+box-shadow:0 6px 20px rgba(0,0,0,0.1);
+}
+
+h1{
+margin-bottom:10px;
+}
+
+.button{
+display:inline-block;
+background:#0B2A4A;
+color:white;
+padding:16px 28px;
+border-radius:6px;
+text-decoration:none;
+font-size:18px;
+margin-top:20px;
+}
+
+.button:hover{
+background:#163f6e;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Complete Your Hug</h1>
+<p>Your hug helps support someone in need.</p>
+<div id="payment"></div>
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const hug = params.get("hug");
+
+let paymentLink = "";
+
+if(hug === "3"){
+paymentLink = "https://buy.stripe.com/test_3huglink";
+}
+
+if(hug === "5"){
+paymentLink = "https://buy.stripe.com/test_5huglink";
+}
+
+if(hug === "10"){
+paymentLink = "https://buy.stripe.com/test_10huglink";
+}
+
+if(paymentLink === ""){
+document.getElementById("payment").innerHTML =
+"<p>Please choose a hug amount first.</p>";
+}else{
+document.getElementById("payment").innerHTML =
+'<a class="button" href="'+paymentLink+'">Complete Hug Payment</a>';
+}
+
+</script>
+</body>
+</html>
+
+
