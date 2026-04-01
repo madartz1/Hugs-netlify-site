@@ -123,7 +123,25 @@ Send them a Hug and help feed someone experiencing homelessness.
 <a class="button" href="#sendhug">Send a Hug</a>
 
 </section>
+<section class="section">
 
+<h2>HUGS Community Impact</h2>
+
+<div style="display:flex;justify-content:center;gap:40px;margin-top:30px;flex-wrap:wrap;">
+
+<div class="card">
+<h3 id="hugCount">128</h3>
+<p>Hugs Sent</p>
+</div>
+
+<div class="card">
+<h3 id="mealCount">128</h3>
+<p>Meals Funded</p>
+</div>
+
+</div>
+
+</section>
 
 <section class="section">
 
@@ -195,6 +213,14 @@ Powered by <strong>HUGS – Help Under Good Service</strong>
 <p>Real People Helping Real People</p>
 
 </footer>
+<script>
 
+let hugs = 128;
+let meals = 128;
+
+document.getElementById("hugCount").innerText = hugs;
+document.getElementById("mealCount").innerText = meals;
+
+</script>
 </body>
 </html>
