@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unlocked HUGS eCard</title>
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#fff6f6;
+      color:#2B2B2B;
+      text-align:center;
+      padding:40px 20px;
+    }
+    .card{
+      max-width:700px;
+      margin:0 auto;
+      background:#fff;
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 10px 35px rgba(0,0,0,.08);
+    }
+    .hidden{display:none}
+    h1{color:#8B3A2B}
+    .msg{font-size:1.08rem; line-height:1.6}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div id="loading">Unlocking your HUGS eCard...</div>
+
+    <div id="ecard" class="hidden">
+      <h1>You’ve received a HUGS eCard ❤️</h1>
+      <p id="intro"></p>
+      <p class="msg" id="message"></p>
+      <p style="margin-top:30px;color:#8B3A2B;font-weight:bold;">
+        Patience.. Recovery. Healing.
+      </p>
+    </div>
+
+    <div id="invalid" class="hidden">
+      <h1>Link not valid</h1>
+      <p>This HUGS eCard link is missing or not unlocked yet.</p>
+    </div>
+  </div>
+
+  <script>
+    (async function () {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+
+      if (!token) {
+        showInvalid();
+        return;
+      }
+
+      try {
+        const res = await fetch(
+          `https://hugslinks.com/.netlify/functions/validate-hug-token?token=${encodeURIComponent(token)}`
+        );
+        const data = await res.json();
+
+        if (!res.ok || !data.valid) {
+          showInvalid();
+          return;
+        }
+
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('ecard').classList.remove('hidden');
+        document.getElementById('intro').textContent =
+          `${data.senderName} sent a hug to ${data.recipientName}.`;
+        document.getElementById('message').textContent =
+          data.message || 'A hug just for you.';
+      } catch (err) {
+        showInvalid();
+      }
+
+      function showInvalid() {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('invalid').classList.remove('hidden');
+      }
+    })();
+  </script>
+</body>
+</html>
