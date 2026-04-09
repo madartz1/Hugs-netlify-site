@@ -3,7 +3,7 @@ const products = [
     id: "time-4-healing-hoodie",
     name: "HUGS – Time 4 Healing Hoodie",
     price: 70,
-    image: "/assets/hugs-time-4-healing-front.jpg",
+    image: "/assets/hugs-hoodie-promo.JPEG",
     gallery: [
       "/assets/hugs-time-4-healing-front.jpg",
       "/assets/hugs-time-4-healing-back.jpg",
