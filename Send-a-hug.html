@@ -838,6 +838,100 @@
 
       window.open("https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00", "_blank");
     });
+    const previewModal = document.getElementById("previewModal");
+const openPreviewBtn = document.getElementById("openPreviewBtn");
+const closePreviewBtn = document.getElementById("closePreviewBtn");
+const previewMusic = document.getElementById("previewMusic");
+const previewHearts = document.getElementById("previewHearts");
+const previewImage = document.getElementById("previewImage");
+
+const previewSlides = [
+  "/assets/scene-01.png",
+  "/assets/scene-02.png",
+  "/assets/scene-03.png",
+  "/assets/scene-04.png",
+  "/assets/scene-05.png",
+  "/assets/couple-heart.png"
+];
+
+let previewIndex = 0;
+let previewHeartTimer = null;
+
+function updatePreviewImage() {
+  previewImage.src = previewSlides[previewIndex];
+}
+
+function nextPreview() {
+  previewIndex = (previewIndex + 1) % previewSlides.length;
+  updatePreviewImage();
+}
+
+function prevPreview() {
+  previewIndex = (previewIndex - 1 + previewSlides.length) % previewSlides.length;
+  updatePreviewImage();
+}
+
+function spawnPreviewHeart() {
+  const heart = document.createElement("div");
+  heart.className = "preview-heart";
+  heart.textContent = Math.random() > 0.5 ? "❤" : "💗";
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.fontSize = (12 + Math.random() * 20) + "px";
+  heart.style.animationDuration = (6 + Math.random() * 5) + "s";
+  previewHearts.appendChild(heart);
+  setTimeout(() => heart.remove(), 9000);
+}
+
+function startPreviewHearts() {
+  stopPreviewHearts();
+  previewHeartTimer = setInterval(spawnPreviewHeart, 700);
+}
+
+function stopPreviewHearts() {
+  if (previewHeartTimer) clearInterval(previewHeartTimer);
+  previewHeartTimer = null;
+  previewHearts.innerHTML = "";
+}
+
+openPreviewBtn.addEventListener("click", () => {
+  previewModal.classList.add("open");
+  previewIndex = 0;
+  updatePreviewImage();
+  startPreviewHearts();
+});
+
+closePreviewBtn.addEventListener("click", () => {
+  previewModal.classList.remove("open");
+  previewMusic.pause();
+  previewMusic.currentTime = 0;
+  stopPreviewHearts();
+});
+
+document.getElementById("nextPreviewBtn").addEventListener("click", nextPreview);
+document.getElementById("prevPreviewBtn").addEventListener("click", prevPreview);
+
+document.getElementById("playPreviewMusicBtn").addEventListener("click", async () => {
+  try {
+    previewMusic.volume = 1;
+    await previewMusic.play();
+  } catch (err) {
+    alert("If music doesn’t start, turn off silent mode and tap Play Music again.");
+  }
+});
+
+document.getElementById("stopPreviewMusicBtn").addEventListener("click", () => {
+  previewMusic.pause();
+  previewMusic.currentTime = 0;
+});
+
+previewModal.addEventListener("click", (e) => {
+  if (e.target === previewModal) {
+    previewModal.classList.remove("open");
+    previewMusic.pause();
+    previewMusic.currentTime = 0;
+    stopPreviewHearts();
+  }
+});
     <!-- PREVIEW MODAL -->
 <div id="previewModal" class="preview-modal">
   <div class="preview-modal-card">
