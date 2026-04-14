@@ -838,6 +838,27 @@
 
       window.open("https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00", "_blank");
     });
+    <!-- PREVIEW MODAL -->
+<div id="previewModal" class="preview-modal">
+  <div class="preview-modal-card">
+
+    <button class="preview-close" id="closePreviewBtn">×</button>
+
+    <div class="preview-hearts" id="previewHearts"></div>
+
+    <audio id="previewMusic" preload="auto" loop>
+      <source src="/assets/preview-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <img id="previewImage" src="/assets/scene-01.png" alt="Card preview">
+
+    <div style="text-align:center;margin-top:15px;">
+      <button class="btn btn-secondary" id="playPreviewMusicBtn">Play Music</button>
+      <button class="btn btn-secondary" id="stopPreviewMusicBtn">Stop Music</button>
+    </div>
+
+  </div>
+</div>
   </script>
 </body>
 </html>
