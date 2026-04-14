@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You | HUGS</title>
+  <meta
+    name="description"
+    content="Your HUGS gift is ready. Share the gift code and digital hug card with your recipient."
+  />
+
+  <style>
+    :root{
+      --bg:#F7F6F3;
+      --paper:#FFFDF9;
+      --text:#2B2B2B;
+      --muted:#6B625C;
+      --navy:#0B2A4A;
+      --warm:#8B3A2B;
+      --warm-2:#B85C46;
+      --line:#E8DDD3;
+      --accent:#F2E8D8;
+      --success:#234B35;
+      --shadow:0 12px 35px rgba(0,0,0,.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .wrap{
+      width:min(960px, calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(247,246,243,.94);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .header-inner{
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .brand-mark{
+      font-size:1.4rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      color:var(--warm);
+    }
+
+    .brand-sub{
+      font-size:.82rem;
+      color:var(--muted);
+    }
+
+    .nav{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .nav a{
+      font-weight:700;
+      color:var(--navy);
+    }
+
+    .hero{
+      padding:54px 0 24px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--accent);
+      color:var(--warm);
+      font-weight:700;
+      font-size:.9rem;
+      margin-bottom:16px;
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size:clamp(2rem, 4vw, 3.6rem);
+      line-height:1.05;
+      color:var(--navy);
+    }
+
+    .lead{
+      margin:0;
+      color:var(--muted);
+      font-size:1.05rem;
+      max-width:60ch;
+    }
+
+    .card,
+    .info-card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+
+    .main-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      padding:10px 0 40px;
+    }
+
+    .card{
+      padding:24px;
+    }
+
+    .section-title{
+      margin:0 0 14px;
+      color:var(--navy);
+      font-size:1.35rem;
+    }
+
+    .gift-code{
+      display:inline-block;
+      padding:16px 20px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      font-size:1.3rem;
+      font-weight:800;
+      letter-spacing:.14em;
+      color:var(--warm);
+      margin:6px 0 18px;
+      word-break:break-word;
+    }
+
+    .detail-box{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:16px;
+      margin:14px 0;
+    }
+
+    .detail-row{
+      padding:10px 0;
+      border-top:1px solid var(--line);
+    }
+
+    .detail-row:first-child{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .label{
+      display:block;
+      font-size:.85rem;
+      color:var(--muted);
+      margin-bottom:4px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      font-weight:700;
+    }
+
+    .value{
+      color:var(--text);
+      font-weight:700;
+      word-break:break-word;
+    }
+
+    .message-box{
+      background:var(--accent);
+      border-radius:16px;
+      padding:16px;
+      color:var(--text);
+      margin-top:14px;
+      white-space:pre-wrap;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:50px;
+      padding:0 20px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid transparent;
+      transition:.2s ease;
+      cursor:pointer;
+      font:inherit;
+    }
+
+    .btn-primary{
+      background:var(--warm);
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:var(--warm-2);
+    }
+
+    .btn-secondary{
+      background:transparent;
+      color:var(--navy);
+      border-color:var(--navy);
+    }
+
+    .btn-secondary:hover{
+      background:#fff;
+    }
+
+    .info-card{
+      padding:22px;
+      margin-bottom:16px;
+    }
+
+    .mini-steps{
+      display:grid;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .mini-step{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px 0;
+      border-top:1px solid var(--line);
+    }
+
+    .mini-step:first-child{
+      border-top:0;
+      padding-top:0;
+    }
+
+    .bubble{
+      flex:0 0 34px;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      background:var(--accent);
+      color:var(--warm);
+      font-weight:800;
+      display:grid;
+      place-items:center;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .success{
+      color:var(--success);
+      font-weight:800;
+    }
+
+    .fallback{
+      display:none;
+      background:#fff7f2;
+      border:1px dashed #d8c3b4;
+      border-radius:16px;
+      padding:18px;
+    }
+
+    .footer{
+      padding:22px 0 40px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    @media (max-width: 900px){
+      .main-grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">HUGS</span>
+        <span class="brand-sub">Help Under Good Service</span>
+      </a>
+
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/shop.html">Shop</a>
+        <a href="/receipt-rewards.html">Receipt Rewards</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Your gift is ready</div>
+        <h1>You just sent a hug 💌</h1>
+        <p class="lead" id="introText">
+          Your gift details are ready below. Share the code and link with your recipient so they can open the HUGS digital card experience.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap main-grid">
+        <div class="card">
+          <h2 class="section-title">Gift details</h2>
+
+          <span class="label">Gift code</span>
+          <div class="gift-code" id="giftCodeDisplay">Loading...</div>
+
+          <div class="detail-box" id="giftDetails">
+            <div class="detail-row">
+              <span class="label">Recipient</span>
+              <div class="value" id="recipientDisplay">Loading...</div>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Gift link</span>
+              <div class="value" id="giftLinkDisplay">Loading...</div>
+            </div>
+
+            <div class="detail-row">
+              <span class="label">Occasion</span>
+              <div class="value" id="occasionDisplay">Loading...</div>
+            </div>
+          </div>
+
+          <div>
+            <span class="label">Your message</span>
+            <div class="message-box" id="messageDisplay">Loading...</div>
+          </div>
+
+          <div class="actions">
+            <a id="openCardBtn" class="btn btn-primary" href="#" target="_blank" rel="noopener">
+              Open Gift Card
+            </a>
+
+            <a id="emailRecipientBtn" class="btn btn-secondary" href="#">
+              Email Recipient
+            </a>
+
+            <button id="copyGiftBtn" class="btn btn-secondary" type="button">
+              Copy Gift Details
+            </button>
+          </div>
+
+          <div class="actions">
+            <a id="smsBtn" class="btn btn-secondary" href="#">
+              Text the Gift
+            </a>
+
+            <a class="btn btn-secondary" href="/send-a-hug.html">
+              Send Another Hug
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="info-card">
+            <h3 class="section-title">What to do next</h3>
+
+            <div class="mini-steps">
+              <div class="mini-step">
+                <div class="bubble">1</div>
+                <div>
+                  <strong>Copy the gift details</strong>
+                  <div class="muted">Use the copy button to save the code and link.</div>
+                </div>
+              </div>
+
+              <div class="mini-step">
+                <div class="bubble">2</div>
+                <div>
+                  <strong>Email or text the recipient</strong>
+                  <div class="muted">Use the built-in share buttons below.</div>
+                </div>
+              </div>
+
+              <div class="mini-step">
+                <div class="bubble">3</div>
+                <div>
+                  <strong>Let them open the card</strong>
+                  <div class="muted">They will use the gift code with the link you send.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 class="section-title">Helpful note</h3>
+            <p class="muted" style="margin:0;">
+              This thank-you page uses the gift details saved in your browser when you clicked “Pay $10 &amp; Send the Hug.” If you opened this page directly without going through checkout, the gift details may not appear.
+            </p>
+          </div>
+
+          <div class="info-card fallback" id="fallbackBox">
+            <h3 class="section-title">No saved gift details found</h3>
+            <p class="muted">
+              It looks like this page was opened without saved checkout details. Go back to your Send a Hug page, fill out the form, and click the payment button again.
+            </p>
+            <a class="btn btn-primary" href="/send-a-hug.html">Go to Send a Hug</a>
+          </div>
+
+          <div class="info-card">
+            <h3 class="section-title success">Ready to share</h3>
+            <p class="muted" style="margin:0;">
+              Once you send the recipient the gift code and link, they can open their HUGS digital card experience.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      © <span id="year"></span> HUGS — Help Under Good Service
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const giftDataRaw = localStorage.getItem("latestHugGift");
+    const fallbackBox = document.getElementById("fallbackBox");
+
+    if (!giftDataRaw) {
+      document.getElementById("giftCodeDisplay").textContent = "No gift found";
+      document.getElementById("recipientDisplay").textContent = "No saved recipient";
+      document.getElementById("giftLinkDisplay").textContent = "No saved gift link";
+      document.getElementById("occasionDisplay").textContent = "No saved occasion";
+      document.getElementById("messageDisplay").textContent = "No saved message";
+      document.getElementById("openCardBtn").style.display = "none";
+      document.getElementById("emailRecipientBtn").style.display = "none";
+      document.getElementById("copyGiftBtn").style.display = "none";
+      document.getElementById("smsBtn").style.display = "none";
+      fallbackBox.style.display = "block";
+    } else {
+      const gift = JSON.parse(giftDataRaw);
+
+      const senderName = gift.senderName || "A friend";
+      const senderEmail = gift.senderEmail || "";
+      const recipientName = gift.recipientName || "Your recipient";
+      const recipientEmail = gift.recipientEmail || "";
+      const occasion = gift.occasion || "A special moment";
+      const message = gift.message || "A special hug just for you.";
+      const giftCode = gift.giftCode || "HUG-UNKNOWN";
+      const giftLink = gift.giftLink || "https://hugscard.netlify.app/gift.html";
+
+      document.getElementById("introText").textContent =
+        `${senderName}, your gift for ${recipientName} is ready. Share the code and link below so they can open the HUGS card experience.`;
+
+      document.getElementById("giftCodeDisplay").textContent = giftCode;
+      document.getElementById("recipientDisplay").textContent =
+        recipientEmail ? `${recipientName} (${recipientEmail})` : recipientName;
+      document.getElementById("giftLinkDisplay").textContent = giftLink;
+      document.getElementById("occasionDisplay").textContent = occasion;
+      document.getElementById("messageDisplay").textContent = message;
+
+      document.getElementById("openCardBtn").href = giftLink;
+
+      const emailSubject = encodeURIComponent(`A HUGS gift for ${recipientName}`);
+      const emailBody = encodeURIComponent(
+`Hi ${recipientName},
+
+${senderName} sent you a HUGS digital gift.
+
+Gift Code: ${giftCode}
+Gift Link: ${giftLink}
+
+Occasion: ${occasion}
+
+Message:
+${message}
+
+From,
+${senderName}${senderEmail ? `\n${senderEmail}` : ""}`
+      );
+
+      document.getElementById("emailRecipientBtn").href =
+        `mailto:${recipientEmail}?subject=${emailSubject}&body=${emailBody}`;
+
+      const smsBody = encodeURIComponent(
+`Hi ${recipientName}! ${senderName} sent you a HUGS digital gift. Gift Code: ${giftCode} Gift Link: ${giftLink} Message: ${message}`
+      );
+      document.getElementById("smsBtn").href = `sms:?&body=${smsBody}`;
+
+      document.getElementById("copyGiftBtn").addEventListener("click", async () => {
+        const copyText =
+`Recipient: ${recipientName}${recipientEmail ? ` (${recipientEmail})` : ""}
+Gift Code: ${giftCode}
+Gift Link: ${giftLink}
+Occasion: ${occasion}
+Message: ${message}`;
+
+        try {
+          await navigator.clipboard.writeText(copyText);
+          alert("Gift details copied.");
+        } catch (err) {
+          alert("Could not copy automatically. Please copy the details manually.");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
