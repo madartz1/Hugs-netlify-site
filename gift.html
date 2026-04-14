@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Your HUG Gift</title>
+  <meta name="description" content="Enter your HUGS gift code to open your digital hug card." />
+  <style>
+    :root{
+      --bg:#F7F6F3;
+      --paper:#FFFDF9;
+      --text:#2B2B2B;
+      --muted:#6B625C;
+      --navy:#0B2A4A;
+      --warm:#8B3A2B;
+      --warm-2:#B85C46;
+      --line:#E8DDD3;
+      --accent:#F2E8D8;
+      --shadow:0 12px 35px rgba(0,0,0,.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    .card{
+      width:min(680px, 100%);
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:28px;
+      text-align:center;
+    }
+
+    h1{
+      margin:0 0 10px;
+      color:var(--navy);
+      font-size:clamp(2rem, 4vw, 3rem);
+    }
+
+    p{
+      margin:0 0 18px;
+      color:var(--muted);
+    }
+
+    .gift-box{
+      margin:20px 0;
+      padding:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:16px;
+    }
+
+    label{
+      display:block;
+      font-weight:700;
+      color:var(--navy);
+      margin-bottom:8px;
+      text-align:left;
+    }
+
+    input{
+      width:100%;
+      border:1px solid #d9cec4;
+      border-radius:14px;
+      padding:14px;
+      font:inherit;
+      color:var(--text);
+      background:#fff;
+      text-align:center;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .actions{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:50px;
+      padding:0 20px;
+      border-radius:999px;
+      font-weight:800;
+      border:1px solid transparent;
+      transition:.2s ease;
+      cursor:pointer;
+      text-decoration:none;
+      font:inherit;
+    }
+
+    .btn-primary{
+      background:var(--warm);
+      color:#fff;
+    }
+
+    .btn-primary:hover{
+      background:var(--warm-2);
+    }
+
+    .btn-secondary{
+      background:transparent;
+      color:var(--navy);
+      border-color:var(--navy);
+    }
+
+    .status{
+      margin-top:16px;
+      font-weight:700;
+      min-height:24px;
+    }
+
+    .success{ color:#234B35; }
+    .error{ color:#8B3A2B; }
+
+    @media (max-width:640px){
+      .actions{
+        flex-direction:column;
+      }
+      .btn{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>You’ve received a HUG 💌</h1>
+    <p>Enter your gift code to open the digital hug card experience.</p>
+
+    <div class="gift-box">
+      <label for="giftCodeInput">Gift code</label>
+      <input id="giftCodeInput" type="text" placeholder="Enter your code" />
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-primary" id="openGiftBtn" type="button">Open My Gift</button>
+      <a class="btn btn-secondary" href="/">Back to Home</a>
+    </div>
+
+    <div id="statusMsg" class="status"></div>
+  </div>
+
+  <script>
+    document.getElementById("openGiftBtn").addEventListener("click", function () {
+      const code = document.getElementById("giftCodeInput").value.trim().toUpperCase();
+      const status = document.getElementById("statusMsg");
+
+      if (!code) {
+        status.textContent = "Please enter your gift code.";
+        status.className = "status error";
+        return;
+      }
+
+      // Simple unlock logic for now:
+      // Any code starting with HUG- will open the card
+      if (code.startsWith("HUG-")) {
+        status.textContent = "Gift accepted. Opening your card...";
+        status.className = "status success";
+
+        setTimeout(() => {
+          window.location.href = "https://hugslinks.com/";
+        }, 900);
+      } else {
+        status.textContent = "That code does not look valid. Please check the message you received.";
+        status.className = "status error";
+      }
+    });
+  </script>
+</body>
+</html>
