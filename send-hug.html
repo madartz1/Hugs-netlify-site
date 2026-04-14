@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Send a Hug | HUGS</title>
+
+<style>
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+margin:0;
+background:#F7F6F3;
+color:#2B2B2B;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+padding:40px 20px;
+}
+
+h1{
+color:#0B2A4A;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:16px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:15px;
+}
+
+input, textarea{
+width:100%;
+padding:12px;
+margin-top:6px;
+border-radius:10px;
+border:1px solid #ddd;
+font-size:16px;
+}
+
+textarea{
+min-height:120px;
+}
+
+button{
+margin-top:20px;
+padding:14px;
+width:100%;
+font-size:18px;
+border-radius:999px;
+border:none;
+cursor:pointer;
+}
+
+.primary{
+background:#8B3A2B;
+color:white;
+}
+
+.preview{
+background:#0B2A4A;
+color:white;
+}
+
+.price{
+margin-top:20px;
+font-size:24px;
+font-weight:bold;
+}
+
+.note{
+margin-top:10px;
+font-size:14px;
+color:#666;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+<h1>Send a Digital Hug</h1>
+
+<div class="card">
+
+<label>Your Name</label>
+<input id="senderName">
+
+<label>Your Email</label>
+<input id="senderEmail">
+
+<label>Recipient Name</label>
+<input id="recipientName">
+
+<label>Recipient Email</label>
+<input id="recipientEmail">
+
+<label>Your Message</label>
+<textarea id="message"></textarea>
+
+<div class="price">$10 Digital Hug</div>
+
+<button class="primary" id="payBtn">
+Pay $10 & Send Hug
+</button>
+
+<button class="preview" onclick="window.open('https://hugslinks.com/gift.html','_blank')">
+Preview Hug Card
+</button>
+
+<div class="note">
+After payment you will receive a gift code to send the hug card.
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function generateCode(){
+
+const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+let code="HUG-";
+
+for(let i=0;i<8;i++){
+
+code+=chars[Math.floor(Math.random()*chars.length)];
+
+}
+
+return code;
+
+}
+
+document.getElementById("payBtn").onclick=function(){
+
+const senderName=document.getElementById("senderName").value.trim();
+const senderEmail=document.getElementById("senderEmail").value.trim();
+const recipientName=document.getElementById("recipientName").value.trim();
+const recipientEmail=document.getElementById("recipientEmail").value.trim();
+const message=document.getElementById("message").value.trim();
+
+if(!senderName || !senderEmail || !recipientName || !recipientEmail){
+
+alert("Please complete all fields.");
+
+return;
+
+}
+
+const giftCode=generateCode();
+
+const giftData={
+senderName,
+senderEmail,
+recipientName,
+recipientEmail,
+message,
+giftCode,
+giftLink:"https://hugslinks.com/gift.html"
+};
+
+localStorage.setItem("hugGift",JSON.stringify(giftData));
+
+window.open(
+"https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00",
+"_blank"
+);
+
+}
+
+</script>
+
+</body>
+
+</html>
