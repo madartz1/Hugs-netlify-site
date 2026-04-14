@@ -27,9 +27,7 @@
 
     *{box-sizing:border-box}
 
-    html{
-      scroll-behavior:smooth;
-    }
+    html{scroll-behavior:smooth}
 
     body{
       margin:0;
@@ -420,6 +418,102 @@
       text-align:center;
     }
 
+    .preview-modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.7);
+      backdrop-filter:blur(6px);
+      z-index:9999;
+      padding:20px;
+    }
+
+    .preview-modal.open{
+      display:block;
+    }
+
+    .preview-modal-card{
+      max-width:900px;
+      margin:5vh auto;
+      background:#fff;
+      border-radius:18px;
+      padding:18px;
+      position:relative;
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+
+    .preview-close{
+      position:absolute;
+      top:12px;
+      right:14px;
+      width:42px;
+      height:42px;
+      border:0;
+      border-radius:999px;
+      background:#111;
+      color:#fff;
+      font-size:24px;
+      cursor:pointer;
+      z-index:3;
+    }
+
+    .preview-hearts{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:1;
+    }
+
+    .preview-heart{
+      position:absolute;
+      bottom:-20px;
+      opacity:.7;
+      animation:previewFloat linear forwards;
+      z-index:1;
+    }
+
+    @keyframes previewFloat{
+      from{transform:translateY(0) scale(1); opacity:0;}
+      10%{opacity:.7;}
+      to{transform:translateY(-120vh) scale(1.5); opacity:0;}
+    }
+
+    .preview-title{
+      margin:0 0 14px;
+      color:var(--navy);
+      font-size:1.5rem;
+      position:relative;
+      z-index:2;
+      text-align:center;
+    }
+
+    .preview-stage{
+      position:relative;
+      z-index:2;
+    }
+
+    #previewImage{
+      width:100%;
+      max-height:70vh;
+      object-fit:contain;
+      border-radius:14px;
+      background:#f9f4ee;
+      box-shadow:var(--shadow);
+    }
+
+    .preview-controls{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      margin-top:15px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
     @media (max-width: 900px){
       .hero-grid,
       .form-layout{
@@ -445,73 +539,12 @@
       .nav{
         gap:12px;
       }
+
+      .preview-controls .btn{
+        width:100%;
+      }
     }
-    /* ===========================
-   PREVIEW MODAL CSS
-   ADD THIS PART
-   =========================== */
-
-.preview-modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(6px);
-  z-index:9999;
-  padding:20px;
-}
-
-.preview-modal.open{
-  display:block;
-}
-
-.preview-modal-card{
-  max-width:900px;
-  margin:5vh auto;
-  background:#fff;
-  border-radius:18px;
-  padding:18px;
-  position:relative;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
-  overflow:hidden;
-}
-
-.preview-close{
-  position:absolute;
-  top:12px;
-  right:14px;
-  width:42px;
-  height:42px;
-  border:0;
-  border-radius:999px;
-  background:#111;
-  color:#fff;
-  font-size:24px;
-  cursor:pointer;
-}
-
-.preview-hearts{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-}
-
-.preview-heart{
-  position:absolute;
-  bottom:-20px;
-  opacity:.7;
-  animation:previewFloat linear forwards;
-}
-
-@keyframes previewFloat{
-  from{transform:translateY(0) scale(1); opacity:0;}
-  10%{opacity:.7;}
-  to{transform:translateY(-120vh) scale(1.5); opacity:0;}
-}
-
-</style>
-  
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -543,7 +576,7 @@
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#send-hug">Send a $10 Hug ❤️</a>
-            <a class="btn btn-secondary" href="https://hugscard.netlify.app/" target="_blank" rel="noopener">Preview Hug Card</a>
+            <button type="button" class="btn btn-secondary" id="openPreviewBtnTop">Preview Hug Card 💌</button>
           </div>
 
           <div class="stats">
@@ -588,7 +621,7 @@
           >
             <input type="hidden" name="form-name" value="send-a-hug" />
             <input type="hidden" id="giftCode" name="giftCode" />
-            <input type="hidden" id="giftLink" name="giftLink" value="https://hugscard.netlify.app/gift.html" />
+            <input type="hidden" id="giftLink" name="giftLink" value="https://hugslinks.com/gift.html" />
             <p style="display:none;">
               <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
             </p>
@@ -644,7 +677,7 @@
                   id="shareLink"
                   name="shareLink"
                   type="url"
-                  value="https://hugscard.netlify.app/gift.html"
+                  value="https://hugslinks.com/gift.html"
                   readonly
                 />
                 <div class="help">This is the gift link that will be shared after payment.</div>
@@ -660,22 +693,22 @@
             </div>
 
             <button
-  type="button"
-  class="btn btn-primary"
-  id="payAndSendBtn"
-  style="width:100%;"
->
-  Pay $10 & Send the Hug ❤️
-</button>
+              type="button"
+              class="btn btn-primary"
+              id="payAndSendBtn"
+              style="width:100%;"
+            >
+              Pay $10 & Send the Hug ❤️
+            </button>
 
-<button
-  type="button"
-  class="btn btn-secondary"
-  id="openPreviewBtn"
-  style="width:100%; margin-top:10px;"
->
-  Preview the Hug Card 💌
-</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              id="openPreviewBtnBottom"
+              style="width:100%; margin-top:10px;"
+            >
+              Preview the Hug Card 💌
+            </button>
 
             <div class="note">
               This version generates a gift code for the buyer, stores the sender and recipient details, and opens secure Stripe checkout. After payment, Stripe should redirect to your thank-you page where the buyer can email the recipient the card and gift code.
@@ -734,7 +767,7 @@
             <p style="margin:0; color:var(--muted);">
               In Stripe, set your payment link redirect to:
               <br /><br />
-              <strong style="color:var(--navy);">https://hugs4valentines.netlify.app/thank-you.html</strong>
+              <strong style="color:var(--navy);">https://hugslinks.com/thank-you.html</strong>
             </p>
           </div>
         </div>
@@ -787,6 +820,31 @@
     </div>
   </footer>
 
+  <div id="previewModal" class="preview-modal">
+    <div class="preview-modal-card">
+      <button type="button" class="preview-close" id="closePreviewBtn">×</button>
+
+      <div class="preview-hearts" id="previewHearts"></div>
+
+      <h3 class="preview-title">Preview the Hug Card</h3>
+
+      <audio id="previewMusic" preload="auto" loop>
+        <source src="/assets/preview-music.mp3" type="audio/mpeg">
+      </audio>
+
+      <div class="preview-stage">
+        <img id="previewImage" src="/assets/scene-01.png" alt="Card preview">
+      </div>
+
+      <div class="preview-controls">
+        <button type="button" class="btn btn-secondary" id="prevPreviewBtn">Back</button>
+        <button type="button" class="btn btn-secondary" id="nextPreviewBtn">Next</button>
+        <button type="button" class="btn btn-secondary" id="playPreviewMusicBtn">Play Music</button>
+        <button type="button" class="btn btn-secondary" id="stopPreviewMusicBtn">Stop Music</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -818,7 +876,7 @@
       }
 
       const code = generateGiftCode();
-      const giftLink = "https://hugscard.netlify.app/gift.html";
+      const giftLink = "https://hugslinks.com/gift.html";
 
       document.getElementById("giftCode").value = code;
       document.getElementById("giftLink").value = giftLink;
@@ -838,121 +896,103 @@
 
       window.open("https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00", "_blank");
     });
+
     const previewModal = document.getElementById("previewModal");
-const openPreviewBtn = document.getElementById("openPreviewBtn");
-const closePreviewBtn = document.getElementById("closePreviewBtn");
-const previewMusic = document.getElementById("previewMusic");
-const previewHearts = document.getElementById("previewHearts");
-const previewImage = document.getElementById("previewImage");
+    const openPreviewBtnTop = document.getElementById("openPreviewBtnTop");
+    const openPreviewBtnBottom = document.getElementById("openPreviewBtnBottom");
+    const closePreviewBtn = document.getElementById("closePreviewBtn");
+    const previewMusic = document.getElementById("previewMusic");
+    const previewHearts = document.getElementById("previewHearts");
+    const previewImage = document.getElementById("previewImage");
 
-const previewSlides = [
-  "/assets/scene-01.png",
-  "/assets/scene-02.png",
-  "/assets/scene-03.png",
-  "/assets/scene-04.png",
-  "/assets/scene-05.png",
-  "/assets/couple-heart.png"
-];
+    const previewSlides = [
+      "/assets/scene-01.png",
+      "/assets/scene-02.png",
+      "/assets/scene-03.png",
+      "/assets/scene-04.png",
+      "/assets/scene-05.png",
+      "/assets/couple-heart.png"
+    ];
 
-let previewIndex = 0;
-let previewHeartTimer = null;
+    let previewIndex = 0;
+    let previewHeartTimer = null;
 
-function updatePreviewImage() {
-  previewImage.src = previewSlides[previewIndex];
-}
+    function updatePreviewImage() {
+      previewImage.src = previewSlides[previewIndex];
+    }
 
-function nextPreview() {
-  previewIndex = (previewIndex + 1) % previewSlides.length;
-  updatePreviewImage();
-}
+    function nextPreview() {
+      previewIndex = (previewIndex + 1) % previewSlides.length;
+      updatePreviewImage();
+    }
 
-function prevPreview() {
-  previewIndex = (previewIndex - 1 + previewSlides.length) % previewSlides.length;
-  updatePreviewImage();
-}
+    function prevPreview() {
+      previewIndex = (previewIndex - 1 + previewSlides.length) % previewSlides.length;
+      updatePreviewImage();
+    }
 
-function spawnPreviewHeart() {
-  const heart = document.createElement("div");
-  heart.className = "preview-heart";
-  heart.textContent = Math.random() > 0.5 ? "❤" : "💗";
-  heart.style.left = Math.random() * 100 + "%";
-  heart.style.fontSize = (12 + Math.random() * 20) + "px";
-  heart.style.animationDuration = (6 + Math.random() * 5) + "s";
-  previewHearts.appendChild(heart);
-  setTimeout(() => heart.remove(), 9000);
-}
+    function spawnPreviewHeart() {
+      const heart = document.createElement("div");
+      heart.className = "preview-heart";
+      heart.textContent = Math.random() > 0.5 ? "❤" : "💗";
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.fontSize = (12 + Math.random() * 20) + "px";
+      heart.style.animationDuration = (6 + Math.random() * 5) + "s";
+      previewHearts.appendChild(heart);
+      setTimeout(() => heart.remove(), 9000);
+    }
 
-function startPreviewHearts() {
-  stopPreviewHearts();
-  previewHeartTimer = setInterval(spawnPreviewHeart, 700);
-}
+    function startPreviewHearts() {
+      stopPreviewHearts();
+      previewHeartTimer = setInterval(spawnPreviewHeart, 700);
+    }
 
-function stopPreviewHearts() {
-  if (previewHeartTimer) clearInterval(previewHeartTimer);
-  previewHeartTimer = null;
-  previewHearts.innerHTML = "";
-}
+    function stopPreviewHearts() {
+      if (previewHeartTimer) clearInterval(previewHeartTimer);
+      previewHeartTimer = null;
+      previewHearts.innerHTML = "";
+    }
 
-openPreviewBtn.addEventListener("click", () => {
-  previewModal.classList.add("open");
-  previewIndex = 0;
-  updatePreviewImage();
-  startPreviewHearts();
-});
+    function openPreviewModal() {
+      previewModal.classList.add("open");
+      previewIndex = 0;
+      updatePreviewImage();
+      startPreviewHearts();
+    }
 
-closePreviewBtn.addEventListener("click", () => {
-  previewModal.classList.remove("open");
-  previewMusic.pause();
-  previewMusic.currentTime = 0;
-  stopPreviewHearts();
-});
+    function closePreviewModal() {
+      previewModal.classList.remove("open");
+      previewMusic.pause();
+      previewMusic.currentTime = 0;
+      stopPreviewHearts();
+    }
 
-document.getElementById("nextPreviewBtn").addEventListener("click", nextPreview);
-document.getElementById("prevPreviewBtn").addEventListener("click", prevPreview);
+    openPreviewBtnTop.addEventListener("click", openPreviewModal);
+    openPreviewBtnBottom.addEventListener("click", openPreviewModal);
+    closePreviewBtn.addEventListener("click", closePreviewModal);
 
-document.getElementById("playPreviewMusicBtn").addEventListener("click", async () => {
-  try {
-    previewMusic.volume = 1;
-    await previewMusic.play();
-  } catch (err) {
-    alert("If music doesn’t start, turn off silent mode and tap Play Music again.");
-  }
-});
+    document.getElementById("nextPreviewBtn").addEventListener("click", nextPreview);
+    document.getElementById("prevPreviewBtn").addEventListener("click", prevPreview);
 
-document.getElementById("stopPreviewMusicBtn").addEventListener("click", () => {
-  previewMusic.pause();
-  previewMusic.currentTime = 0;
-});
+    document.getElementById("playPreviewMusicBtn").addEventListener("click", async () => {
+      try {
+        previewMusic.volume = 1;
+        await previewMusic.play();
+      } catch (err) {
+        alert("If music doesn’t start, turn off silent mode and tap Play Music again.");
+      }
+    });
 
-previewModal.addEventListener("click", (e) => {
-  if (e.target === previewModal) {
-    previewModal.classList.remove("open");
-    previewMusic.pause();
-    previewMusic.currentTime = 0;
-    stopPreviewHearts();
-  }
-});
-    <!-- PREVIEW MODAL -->
-<div id="previewModal" class="preview-modal">
-  <div class="preview-modal-card">
+    document.getElementById("stopPreviewMusicBtn").addEventListener("click", () => {
+      previewMusic.pause();
+      previewMusic.currentTime = 0;
+    });
 
-    <button class="preview-close" id="closePreviewBtn">×</button>
-
-    <div class="preview-hearts" id="previewHearts"></div>
-
-    <audio id="previewMusic" preload="auto" loop>
-      <source src="/assets/preview-music.mp3" type="audio/mpeg">
-    </audio>
-
-    <img id="previewImage" src="/assets/scene-01.png" alt="Card preview">
-
-    <div style="text-align:center;margin-top:15px;">
-      <button class="btn btn-secondary" id="playPreviewMusicBtn">Play Music</button>
-      <button class="btn btn-secondary" id="stopPreviewMusicBtn">Stop Music</button>
-    </div>
-
-  </div>
-</div>
+    previewModal.addEventListener("click", (e) => {
+      if (e.target === previewModal) {
+        closePreviewModal();
+      }
+    });
   </script>
 </body>
 </html>
