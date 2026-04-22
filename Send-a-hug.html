@@ -1,1061 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Send a Hug | HUGS</title>
-  <meta
-    name="description"
-    content="Send a digital hug for $10. Share comfort, care, and support through the HUGS community."
-  />
-
-
-.
-  <style>
-    :root{
-      --bg:#F7F6F3;
-      --paper:#FFFDF9;
-      --text:#2B2B2B;
-      --muted:#6B625C;
-      --navy:#0B2A4A;
-      --warm:#8B3A2B;
-      --warm-2:#B85C46;
-      --line:#E8DDD3;
-      --accent:#F2E8D8;
-      --success:#234B35;
-      --shadow:0 12px 35px rgba(0,0,0,.08);
-      --radius:18px;
-    }
-
-    *{box-sizing:border-box}
-
-    html{scroll-behavior:smooth}
-
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.5;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    img{
-      max-width:100%;
-      display:block;
-    }
-
-    .wrap{
-      width:min(1120px, calc(100% - 32px));
-      margin:0 auto;
-    }
-
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      background:rgba(247,246,243,.94);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-
-    .header-inner{
-      min-height:74px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-    }
-
-    .brand{
-      display:flex;
-      flex-direction:column;
-    }
-
-    .brand-mark{
-      font-size:1.4rem;
-      font-weight:800;
-      letter-spacing:.08em;
-      color:var(--warm);
-    }
-
-    .brand-sub{
-      font-size:.82rem;
-      color:var(--muted);
-    }
-
-    .nav{
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-
-    .nav a{
-      font-weight:700;
-      color:var(--navy);
-    }
-
-    .hero{
-      padding:54px 0 28px;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:28px;
-      align-items:center;
-    }
-
-    .eyebrow{
-      display:inline-block;
-      padding:8px 12px;
-      border-radius:999px;
-      background:var(--accent);
-      color:var(--warm);
-      font-weight:700;
-      font-size:.9rem;
-      margin-bottom:16px;
-    }
-
-    h1{
-      margin:0 0 14px;
-      font-size:clamp(2rem, 4vw, 4rem);
-      line-height:1.02;
-      color:var(--navy);
-    }
-
-    .lead{
-      font-size:1.06rem;
-      color:var(--muted);
-      max-width:60ch;
-      margin-bottom:22px;
-    }
-
-    .hero-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-bottom:22px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:50px;
-      padding:0 20px;
-      border-radius:999px;
-      font-weight:800;
-      border:1px solid transparent;
-      transition:.2s ease;
-      cursor:pointer;
-      font:inherit;
-    }
-
-    .btn-primary{
-      background:var(--warm);
-      color:#fff;
-      box-shadow:var(--shadow);
-    }
-
-    .btn-primary:hover{
-      background:var(--warm-2);
-      transform:translateY(-1px);
-    }
-
-    .btn-secondary{
-      background:transparent;
-      color:var(--navy);
-      border-color:var(--navy);
-    }
-
-    .btn-secondary:hover{
-      background:#fff;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .stat{
-      background:var(--paper);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px;
-      box-shadow:var(--shadow);
-    }
-
-    .stat strong{
-      display:block;
-      font-size:1.4rem;
-      color:var(--warm);
-    }
-
-    .stat span{
-      color:var(--muted);
-      font-size:.94rem;
-    }
-
-    .hero-card,
-    .form-card,
-    .info-card,
-    .impact-card{
-      background:var(--paper);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-
-    .hero-card{
-      padding:18px;
-    }
-
-    .hero-card img{
-      border-radius:14px;
-      object-fit:cover;
-      width:100%;
-      aspect-ratio:4/5;
-      background:#efe7dc;
-    }
-
-    .section{
-      padding:26px 0;
-    }
-
-    .section-head{
-      margin-bottom:18px;
-    }
-
-    .section-head h2{
-      margin:0 0 8px;
-      color:var(--navy);
-      font-size:1.85rem;
-    }
-
-    .section-head p{
-      margin:0;
-      color:var(--muted);
-    }
-
-    .form-layout{
-      display:grid;
-      grid-template-columns:1.05fr .95fr;
-      gap:28px;
-    }
-
-    .form-card{
-      padding:24px;
-    }
-
-    .fields{
-      display:grid;
-      gap:14px;
-    }
-
-    .two{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-    }
-
-    label{
-      display:block;
-      font-weight:700;
-      margin-bottom:6px;
-      color:var(--navy);
-    }
-
-    input,
-    textarea,
-    select{
-      width:100%;
-      border:1px solid #d9cec4;
-      border-radius:14px;
-      padding:14px 14px;
-      font:inherit;
-      color:var(--text);
-      background:#fff;
-    }
-
-    textarea{
-      min-height:140px;
-      resize:vertical;
-    }
-
-    .help{
-      font-size:.88rem;
-      color:var(--muted);
-      margin-top:5px;
-    }
-
-    .price-box{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      background:var(--accent);
-      border-radius:16px;
-      padding:16px;
-      margin-top:16px;
-      margin-bottom:16px;
-    }
-
-    .price-box strong{
-      font-size:1.6rem;
-      color:var(--warm);
-    }
-
-    .tiny{
-      font-size:.84rem;
-      color:var(--muted);
-    }
-
-    .note{
-      margin-top:14px;
-      padding:14px;
-      border-radius:14px;
-      background:#fff;
-      border:1px dashed #d8c3b4;
-      color:var(--muted);
-      font-size:.93rem;
-    }
-
-    .info-stack{
-      display:grid;
-      gap:16px;
-    }
-
-    .info-card,
-    .impact-card{
-      padding:22px;
-    }
-
-    .info-card h3,
-    .impact-card h3{
-      margin:0 0 10px;
-      color:var(--navy);
-    }
-
-    .check{
-      padding-left:18px;
-      margin:0;
-    }
-
-    .check li{
-      margin:0 0 10px;
-      color:var(--muted);
-    }
-
-    .impact-number{
-      font-size:2.2rem;
-      font-weight:800;
-      color:var(--warm);
-      margin:8px 0 6px;
-    }
-
-    .mini-steps{
-      display:grid;
-      gap:10px;
-      margin-top:12px;
-    }
-
-    .mini-step{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:12px 0;
-      border-top:1px solid var(--line);
-    }
-
-    .mini-step:first-child{
-      border-top:0;
-      padding-top:0;
-    }
-
-    .bubble{
-      flex:0 0 34px;
-      width:34px;
-      height:34px;
-      border-radius:50%;
-      background:var(--accent);
-      color:var(--warm);
-      font-weight:800;
-      display:grid;
-      place-items:center;
-    }
-
-    .faq{
-      display:grid;
-      gap:12px;
-    }
-
-    details{
-      background:var(--paper);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:14px 16px;
-    }
-
-    summary{
-      cursor:pointer;
-      font-weight:800;
-      color:var(--navy);
-    }
-
-    details p{
-      color:var(--muted);
-      margin:12px 0 0;
-    }
-
-    .footer{
-      padding:34px 0 50px;
-      color:var(--muted);
-      text-align:center;
-    }
-
-    .preview-modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.7);
-      backdrop-filter:blur(6px);
-      z-index:9999;
-      padding:20px;
-    }
-
-    .preview-modal.open{
-      display:block;
-    }
-
-    .preview-modal-card{
-      max-width:900px;
-      margin:5vh auto;
-      background:#fff;
-      border-radius:18px;
-      padding:18px;
-      position:relative;
-      box-shadow:0 20px 60px rgba(0,0,0,.25);
-      overflow:hidden;
-    }
-
-    .preview-close{
-      position:absolute;
-      top:12px;
-      right:14px;
-      width:42px;
-      height:42px;
-      border:0;
-      border-radius:999px;
-      background:#111;
-      color:#fff;
-      font-size:24px;
-      cursor:pointer;
-      z-index:3;
-    }
-
-    .preview-hearts{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index:1;
-    }
-
-    .preview-heart{
-      position:absolute;
-      bottom:-20px;
-      opacity:.7;
-      animation:previewFloat linear forwards;
-      z-index:1;
-    }
-
-    @keyframes previewFloat{
-      from{transform:translateY(0) scale(1); opacity:0;}
-      10%{opacity:.7;}
-      to{transform:translateY(-120vh) scale(1.5); opacity:0;}
-    }
-
-    .preview-title{
-      margin:0 0 14px;
-      color:var(--navy);
-      font-size:1.5rem;
-      position:relative;
-      z-index:2;
-      text-align:center;
-    }
-
-    .preview-stage{
-      position:relative;
-      z-index:2;
-    }
-
-    #previewImage{
-      width:100%;
-      max-height:70vh;
-      object-fit:contain;
-      border-radius:14px;
-      background:#f9f4ee;
-      box-shadow:var(--shadow);
-    }
-
-    .preview-controls{
-      position:relative;
-      z-index:2;
-      text-align:center;
-      margin-top:15px;
-      display:flex;
-      gap:10px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-
-    @media (max-width: 900px){
-      .hero-grid,
-      .form-layout{
-        grid-template-columns:1fr;
-      }
-
-      .stats{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media (max-width: 640px){
-      .two{
-        grid-template-columns:1fr;
-      }
-
-      .header-inner{
-        align-items:flex-start;
-        padding:14px 0;
-        flex-direction:column;
-      }
-
-      .nav{
-        gap:12px;
-      }
-
-      .preview-controls .btn{
-        width:100%;
-      }
-    }.scroll-window {
-  display: flex;
-  overflow-x: auto;
-  gap: 12px;
-  margin-top: 12px;
-  padding-bottom: 6px;
-  scroll-snap-type: x mandatory;
-}
-
-.scroll-window::-webkit-scrollbar {
-  display: none;
-}
-
-.scroll-window a {
-  flex: 0 0 auto;
-  scroll-snap-align: start;
-}
-
-.scroll-window img {
-  width: 140px;
-  border-radius: 10px;
-  transition: transform 0.2s ease;
-}
-
-.scroll-window img:hover {
-  transform: scale(1.04);
-}
-    
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send A Hug</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: #f7f3ee;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 30px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    .card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        height: 420px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: scale(1.02);
+    }
+
+    .card a {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 20px;
+        background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    @media(max-width:768px){
+        .grid{
+            grid-template-columns: 1fr;
+        }
+        .card{
+            height: 340px;
+        }
+    }
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="brand" href="/">
-        <span class="brand-mark">HUGS</span>
-        <span class="brand-sub">Help Under Good Service</span>
-      </a>
 
-      <nav class="nav">
-        <a href="/">Home</a>
-        <a href="/shop.html">Shop</a>
-        <a href="/receipt-rewards.html">Receipt Rewards</a>
-        <a href="#send-hug">Send a Hug</a>
-      </nav>
-    </div>
-  </header>
+<div class="container">
+    <div class="grid">
 
-  <main>
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div>
-          <div class="eyebrow">Digital comfort with real-world purpose</div>
-          <h1>Send a $10 Hug that someone can actually feel.</h1>
-          <p class="lead">
-            Send a digital hug card to someone who needs encouragement, love, or support.
-            Your purchase helps support the HUGS mission while giving you a meaningful way to reach someone right now.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#send-hug">Send a $10 Hug ❤️</a>
-            <button type="button" class="btn btn-secondary" id="openPreviewBtnTop">Preview Hug Card 💌</button>
-          </div>
-
-          <div class="stats">
-            <div class="stat">
-              <strong id="heroHugCount">333</strong>
-              <span>Goal for early supporters</span>
-            </div>
-            <div class="stat">
-              <strong>$10</strong>
-              <span>Simple flat contribution</span>
-            </div>
-            <div class="stat">
-              <strong>1 Card</strong>
-              <span>1 digital hug experience sent</span>
-            </div>
-          </div>
+        <!-- Window 1 -->
+        <div class="card">
+            <a href="YOUR_STRIPE_LINK_1" target="_blank">
+                <img src="girl-hoodie.jpg" alt="Send a Hug">
+                <div class="overlay">Send a Hug</div>
+            </a>
         </div>
 
-        <div class="hero-card">
-          <img src="/assets/hugs-hoodie-promo.JPEG" alt="HUGS Send a Hug visual" />
-          <div class="scroll-window">
-  <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00">
-    <img src="/assets/hugs-hoodie-promo.JPEG" alt="Hoodie">
-  </a>
+        <!-- Window 2 -->
+        <div class="card">
+            <a href="YOUR_STRIPE_LINK_2" target="_blank">
+                <img src="image2.jpg" alt="Gift 2">
+                <div class="overlay">Gift 2</div>
+            </a>
+        </div>
 
-  <a href="/send-a-hug.html">
-    <img src="/assets/scene-02.png" alt="Hug Card">
-  </a>
+        <!-- Window 3 -->
+        <div class="card">
+            <a href="YOUR_STRIPE_LINK_3" target="_blank">
+                <img src="image3.jpg" alt="Gift 3">
+                <div class="overlay">Gift 3</div>
+            </a>
+        </div>
 
-  <a href="/gift.html">
-    <img src="/assets/scene-03.png" alt="Gift Hug">
-  </a>
+        <!-- Window 4 -->
+        <div class="card">
+            <a href="YOUR_STRIPE_LINK_4" target="_blank">
+                <img src="image4.jpg" alt="Gift 4">
+                <div class="overlay">Gift 4</div>
+            </a>
+        </div>
+
+    </div>
 </div>
 
-    <!-- PRODUCT 1 -->
-    <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" class="product-card">
-      <img src="assets/hugs-hoodie-promo.JPEG" alt="HUGS Hoodie">
-      <p>HUGS Hoodie</p>
-    </a>
-
-    <!-- PRODUCT 2 -->
-    <a href="/send-a-hug.html" class="product-card">
-      <img src="assets/scene-02.png" alt="Digital Hug Card">
-      <p>Send a Hug Card</p>
-    </a>
-
-    <!-- PRODUCT 3 -->
-    <a href="/gift.html" class="product-card">
-      <img src="assets/scene-03.png" alt="Gift a Hug">
-      <p>Gift a Hug</p>
-    </a>
-
-  </div>
-</section>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="send-hug">
-      <div class="wrap form-layout">
-        <div class="form-card">
-          <div class="section-head">
-            <h2>Send a Hug</h2>
-            <p>
-              Fill this out first, then complete payment. After payment, Stripe should redirect to your thank-you page so both the buyer and recipient can get the gift details.
-            </p>
-          </div>
-
-          <form
-            name="send-a-hug"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            action="/thank-you.html"
-            id="sendHugForm"
-          >
-            <input type="hidden" name="form-name" value="send-a-hug" />
-            <input type="hidden" id="giftCode" name="giftCode" />
-            <input type="hidden" id="giftLink" name="giftLink" value="https://hugslinks.com/gift.html" />
-            <p style="display:none;">
-              <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-            </p>
-
-            <div class="fields">
-              <div class="two">
-                <div>
-                  <label for="senderName">Your name</label>
-                  <input id="senderName" name="senderName" type="text" placeholder="Your name" required />
-                </div>
-                <div>
-                  <label for="senderEmail">Your email</label>
-                  <input id="senderEmail" name="senderEmail" type="email" placeholder="you@example.com" required />
-                </div>
-              </div>
-
-              <div class="two">
-                <div>
-                  <label for="recipientName">Recipient name</label>
-                  <input id="recipientName" name="recipientName" type="text" placeholder="Who is receiving the hug?" required />
-                </div>
-                <div>
-                  <label for="recipientEmail">Recipient email</label>
-                  <input id="recipientEmail" name="recipientEmail" type="email" placeholder="recipient@example.com" required />
-                </div>
-              </div>
-
-              <div>
-                <label for="occasion">Why are you sending this hug?</label>
-                <select id="occasion" name="occasion">
-                  <option value="Just because">Just because</option>
-                  <option value="Encouragement">Encouragement</option>
-                  <option value="Healing">Healing</option>
-                  <option value="Thinking of you">Thinking of you</option>
-                  <option value="Love and support">Love and support</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="message">Your message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  placeholder="Write a short message to include with the hug..."
-                ></textarea>
-                <div class="help">Tip: keep this warm, short, and personal.</div>
-              </div>
-
-              <div>
-                <label for="shareLink">Hug card link</label>
-                <input
-                  id="shareLink"
-                  name="shareLink"
-                  type="url"
-                  value="https://hugslinks.com/gift.html"
-                  readonly
-                />
-                <div class="help">This is the gift link that will be shared after payment.</div>
-              </div>
-            </div>
-
-            <div class="price-box">
-              <div>
-                <div style="font-weight:800; color:var(--navy);">One digital hug contribution</div>
-                <div class="tiny">Supports community-centered healing work through HUGS</div>
-              </div>
-              <strong>$10</strong>
-            </div>
-
-            <button
-              type="button"
-              class="btn btn-primary"
-              id="payAndSendBtn"
-              style="width:100%;"
-            >
-              Pay $10 & Send the Hug ❤️
-            </button>
-
-            <button
-              type="button"
-              class="btn btn-secondary"
-              id="openPreviewBtnBottom"
-              style="width:100%; margin-top:10px;"
-            >
-              Preview the Hug Card 💌
-            </button>
-
-            <div class="note">
-              This version generates a gift code for the buyer, stores the sender and recipient details, and opens secure Stripe checkout. After payment, Stripe should redirect to your thank-you page where the buyer can email the recipient the card and gift code.
-            </div>
-          </form>
-        </div>
-
-        <div class="info-stack">
-          <div class="info-card">
-            <h3>What this page does</h3>
-            <ul class="check">
-              <li>Collects sender and recipient details before payment.</li>
-              <li>Generates a gift code for the digital hug experience.</li>
-              <li>Opens the secure $10 Stripe checkout.</li>
-              <li>Lets the buyer send the gift link and code to the recipient after payment.</li>
-            </ul>
-          </div>
-
-          <div class="impact-card">
-            <h3>Hugs Sent</h3>
-            <div class="impact-number" id="hugCounter">108</div>
-            <p style="color:var(--muted); margin:0;">
-              This counter can be updated manually, or later connected to a real form/database counter.
-            </p>
-          </div>
-
-          <div class="info-card">
-            <h3>How it works</h3>
-            <div class="mini-steps">
-              <div class="mini-step">
-                <div class="bubble">1</div>
-                <div>
-                  <strong>Fill out the hug details</strong>
-                  <div class="tiny">Add sender info, recipient info, and your personal message.</div>
-                </div>
-              </div>
-              <div class="mini-step">
-                <div class="bubble">2</div>
-                <div>
-                  <strong>Pay the $10 contribution</strong>
-                  <div class="tiny">Use your secure Stripe checkout link.</div>
-                </div>
-              </div>
-              <div class="mini-step">
-                <div class="bubble">3</div>
-                <div>
-                  <strong>Share the digital gift</strong>
-                  <div class="tiny">The thank-you page will show the gift code, link, and recipient sharing options.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="info-card">
-            <h3>Important Stripe setting</h3>
-            <p style="margin:0; color:var(--muted);">
-              In Stripe, set your payment link redirect to:
-              <br /><br />
-              <strong style="color:var(--navy);">https://hugslinks.com/thank-you.html</strong>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Frequently asked questions</h2>
-          <p>Simple answers for visitors before they purchase.</p>
-        </div>
-
-        <div class="faq">
-          <details>
-            <summary>Does the recipient get a physical item?</summary>
-            <p>
-              No. This page is for a digital hug card experience. It is meant to send encouragement, comfort, and support online.
-            </p>
-          </details>
-
-          <details>
-            <summary>Do I have to pay before sending the card?</summary>
-            <p>
-              Yes. The $10 contribution is completed through Stripe first. After payment, the thank-you page will help you share the gift code and link.
-            </p>
-          </details>
-
-          <details>
-            <summary>Will the email send automatically?</summary>
-            <p>
-              This version prepares the buyer and recipient details and makes sharing simple from the thank-you page. Fully automatic email delivery would need an added email service or automation later.
-            </p>
-          </details>
-
-          <details>
-            <summary>Can I customize the message?</summary>
-            <p>
-              Yes. Use the message box to write your own note. That message is saved with the gift details and can be shared with the recipient after payment.
-            </p>
-          </details>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">
-      © <span id="year"></span> HUGS — Help Under Good Service
-    </div>
-  </footer>
-
-  <div id="previewModal" class="preview-modal">
-    <div class="preview-modal-card">
-      <button type="button" class="preview-close" id="closePreviewBtn">×</button>
-
-      <div class="preview-hearts" id="previewHearts"></div>
-
-      <h3 class="preview-title">Preview the Hug Card</h3>
-
-      <audio id="previewMusic" preload="auto" loop>
-        <source src="/assets/preview-music.mp3" type="audio/mpeg">
-      </audio>
-
-      <div class="preview-stage">
-        <img id="previewImage" src="/assets/scene-01.png" alt="Card preview">
-      </div>
-
-      <div class="preview-controls">
-        <button type="button" class="btn btn-secondary" id="prevPreviewBtn">Back</button>
-        <button type="button" class="btn btn-secondary" id="nextPreviewBtn">Next</button>
-        <button type="button" class="btn btn-secondary" id="playPreviewMusicBtn">Play Music</button>
-        <button type="button" class="btn btn-secondary" id="stopPreviewMusicBtn">Stop Music</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const stored = localStorage.getItem("hugsSentCount");
-    const currentCount = stored ? Number(stored) : 108;
-    document.getElementById("hugCounter").textContent = currentCount;
-    document.getElementById("heroHugCount").textContent = 333;
-
-    function generateGiftCode() {
-      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      let code = "HUG-";
-      for (let i = 0; i < 8; i++) {
-        code += chars[Math.floor(Math.random() * chars.length)];
-      }
-      return code;
-    }
-
-    document.getElementById("payAndSendBtn").addEventListener("click", function () {
-      const senderName = document.getElementById("senderName").value.trim();
-      const senderEmail = document.getElementById("senderEmail").value.trim();
-      const recipientName = document.getElementById("recipientName").value.trim();
-      const recipientEmail = document.getElementById("recipientEmail").value.trim();
-      const occasion = document.getElementById("occasion").value;
-      const message = document.getElementById("message").value.trim();
-
-      if (!senderName || !senderEmail || !recipientName || !recipientEmail) {
-        alert("Please complete sender name, sender email, recipient name, and recipient email first.");
-        return;
-      }
-
-      const code = generateGiftCode();
-      const giftLink = "https://hugslinks.com/gift.html";
-
-      document.getElementById("giftCode").value = code;
-      document.getElementById("giftLink").value = giftLink;
-
-      const giftData = {
-        senderName,
-        senderEmail,
-        recipientName,
-        recipientEmail,
-        occasion,
-        message,
-        giftCode: code,
-        giftLink
-      };
-
-      localStorage.setItem("latestHugGift", JSON.stringify(giftData));
-
-      window.open("https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00", "_blank");
-    });
-
-    const previewModal = document.getElementById("previewModal");
-    const openPreviewBtnTop = document.getElementById("openPreviewBtnTop");
-    const openPreviewBtnBottom = document.getElementById("openPreviewBtnBottom");
-    const closePreviewBtn = document.getElementById("closePreviewBtn");
-    const previewMusic = document.getElementById("previewMusic");
-    const previewHearts = document.getElementById("previewHearts");
-    const previewImage = document.getElementById("previewImage");
-
-    const previewSlides = [
-      "/assets/scene-01.png",
-      "/assets/scene-02.png",
-      "/assets/scene-03.png",
-      "/assets/scene-04.png",
-      "/assets/scene-05.png",
-      "/assets/couple-heart.png"
-    ];
-
-    let previewIndex = 0;
-    let previewHeartTimer = null;
-
-    function updatePreviewImage() {
-      previewImage.src = previewSlides[previewIndex];
-    }
-
-    function nextPreview() {
-      previewIndex = (previewIndex + 1) % previewSlides.length;
-      updatePreviewImage();
-    }
-
-    function prevPreview() {
-      previewIndex = (previewIndex - 1 + previewSlides.length) % previewSlides.length;
-      updatePreviewImage();
-    }
-
-    function spawnPreviewHeart() {
-      const heart = document.createElement("div");
-      heart.className = "preview-heart";
-      heart.textContent = Math.random() > 0.5 ? "❤" : "💗";
-      heart.style.left = Math.random() * 100 + "%";
-      heart.style.fontSize = (12 + Math.random() * 20) + "px";
-      heart.style.animationDuration = (6 + Math.random() * 5) + "s";
-      previewHearts.appendChild(heart);
-      setTimeout(() => heart.remove(), 9000);
-    }
-
-    function startPreviewHearts() {
-      stopPreviewHearts();
-      previewHeartTimer = setInterval(spawnPreviewHeart, 700);
-    }
-
-    function stopPreviewHearts() {
-      if (previewHeartTimer) clearInterval(previewHeartTimer);
-      previewHeartTimer = null;
-      previewHearts.innerHTML = "";
-    }
-
-    function openPreviewModal() {
-      previewModal.classList.add("open");
-      previewIndex = 0;
-      updatePreviewImage();
-      startPreviewHearts();
-    }
-
-    function closePreviewModal() {
-      previewModal.classList.remove("open");
-      previewMusic.pause();
-      previewMusic.currentTime = 0;
-      stopPreviewHearts();
-    }
-
-    openPreviewBtnTop.addEventListener("click", openPreviewModal);
-    openPreviewBtnBottom.addEventListener("click", openPreviewModal);
-    closePreviewBtn.addEventListener("click", closePreviewModal);
-
-    document.getElementById("nextPreviewBtn").addEventListener("click", nextPreview);
-    document.getElementById("prevPreviewBtn").addEventListener("click", prevPreview);
-
-    document.getElementById("playPreviewMusicBtn").addEventListener("click", async () => {
-      try {
-        previewMusic.volume = 1;
-        await previewMusic.play();
-      } catch (err) {
-        alert("If music doesn’t start, turn off silent mode and tap Play Music again.");
-      }
-    });
-
-    document.getElementById("stopPreviewMusicBtn").addEventListener("click", () => {
-      previewMusic.pause();
-      previewMusic.currentTime = 0;
-    });
-
-    previewModal.addEventListener("click", (e) => {
-      if (e.target === previewModal) {
-        closePreviewModal();
-      }
-    });
-  </script>
 </body>
 </html>
