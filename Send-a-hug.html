@@ -703,7 +703,7 @@
               Pay $10 & Send the Hug ❤️
             </button>
 
-            <button
+            <button no
               type="button"
               class="btn btn-secondary"
               id="openPreviewBtnBottom"
@@ -995,7 +995,8 @@ previewModal.addEventListener("click", function(e) {
     closePreviewModal();
   }
 });
-
+document.getElementById("openPreviewBtn").addEventListener("click", openPreviewModal);
+document.getElementById("openPreviewBtnBottom").addEventListener("click", openPreviewModal);
   </script>
 </body>
 </html>
