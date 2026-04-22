@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Share Your Hug</title>
+
+<style>
+body{
+    background:#f7f3ee;
+    font-family:Arial;
+    text-align:center;
+    padding:25px;
+}
+.card img{
+    width:100%;
+    max-width:500px;
+    border-radius:20px;
+}
+button{
+    margin-top:20px;
+    padding:16px 30px;
+    border:none;
+    border-radius:14px;
+    font-size:18px;
+    background:#7a3d2c;
+    color:white;
+}
+</style>
+</head>
+<body>
+
+<h1>Your Hug is Ready</h1>
+
+<div class="card">
+    <img src="https://hugslinks.com/images/healing-heart.jpg" alt="Healing Heart Card">
+</div>
+
+<button onclick="shareCard()">Share This Hug</button>
+
+<script>
+function shareCard() {
+  navigator.share({
+    title: 'A Hug For You',
+    text: 'Someone sent you a healing hug ❤️',
+    url: window.location.href
+  });
+}
+</script>
+
+</body>
+</html>
