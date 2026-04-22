@@ -849,153 +849,153 @@
   </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    
+document.getElementById("year").textContent = new Date().getFullYear();
 
-    const stored = localStorage.getItem("hugsSentCount");
-    const currentCount = stored ? Number(stored) : 108;
-    document.getElementById("hugCounter").textContent = currentCount;
-    document.getElementById("heroHugCount").textContent = 333;
+const stored = localStorage.getItem("hugsSentCount");
+const currentCount = stored ? Number(stored) : 108;
+document.getElementById("hugCounter").textContent = currentCount;
+document.getElementById("heroHugCount").textContent = 333;
 
-    function generateGiftCode() {
-      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      let code = "HUG-";
-      for (let i = 0; i < 8; i++) {
-        code += chars[Math.floor(Math.random() * chars.length)];
-      }
-      return code;
-    }
+function generateGiftCode() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code = "HUG-";
+  for (let i = 0; i < 8; i++) {
+    code += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return code;
+}
 
-    document.getElementById("payAndSendBtn").addEventListener("click", function () {
-      const senderName = document.getElementById("senderName").value.trim();
-      const senderEmail = document.getElementById("senderEmail").value.trim();
-      const recipientName = document.getElementById("recipientName").value.trim();
-      const recipientEmail = document.getElementById("recipientEmail").value.trim();
-      const occasion = document.getElementById("occasion").value;
-      const message = document.getElementById("message").value.trim();
+document.getElementById("payAndSendBtn").addEventListener("click", function () {
+  const senderName = document.getElementById("senderName").value.trim();
+  const senderEmail = document.getElementById("senderEmail").value.trim();
+  const recipientName = document.getElementById("recipientName").value.trim();
+  const recipientEmail = document.getElementById("recipientEmail").value.trim();
+  const occasion = document.getElementById("occasion").value;
+  const message = document.getElementById("message").value.trim();
 
-      if (!senderName || !senderEmail || !recipientName || !recipientEmail) {
-        alert("Please complete sender name, sender email, recipient name, and recipient email first.");
-        return;
-      }
+  if (!senderName || !senderEmail || !recipientName || !recipientEmail) {
+    alert("Please complete all required fields first.");
+    return;
+  }
 
-      const code = generateGiftCode();
-      const giftLink = "https://hugscard.netlify.app/gift.html";
+  const code = generateGiftCode();
+  const giftLink = "https://hugscard.netlify.app/gift.html";
 
-      document.getElementById("giftCode").value = code;
-      document.getElementById("giftLink").value = giftLink;
+  document.getElementById("giftCode").value = code;
+  document.getElementById("giftLink").value = giftLink;
 
-      const giftData = {
-        senderName,
-        senderEmail,
-        recipientName,
-        recipientEmail,
-        occasion,
-        message,
-        giftCode: code,
-        giftLink
-      };
+  const giftData = {
+    senderName,
+    senderEmail,
+    recipientName,
+    recipientEmail,
+    occasion,
+    message,
+    giftCode: code,
+    giftLink
+  };
 
-      localStorage.setItem("latestHugGift", JSON.stringify(giftData));
+  localStorage.setItem("latestHugGift", JSON.stringify(giftData));
 
-      window.open("https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00", "_blank");
-    });
+  window.open("https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00", "_blank");
+});
 
-    const previewModal = document.getElementById("previewModal");
-    const openPreviewBtn = document.getElementById("openPreviewBtn");
-    const openPreviewBtnBottom = document.getElementById("openPreviewBtnBottom");
-    const closePreviewBtn = document.getElementById("closePreviewBtn");
-    const previewMusic = document.getElementById("previewMusic");
-    const previewHearts = document.getElementById("previewHearts");
-    const previewImage = document.getElementById("previewImage");
+const previewModal = document.getElementById("previewModal");
+const previewImage = document.getElementById("previewImage");
+const previewMusic = document.getElementById("previewMusic");
+const previewHearts = document.getElementById("previewHearts");
 
-    const previewSlides = [
-      "/assets/scene-01.png",
-      "/assets/scene-02.png",
-      "/assets/scene-03.png",
-      "/assets/scene-04.png",
-      "/assets/scene-05.png",
-      "/assets/couple-heart.png"
-    ];
+const previewSlides = [
+  "/assets/scene-01.png",
+  "/assets/scene-02.png",
+  "/assets/scene-03.png",
+  "/assets/scene-04.png",
+  "/assets/scene-05.png",
+  "/assets/couple-heart.png"
+];
 
-    let previewIndex = 0;
-    let previewHeartTimer = null;
+let previewIndex = 0;
+let previewHeartTimer = null;
 
-    function updatePreviewImage() {
-      previewImage.src = previewSlides[previewIndex];
-    }
+function updatePreviewImage() {
+  previewImage.src = previewSlides[previewIndex];
+}
 
-    function nextPreview() {
-      previewIndex = (previewIndex + 1) % previewSlides.length;
-      updatePreviewImage();
-    }
+function nextPreview() {
+  previewIndex = (previewIndex + 1) % previewSlides.length;
+  updatePreviewImage();
+}
 
-    function prevPreview() {
-      previewIndex = (previewIndex - 1 + previewSlides.length) % previewSlides.length;
-      updatePreviewImage();
-    }
+function prevPreview() {
+  previewIndex = (previewIndex - 1 + previewSlides.length) % previewSlides.length;
+  updatePreviewImage();
+}
 
-    function spawnPreviewHeart() {
-      const heart = document.createElement("div");
-      heart.className = "preview-heart";
-      heart.textContent = Math.random() > 0.5 ? "❤" : "💗";
-      heart.style.left = Math.random() * 100 + "%";
-      heart.style.fontSize = (12 + Math.random() * 20) + "px";
-      heart.style.animationDuration = (6 + Math.random() * 5) + "s";
-      previewHearts.appendChild(heart);
-      setTimeout(() => heart.remove(), 9000);
-    }
+function spawnPreviewHeart() {
+  const heart = document.createElement("div");
+  heart.className = "preview-heart";
+  heart.textContent = Math.random() > 0.5 ? "❤" : "💗";
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.fontSize = (12 + Math.random() * 20) + "px";
+  heart.style.animationDuration = (6 + Math.random() * 5) + "s";
+  previewHearts.appendChild(heart);
 
-    function startPreviewHearts() {
-      stopPreviewHearts();
-      previewHeartTimer = setInterval(spawnPreviewHeart, 700);
-    }
+  setTimeout(() => {
+    heart.remove();
+  }, 9000);
+}
 
-    function stopPreviewHearts() {
-      if (previewHeartTimer) clearInterval(previewHeartTimer);
-      previewHeartTimer = null;
-      previewHearts.innerHTML = "";
-    }
+function startPreviewHearts() {
+  stopPreviewHearts();
+  previewHeartTimer = setInterval(spawnPreviewHeart, 700);
+}
 
-    function openPreviewModal() {
-      previewModal.classList.add("open");
-      previewIndex = 0;
-      updatePreviewImage();
-      startPreviewHearts();
-    }
+function stopPreviewHearts() {
+  clearInterval(previewHeartTimer);
+  previewHeartTimer = null;
+  previewHearts.innerHTML = "";
+}
 
-    function closePreviewModal() {
-      previewModal.classList.remove("open");
-      previewMusic.pause();
-      previewMusic.currentTime = 0;
-      stopPreviewHearts();
-    }
+function openPreviewModal() {
+  previewIndex = 0;
+  updatePreviewImage();
+  startPreviewHearts();
+  previewModal.classList.add("open");
+}
 
-    openPreviewBtn.addEventListener("click", openPreviewModal);
-    openPreviewBtnBottom.addEventListener("click", openPreviewModal);
-    closePreviewBtn.addEventListener("click", closePreviewModal);
+function closePreviewModal() {
+  previewModal.classList.remove("open");
+  previewMusic.pause();
+  previewMusic.currentTime = 0;
+  stopPreviewHearts();
+}
 
-    document.getElementById("nextPreviewBtn").addEventListener("click", nextPreview);
-    document.getElementById("prevPreviewBtn").addEventListener("click", prevPreview);
+document.getElementById("openPreviewBtn").addEventListener("click", openPreviewModal);
+document.getElementById("openPreviewBtnBottom").addEventListener("click", openPreviewModal);
+document.getElementById("closePreviewBtn").addEventListener("click", closePreviewModal);
+document.getElementById("nextPreviewBtn").addEventListener("click", nextPreview);
+document.getElementById("prevPreviewBtn").addEventListener("click", prevPreview);
 
-    document.getElementById("playPreviewMusicBtn").addEventListener("click", async () => {
-      try {
-        previewMusic.volume = 1;
-        await previewMusic.play();
-      } catch (err) {
-        alert("If music doesn’t start, turn off silent mode and tap Play Music again.");
-      }
-    });
+document.getElementById("playPreviewMusicBtn").addEventListener("click", async () => {
+  try {
+    await previewMusic.play();
+  } catch {
+    alert("Tap again after turning off silent mode.");
+  }
+});
 
-    document.getElementById("stopPreviewMusicBtn").addEventListener("click", () => {
-      previewMusic.pause();
-      previewMusic.currentTime = 0;
-    });
+document.getElementById("stopPreviewMusicBtn").addEventListener("click", () => {
+  previewMusic.pause();
+  previewMusic.currentTime = 0;
+});
 
-    previewModal.addEventListener("click", (e) => {
-      if (e.target === previewModal) {
-        closePreviewModal();
-      }
-    });
+previewModal.addEventListener("click", function(e) {
+  if (e.target === previewModal) {
+    closePreviewModal();
+  }
+});
+
   </script>
 </body>
 </html>
