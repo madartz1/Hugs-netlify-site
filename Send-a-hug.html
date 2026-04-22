@@ -545,7 +545,34 @@
       .preview-controls .btn{
         width:100%;
       }
-    }
+    }.scroll-window {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  margin-top: 12px;
+  padding-bottom: 6px;
+  scroll-snap-type: x mandatory;
+}
+
+.scroll-window::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-window a {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.scroll-window img {
+  width: 140px;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+}
+
+.scroll-window img:hover {
+  transform: scale(1.04);
+}
+    
   </style>
 </head>
 <body>
@@ -599,11 +626,19 @@
 
         <div class="hero-card">
           <img src="/assets/hugs-hoodie-promo.JPEG" alt="HUGS Send a Hug visual" />
-          <!-- HUGS PRODUCT SCROLL WINDOW -->
-<section class="product-scroll-section">
-  <h2 class="scroll-title">Send More Love ❤️</h2>
+          <div class="scroll-window">
+  <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00">
+    <img src="/assets/hugs-hoodie-promo.JPEG" alt="Hoodie">
+  </a>
 
-  <div class="product-scroll">
+  <a href="/send-a-hug.html">
+    <img src="/assets/scene-02.png" alt="Hug Card">
+  </a>
+
+  <a href="/gift.html">
+    <img src="/assets/scene-03.png" alt="Gift Hug">
+  </a>
+</div>
 
     <!-- PRODUCT 1 -->
     <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" class="product-card">
