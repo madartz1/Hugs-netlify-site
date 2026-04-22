@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send Your Hug</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f7f3ee;
+    margin:0;
+    padding:30px;
+}
+
+.container{
+    max-width:600px;
+    margin:auto;
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+h1{
+    text-align:center;
+    color:#7a3d2c;
+}
+
+input, textarea{
+    width:100%;
+    padding:15px;
+    margin:12px 0;
+    border:1px solid #ccc;
+    border-radius:12px;
+    font-size:16px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:14px;
+    background:#7a3d2c;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Send Your Hug</h1>
+
+    <form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
+        
+        <input type="hidden" name="_subject" value="New Hug Card Order">
+        <input type="hidden" name="_captcha" value="false">
+
+        <input type="text" name="buyer_name" placeholder="Your Name" required>
+
+        <input type="text" name="recipient_name" placeholder="Recipient Name" required>
+
+        <input type="email" name="recipient_email" placeholder="Recipient Email" required>
+
+        <textarea name="message" rows="5" placeholder="Write your personal message..." required></textarea>
+
+        <button type="submit">Send Hug Card</button>
+
+    </form>
+</div>
+
+</body>
+</html>
