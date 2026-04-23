@@ -207,49 +207,26 @@
 </main>
 
 <script>
-function pay() {
+
+async function pay() {
+
   const senderName = document.getElementById("senderName").value;
   const senderEmail = document.getElementById("senderEmail").value;
   const recipientName = document.getElementById("recipientName").value;
   const recipientEmail = document.getElementById("recipientEmail").value;
   const message = document.getElementById("message").value;
 
-  if(!senderName || !senderEmail || !recipientName || !recipientEmail){
-    alert("Fill all required fields");
-    return;
-  }
-
+  // OPTIONAL ONLY (no blocking anymore)
   localStorage.setItem("hugData", JSON.stringify({
-    senderName,
-    senderEmail,
-    recipientName,
-    recipientEmail,
-    message
-  }));
-
-  async function pay() {
-  const senderName = document.getElementById("senderName").value;
-  const senderEmail = document.getElementById("senderEmail").value;
-  const recipientName = document.getElementById("recipientName").value;
-  const recipientEmail = document.getElementById("recipientEmail").value;
-  const message = document.getElementById("message").value;
-
-  if(!senderName || !senderEmail || !recipientName || !recipientEmail){
-    alert("Fill all required fields");
-    return;
-  }
-
-  // save draft info locally
-  localStorage.setItem("hugData", JSON.stringify({
-    senderName,
-    senderEmail,
-    recipientName,
-    recipientEmail,
-    message
+    senderName: senderName || "",
+    senderEmail: senderEmail || "",
+    recipientName: recipientName || "",
+    recipientEmail: recipientEmail || "",
+    message: message || ""
   }));
 
   try {
-    // 🔥 NEW STRIPE CHECKOUT FLOW
+    // 🔥 STRIPE CHECKOUT (Netlify function)
     const res = await fetch("/.netlify/functions/create-checkout");
     const data = await res.json();
 
@@ -258,7 +235,7 @@ function pay() {
       return;
     }
 
-    // redirect to Stripe Checkout session
+    // redirect to Stripe Checkout
     window.location.href = data.url;
 
   } catch (err) {
@@ -266,11 +243,11 @@ function pay() {
     alert("Something went wrong. Please try again.");
   }
 }
-}
 
 function preview(){
   window.open("https://hugscard.netlify.app/", "_blank");
 }
+
 </script>
 
 </body>
