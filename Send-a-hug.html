@@ -210,36 +210,37 @@
 
 async function pay() {
 
-  const senderName = document.getElementById("senderName").value;
-  const senderEmail = document.getElementById("senderEmail").value;
-  const recipientName = document.getElementById("recipientName").value;
-  const recipientEmail = document.getElementById("recipientEmail").value;
-  const message = document.getElementById("message").value;
+  // Get values (optional — no blocking)
+  const senderName = document.getElementById("senderName").value || "";
+  const senderEmail = document.getElementById("senderEmail").value || "";
+  const recipientName = document.getElementById("recipientName").value || "";
+  const recipientEmail = document.getElementById("recipientEmail").value || "";
+  const message = document.getElementById("message").value || "";
 
-  // OPTIONAL ONLY (no blocking anymore)
+  // Save whatever user entered (even if empty)
   localStorage.setItem("hugData", JSON.stringify({
-    senderName: senderName || "",
-    senderEmail: senderEmail || "",
-    recipientName: recipientName || "",
-    recipientEmail: recipientEmail || "",
-    message: message || ""
+    senderName,
+    senderEmail,
+    recipientName,
+    recipientEmail,
+    message
   }));
 
   try {
-    // 🔥 STRIPE CHECKOUT (Netlify function)
+    // Call Stripe Checkout (Netlify function)
     const res = await fetch("/.netlify/functions/create-checkout");
     const data = await res.json();
 
     if (!data.url) {
-      alert("Checkout failed. Try again.");
+      alert("Checkout failed. Please try again.");
       return;
     }
 
-    // redirect to Stripe Checkout
+    // Redirect to Stripe Checkout
     window.location.href = data.url;
 
   } catch (err) {
-    console.error(err);
+    console.error("Checkout error:", err);
     alert("Something went wrong. Please try again.");
   }
 }
