@@ -1,4 +1,4 @@
-const stripe = require("stripe")("const stripe = require("stripe")(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);");
+const stripe = require("stripe")("const stripe = require("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");");
 
 exports.handler = async () => {
   try {
