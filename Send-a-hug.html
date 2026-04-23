@@ -227,7 +227,45 @@ function pay() {
     message
   }));
 
-  window.open("https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00", "_blank");
+  async function pay() {
+  const senderName = document.getElementById("senderName").value;
+  const senderEmail = document.getElementById("senderEmail").value;
+  const recipientName = document.getElementById("recipientName").value;
+  const recipientEmail = document.getElementById("recipientEmail").value;
+  const message = document.getElementById("message").value;
+
+  if(!senderName || !senderEmail || !recipientName || !recipientEmail){
+    alert("Fill all required fields");
+    return;
+  }
+
+  // save draft info locally
+  localStorage.setItem("hugData", JSON.stringify({
+    senderName,
+    senderEmail,
+    recipientName,
+    recipientEmail,
+    message
+  }));
+
+  try {
+    // 🔥 NEW STRIPE CHECKOUT FLOW
+    const res = await fetch("/.netlify/functions/create-checkout");
+    const data = await res.json();
+
+    if (!data.url) {
+      alert("Checkout failed. Try again.");
+      return;
+    }
+
+    // redirect to Stripe Checkout session
+    window.location.href = data.url;
+
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong. Please try again.");
+  }
+}
 }
 
 function preview(){
