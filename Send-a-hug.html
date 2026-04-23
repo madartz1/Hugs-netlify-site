@@ -57,28 +57,33 @@
     .btn{
       display:block;
       width:100%;
-      padding:16px;
-      border:none;
+      padding:18px;
       border-radius:999px;
-      font-size:16px;
+      font-size:18px;
       font-weight:800;
-      cursor:pointer;
-      margin-top:12px;
+      text-decoration:none;
+      margin-top:15px;
+      transition:0.3s ease;
     }
 
-    .primary{
+    .buy{
       background:#8B3A2B;
       color:white;
     }
 
-    .primary:hover{
+    .buy:hover{
       background:#B85C46;
+      transform:scale(1.03);
     }
 
     .secondary{
-      background:transparent;
       border:1px solid #0B2A4A;
       color:#0B2A4A;
+    }
+
+    .secondary:hover{
+      background:#0B2A4A;
+      color:white;
     }
 
     .trust{
@@ -98,6 +103,12 @@
       color:#777;
       margin-top:10px;
     }
+
+    .flow{
+      font-size:14px;
+      margin-top:15px;
+      color:#8B3A2B;
+    }
   </style>
 </head>
 
@@ -114,19 +125,29 @@
   <h1>Send a Hug ❤️</h1>
 
   <p>
-    No forms. No pressure. Just a real moment of care.
+    No forms. No pressure. Just a real moment of care.  
     Pay once — then share your Hug instantly.
   </p>
 
   <div class="card">
 
-    <button class="btn primary" onclick="pay()">
+    <!-- 🔥 STRIPE PAYMENT LINK BUTTON -->
+    <a class="btn buy"
+       href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00"
+       target="_blank" rel="noopener">
       Pay $10 & Create Your Hug ❤️
-    </button>
+    </a>
 
-    <button class="btn secondary" onclick="preview()">
+    <!-- PREVIEW -->
+    <a class="btn secondary"
+       href="https://hugscard.netlify.app/"
+       target="_blank">
       Preview Hug Experience 💌
-    </button>
+    </a>
+
+    <div class="flow">
+      Tap → Pay → Share ❤️
+    </div>
 
     <div class="trust">
       <div><strong>Trusted by the HUGS community ❤️</strong></div>
@@ -139,40 +160,12 @@
     </div>
 
     <div class="note">
-      After payment you’ll get a unique Hug link to share instantly.
+      After payment, return here to share your Hug link.
     </div>
 
   </div>
 
 </main>
-
-<script>
-async function pay() {
-  try {
-    const res = await fetch("/.netlify/functions/create-checkout");
-    const data = await res.json();
-
-    console.log("Stripe response:", data);
-
-    if (!data.url) {
-      alert("No checkout URL returned");
-      return;
-    }
-
-    window.location.href = data.url;
-
-  } catch (err) {
-    console.error(err);
-    alert("Checkout failed");
-  }
-}
-
-
-function preview(){
-  window.open("https://hugscard.netlify.app/", "_blank");
-}
-
-</script>
 
 </body>
 </html>
