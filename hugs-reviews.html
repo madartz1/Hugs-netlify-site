@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HUGS Reviews</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      background: #111;
+      border-bottom: 1px solid #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #00c2ff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #00a6d6;
+    }
+
+    .review {
+      background: #1a1a1a;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    .name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .stars {
+      color: gold;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>❤️ HUGS Reviews</header>
+
+<div class="container">
+
+  <h2>Leave a Review</h2>
+
+  <input id="name" placeholder="Your name" />
+  
+  <input id="rating" type="number" min="1" max="5" placeholder="Rating (1-5)" />
+  
+  <textarea id="message" placeholder="Share your experience..."></textarea>
+
+  <button onclick="addReview()">Submit Review</button>
+
+  <h2>Community Feedback</h2>
+  <div id="reviews"></div>
+
+</div>
+
+<script>
+  function loadReviews() {
+    const reviews = JSON.parse(localStorage.getItem("hugsReviews")) || [];
+    const container = document.getElementById("reviews");
+    container.innerHTML = "";
+
+    reviews.reverse().forEach(r => {
+      const div = document.createElement("div");
+      div.className = "review";
+
+      const stars = "⭐".repeat(r.rating);
+
+      div.innerHTML = `
+        <div class="name">${r.name}</div>
+        <div class="stars">${stars}</div>
+        <div>${r.message}</div>
+      `;
+
+      container.appendChild(div);
+    });
+  }
+
+  function addReview() {
+    const name = document.getElementById("name").value;
+    const rating = document.getElementById("rating").value;
+    const message = document.getElementById("message").value;
+
+    if (!name || !rating || !message) {
+      alert("Please fill out all fields");
+      return;
+    }
+
+    const newReview = { name, rating, message };
+
+    const reviews = JSON.parse(localStorage.getItem("hugsReviews")) || [];
+    reviews.push(newReview);
+
+    localStorage.setItem("hugsReviews", JSON.stringify(reviews));
+
+    document.getElementById("name").value = "";
+    document.getElementById("rating").value = "";
+    document.getElementById("message").value = "";
+
+    loadReviews();
+  }
+
+  loadReviews();
+</script>
+
+</body>
+</html>
