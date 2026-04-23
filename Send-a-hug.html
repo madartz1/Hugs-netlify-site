@@ -10,6 +10,39 @@
   /></title>
 
   <style>
+    .site-header{
+  padding:10px 0;
+  border-bottom:1px solid #E8DDD3;
+  background:#F7F6F3;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.header-inner{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.logo-link{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-decoration:none;
+}
+
+.logo-img{
+  height:60px;          /* banner size */
+  width:auto;
+  object-fit:contain;
+  cursor:pointer;
+  transition:0.2s ease;
+}
+
+.logo-img:hover{
+  transform:scale(1.05);
+}
     body{
       margin:0;
       font-family:Arial, sans-serif;
@@ -125,12 +158,17 @@
 </head>
 
 <body>
+<header class="site-header">
+  <div class="wrap header-inner">
 
-<header>
-  <div class="wrap">
-    <div class="brand">HUGS</div>
+    <!-- CLICKABLE LOGO BANNER -->
+    <a href="/" class="logo-link">
+      <img src="/assets/hug-logo.jpg" alt="HUGS Logo" class="logo-img" />
+    </a>
+
   </div>
 </header>
+
 
 <main class="wrap">
 
