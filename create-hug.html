@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Your Hug | HUGS</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#f7f6f3;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100vh;
+      text-align:center;
+      color:#2b2b2b;
+    }
+
+    .card{
+      background:white;
+      padding:30px;
+      border-radius:18px;
+      box-shadow:0 12px 35px rgba(0,0,0,0.1);
+      max-width:420px;
+      width:90%;
+    }
+
+    h1{
+      color:#8B3A2B;
+      margin-bottom:10px;
+    }
+
+    p{
+      color:#6b625c;
+      font-size:14px;
+      margin-bottom:20px;
+    }
+
+    .code-box{
+      background:#f2e8d8;
+      padding:12px;
+      border-radius:12px;
+      font-weight:bold;
+      margin:15px 0;
+      word-break:break-all;
+    }
+
+    .btn{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:999px;
+      background:#8B3A2B;
+      color:white;
+      font-weight:bold;
+      cursor:pointer;
+      margin-top:10px;
+    }
+
+    .btn:hover{
+      background:#B85C46;
+    }
+
+    .small{
+      font-size:12px;
+      color:#999;
+      margin-top:10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Creating Your Hug ❤️</h1>
+  <p>One moment… we’re generating your unique Hug link.</p>
+
+  <div class="code-box" id="hugCode">Generating...</div>
+
+  <button class="btn" id="openBtn">Open Hug Gift 🎁</button>
+
+  <div class="small">
+    You can copy and share this link anywhere
+  </div>
+</div>
+
+<script>
+function generateHugCode() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let code = "HUG-";
+  for (let i = 0; i < 8; i++) {
+    code += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return code;
+}
+
+// STEP 1: generate code
+const code = generateHugCode();
+
+// STEP 2: build unique link
+const hugLink = `https://hugslinks.com/gift.html?code=${code}`;
+
+// STEP 3: display code
+document.getElementById("hugCode").innerText = code;
+
+// STEP 4: save locally (optional backup)
+localStorage.setItem("lastHugLink", hugLink);
+
+// STEP 5: button action
+document.getElementById("openBtn").addEventListener("click", function () {
+  window.location.href = hugLink;
+});
+
+// STEP 6: auto redirect after short delay (optional)
+setTimeout(() => {
+  window.location.href = hugLink;
+}, 3500);
+</script>
+
+</body>
+</html>
