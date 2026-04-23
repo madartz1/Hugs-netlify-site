@@ -147,32 +147,26 @@
 </main>
 
 <script>
-
 async function pay() {
-  const btn = document.querySelector(".primary");
-  btn.innerText = "Opening secure checkout...";
-
   try {
     const res = await fetch("/.netlify/functions/create-checkout");
     const data = await res.json();
 
+    console.log("Stripe response:", data);
+
     if (!data.url) {
-      alert("Checkout failed. Try again.");
-      btn.innerText = "Pay $10 & Send Hug ❤️";
+      alert("No checkout URL returned");
       return;
     }
 
-    // smooth UX transition
-    setTimeout(() => {
-      window.location.href = data.url;
-    }, 500);
+    window.location.href = data.url;
 
   } catch (err) {
     console.error(err);
-    alert("Something went wrong. Try again.");
-    btn.innerText = "Pay $10 & Send Hug ❤️";
+    alert("Checkout failed");
   }
 }
+
 
 function preview(){
   window.open("https://hugscard.netlify.app/", "_blank");
