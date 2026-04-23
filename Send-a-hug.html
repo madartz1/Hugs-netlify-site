@@ -2,145 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Send a Hug | HUGS</title>
 
   <style>
-    :root{
-      --bg:#F7F6F3;
-      --paper:#FFFDF9;
-      --text:#2B2B2B;
-      --muted:#6B625C;
-      --navy:#0B2A4A;
-      --warm:#8B3A2B;
-      --warm-2:#B85C46;
-      --line:#E8DDD3;
-      --accent:#F2E8D8;
-      --shadow:0 12px 35px rgba(0,0,0,.08);
-      --radius:18px;
-    }
-
-    *{box-sizing:border-box}
-
     body{
       margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:var(--bg);
-      color:var(--text);
+      font-family:Arial, sans-serif;
+      background:#F7F6F3;
+      color:#2B2B2B;
     }
 
-    a{color:inherit;text-decoration:none}
-
     .wrap{
-      width:min(1100px, calc(100% - 32px));
+      width:min(900px, calc(100% - 32px));
       margin:0 auto;
+      padding:40px 0;
+      text-align:center;
     }
 
     header{
+      padding:20px 0;
+      border-bottom:1px solid #E8DDD3;
+      background:#F7F6F3;
       position:sticky;
       top:0;
-      background:rgba(247,246,243,.95);
-      border-bottom:1px solid var(--line);
-      padding:14px 0;
     }
 
     .brand{
       font-weight:900;
-      color:var(--warm);
+      color:#8B3A2B;
       letter-spacing:.1em;
     }
 
     h1{
-      font-size:2.5rem;
-      color:var(--navy);
-      margin:10px 0;
+      color:#0B2A4A;
+      font-size:2.6rem;
+      margin:20px 0 10px;
+    }
+
+    p{
+      color:#6B625C;
+      max-width:600px;
+      margin:0 auto 20px;
+    }
+
+    .card{
+      background:#FFFDF9;
+      padding:30px;
+      border-radius:18px;
+      box-shadow:0 12px 35px rgba(0,0,0,.08);
+      margin-top:30px;
     }
 
     .btn{
-      padding:14px 18px;
-      border-radius:999px;
+      display:block;
+      width:100%;
+      padding:16px;
       border:none;
+      border-radius:999px;
+      font-size:16px;
+      font-weight:800;
       cursor:pointer;
-      font-weight:700;
+      margin-top:12px;
     }
 
     .primary{
-      background:var(--warm);
-      color:#fff;
+      background:#8B3A2B;
+      color:white;
+    }
+
+    .primary:hover{
+      background:#B85C46;
     }
 
     .secondary{
       background:transparent;
-      border:1px solid var(--navy);
-      color:var(--navy);
+      border:1px solid #0B2A4A;
+      color:#0B2A4A;
     }
 
-    .section{
-      padding:30px 0;
-    }
-
-    .card{
-      background:var(--paper);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
+    .trust{
+      margin-top:25px;
+      background:#F2E8D8;
       padding:20px;
-    }
-
-    input, textarea, select{
-      width:100%;
-      padding:12px;
-      margin-top:6px;
-      border-radius:12px;
-      border:1px solid #ddd;
-    }
-
-    label{
-      font-weight:700;
-      color:var(--navy);
-      display:block;
-      margin-top:12px;
-    }
-
-    /* 🔥 HUG HOUSE SECTION */
-    .hug-house{
-      text-align:center;
-      padding:18px;
-      margin:20px 0;
       border-radius:16px;
-      background:var(--accent);
     }
 
-    .hug-house img{
-      width:110px;
+    .trust img{
+      width:100px;
       margin-top:10px;
-      cursor:pointer;
-      transition:.2s;
     }
 
-    .hug-house img:hover{
-      transform:scale(1.08);
+    .note{
+      font-size:12px;
+      color:#777;
+      margin-top:10px;
     }
-
-    .review-preview{
-      margin-top:12px;
-      padding:12px;
-      background:#fff;
-      border-radius:12px;
-      font-size:.9rem;
-    }
-
-    .price{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      background:var(--accent);
-      padding:14px;
-      border-radius:14px;
-      margin:20px 0;
-      font-weight:800;
-    }
-
   </style>
 </head>
 
@@ -148,7 +105,7 @@
 
 <header>
   <div class="wrap">
-    <span class="brand">HUGS</span>
+    <div class="brand">HUGS</div>
   </div>
 </header>
 
@@ -156,51 +113,34 @@
 
   <h1>Send a Hug ❤️</h1>
 
+  <p>
+    No forms. No pressure. Just a real moment of care.
+    Pay once — then share your Hug instantly.
+  </p>
+
   <div class="card">
 
-    <label>Your Name</label>
-    <input id="senderName">
-
-    <label>Your Email</label>
-    <input id="senderEmail">
-
-    <label>Recipient Name</label>
-    <input id="recipientName">
-
-    <label>Recipient Email</label>
-    <input id="recipientEmail">
-
-    <label>Message</label>
-    <textarea id="message"></textarea>
-
-    <!-- 🔥 HUG HOUSE TRUST BLOCK -->
-    <div class="hug-house">
-      <div><strong>Real Hugs. Real Impact ❤️</strong></div>
-      <div style="font-size:.9rem;color:#666;">
-        See how people are using HUGS in the community
-      </div>
-
-      <a href="https://hugsreviews.netlify.app/" target="_blank">
-        <img src="Hugs-pups.jpg" alt="Hug House">
-      </a>
-
-      <div class="review-preview">
-        ⭐⭐⭐⭐⭐ “This helped me when I needed it most.”
-      </div>
-    </div>
-
-    <div class="price">
-      <span>Digital Hug Contribution</span>
-      <span>$10</span>
-    </div>
-
     <button class="btn primary" onclick="pay()">
-      Pay $10 & Send Hug ❤️
+      Pay $10 & Create Your Hug ❤️
     </button>
 
-    <button class="btn secondary" style="margin-top:10px;" onclick="preview()">
-      Preview Hug Card 💌
+    <button class="btn secondary" onclick="preview()">
+      Preview Hug Experience 💌
     </button>
+
+    <div class="trust">
+      <div><strong>Trusted by the HUGS community ❤️</strong></div>
+      <div style="font-size:13px;color:#666;">
+        Real people sharing real emotional support
+      </div>
+
+      <img src="/assets/hug-house-logo.jpg" alt="Hug House">
+
+    </div>
+
+    <div class="note">
+      After payment you’ll get a unique Hug link to share instantly.
+    </div>
 
   </div>
 
@@ -210,37 +150,20 @@
 
 async function pay() {
 
-  // Get values (optional — no blocking)
-  const senderName = document.getElementById("senderName").value || "";
-  const senderEmail = document.getElementById("senderEmail").value || "";
-  const recipientName = document.getElementById("recipientName").value || "";
-  const recipientEmail = document.getElementById("recipientEmail").value || "";
-  const message = document.getElementById("message").value || "";
-
-  // Save whatever user entered (even if empty)
-  localStorage.setItem("hugData", JSON.stringify({
-    senderName,
-    senderEmail,
-    recipientName,
-    recipientEmail,
-    message
-  }));
-
   try {
-    // Call Stripe Checkout (Netlify function)
     const res = await fetch("/.netlify/functions/create-checkout");
     const data = await res.json();
 
     if (!data.url) {
-      alert("Checkout failed. Please try again.");
+      alert("Checkout failed. Try again.");
       return;
     }
 
-    // Redirect to Stripe Checkout
+    // go to Stripe checkout
     window.location.href = data.url;
 
   } catch (err) {
-    console.error("Checkout error:", err);
+    console.error(err);
     alert("Something went wrong. Please try again.");
   }
 }
