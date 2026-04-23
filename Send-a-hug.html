@@ -149,7 +149,6 @@
 <script>
 
 async function pay() {
-
   try {
     const res = await fetch("/.netlify/functions/create-checkout");
     const data = await res.json();
@@ -159,12 +158,11 @@ async function pay() {
       return;
     }
 
-    // go to Stripe checkout
     window.location.href = data.url;
 
   } catch (err) {
     console.error(err);
-    alert("Something went wrong. Please try again.");
+    alert("Something went wrong.");
   }
 }
 
