@@ -1,4 +1,4 @@
-const stripe = require("stripe")("const stripe = require("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")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async () => {
   try {
@@ -25,13 +25,17 @@ exports.handler = async () => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ url: session.url }),
+      body: JSON.stringify({
+        url: session.url
+      }),
     };
 
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
+      body: JSON.stringify({
+        error: err.message
+      }),
     };
   }
 };
