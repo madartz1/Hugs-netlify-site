@@ -1,247 +1,142 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HUGS Shop</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HUGS Shop</title>
+    <meta name="description" content="Shop HUGS hoodies. Support the mission through community-first merch." />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark">HUGS</span>
+          <span class="brand-sub">Help Under Good Service</span>
+        </a>
 
-  <style>
-    :root{
-      --blue:#0B2A4A;
-      --blue2:#163B63;
-      --sky:#EAF3FF;
-      --card:#FFFFFF;
-      --muted:#5C6B7A;
-      --warm:#8B3A2B;
-      --shadow:0 18px 45px rgba(0,0,0,.12);
-      --radius:18px;
-    }
+        <nav class="nav">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/shop.html" class="nav-link active">Shop</a>
+          <a href="/open-store.html" class="nav-link">Open Store</a>
+        </nav>
+      </div>
+    </header>
 
-    *{box-sizing:border-box}
+    <main class="wrap">
+      <section class="hero">
+        <h1>HUGS Hoodies</h1>
+        <p class="muted">
+          Premium community merch that supports real-world initiatives.
+        </p>
 
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
+        <div class="hero-actions">
+          <!-- ✅ This goes to open-store.html, which redirects to your real store link -->
+          <a class="btn primary" href="/open-store.html">Open Store</a>
+          <a class="btn" href="#products">View Products</a>
+        </div>
+      </section>
 
-      /* 🔥 MATCH HOMEPAGE FEEL */
-      background:linear-gradient(180deg, #EAF3FF 0%, #F7F9FC 40%, #FFFFFF 100%);
-      color:#1E1E1E;
-    }
+      <section id="products" class="section">
+        <div class="section-head">
+          <h2>Featured</h2>
+          <p class="muted">Launch collection (2 hero hoodies).</p>
+        </div>
 
-    a{text-decoration:none;color:inherit}
+        <div id="productGrid" class="grid"></div>
+      </section>
 
-    .wrap{
-      width:min(1100px, calc(100% - 32px));
-      margin:0 auto;
-    }
+      <section class="section" id="faq">
+        <div class="section-head">
+          <h2>FAQ</h2>
+        </div>
 
-    /* HEADER (MATCH HOME PAGE STYLE) */
-    header{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(234,243,255,.85);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid #D6E6F7;
-    }
+        <div class="faq">
+          <details>
+            <summary>Is this a donation?</summary>
+            <p>
+              This is a retail product. Proceeds help support community initiatives.
+            </p>
+          </details>
+          <details>
+            <summary>How does ordering work?</summary>
+            <p>
+              Clicking “Buy Now” takes you to our secure checkout/store link.
+            </p>
+          </details>
+          <details>
+            <summary>How long does shipping take?</summary>
+            <p>
+              Typically production + shipping ranges 7–14 days depending on fulfillment.
+            </p>
+          </details>
+        </div>
+      </section>
 
-    .header-inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:12px 0;
-    }
+      <footer class="footer">
+        <p class="muted">© <span id="year"></span> HUGS. All rights reserved.</p>
+      </footer>
+    </main>
 
-    .logo img{
-      height:46px;
-      transition:.2s ease;
-    }
+    <script src="/products.js"></script>
+    <script>
+      // footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
 
-    .logo img:hover{
-      transform:scale(1.06);
-    }
+      // render products
+      const grid = document.getElementById("productGrid");
 
-    nav a{
-      margin-left:18px;
-      font-weight:700;
-      color:var(--blue);
-    }
-
-    /* HERO SECTION (LIKE HOMEPAGE) */
-    .hero{
-      padding:70px 0 30px;
-    }
-
-    .tag{
-      display:inline-block;
-      padding:8px 14px;
-      border-radius:999px;
-      background:rgba(11,42,74,.08);
-      color:var(--blue);
-      font-weight:800;
-      font-size:.85rem;
-    }
-
-    h1{
-      font-size:3rem;
-      color:var(--blue);
-      margin:14px 0 10px;
-      line-height:1.1;
-    }
-
-    .lead{
-      color:var(--muted);
-      max-width:65ch;
-      font-size:1.05rem;
-    }
-
-    /* SECTION WRAPPER (LIKE HOME CARDS FLOATING ON BLUE) */
-    .section{
-      padding:30px 0 60px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:26px;
-      margin-top:30px;
-    }
-
-    /* CARD STYLE (FLOATING HOMEPAGE STYLE) */
-    .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      transition:.25s ease;
-      border:1px solid rgba(0,0,0,.06);
-    }
-
-    .card:hover{
-      transform:translateY(-6px);
-    }
-
-    .card img{
-      width:100%;
-      height:340px;
-      object-fit:cover;
-      background:#eee;
-    }
-
-    .content{
-      padding:18px;
-    }
-
-    .title{
-      font-size:1.35rem;
-      font-weight:900;
-      color:var(--blue);
-      margin-bottom:6px;
-    }
-
-    .desc{
-      color:var(--muted);
-      font-size:.95rem;
-      margin-bottom:14px;
-    }
-
-    /* BUTTON (MATCH HOMEPAGE CTA FEEL) */
-    .btn{
-      display:inline-block;
-      padding:14px 20px;
-      border-radius:999px;
-      background:linear-gradient(135deg, var(--blue), var(--blue2));
-      color:white;
-      font-weight:900;
-      box-shadow:0 12px 25px rgba(11,42,74,.25);
-      transition:.2s ease;
-    }
-
-    .btn:hover{
-      transform:scale(1.04);
-    }
-
-    /* MOBILE */
-    @media(max-width:768px){
-      .grid{
-        grid-template-columns:1fr;
+      function money(n) {
+        return `$${Number(n).toFixed(0)}`;
       }
 
-      h1{
-        font-size:2.2rem;
+      function card(p) {
+        return `
+          <article class="card">
+            <a class="card-img" href="${p.buyLink}" target="_blank" rel="noopener">
+              <img src="${p.image}" alt="${p.name}" loading="lazy" />
+            </a>
+            <div class="card-body">
+              <div class="card-top">
+                <h3>${p.name}</h3>
+                <div class="price">${money(p.price)}</div>
+              </div>
+              <p class="muted">${p.description}</p>
+
+              <div class="card-actions">
+                <a class="btn primary" href="${p.buyLink}" target="_blank" rel="noopener">Buy Now</a>
+                <button class="btn" type="button" onclick='openGallery(${JSON.stringify(
+                  p.gallery
+                )})'>View</button>
+              </div>
+            </div>
+          </article>
+        `;
       }
-    }
 
-  </style>
-</head>
+      grid.innerHTML = products.map(card).join("");
 
-<body>
-
-<header>
-  <div class="wrap header-inner">
-
-    <!-- LOGO LEFT (HOME LINK) -->
-    <a href="/" class="logo">
-      <img src="/assets/hug-logo.jpg" alt="HUGS Logo">
-    </a>
-
-    <nav>
-      <a href="/">Home</a>
-      <a href="/send-a-hug">Send a Hug</a>
-      <a href="/shop.html">Shop</a>
-    </nav>
-
-  </div>
-</header>
-
-<main class="wrap">
-
-  <!-- HERO (MATCH HOMEPAGE ENERGY) -->
-  <section class="hero">
-    <div class="tag">Wear the Mission</div>
-
-    <h1>HUGS Clothing That Carries Real Emotion ❤️</h1>
-
-    <p class="lead">
-      Every hoodie is part of a larger movement of care, support, and human connection.
-      This is not fashion — it’s emotional infrastructure.
-    </p>
-  </section>
-
-  <!-- PRODUCT SECTION (FLOATING ON BLUE BACKGROUND FEEL) -->
-  <section class="section">
-
-    <div class="grid">
-
-      <!-- HERO HOODIE -->
-      <div class="card">
-        <img src="/assets/hero-hoodie.jpg" alt="Hero Hoodie">
-        <div class="content">
-          <div class="title">Hero Hoodie</div>
-          <div class="desc">A bold symbol of strength, unity, and emotional resilience.</div>
-          <a class="btn" href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" target="_blank">
-            Buy Hero Hoodie
-          </a>
-        </div>
-      </div>
-
-      <!-- COMMUNITY HOODIE -->
-      <div class="card">
-        <img src="/assets/community-hoodie.jpg" alt="Community Hoodie">
-        <div class="content">
-          <div class="title">Community Hoodie</div>
-          <div class="desc">Soft everyday support wear designed for connection and care.</div>
-          <a class="btn" href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" target="_blank">
-            Buy Community Hoodie
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-</main>
-
-</body>
+      // simple gallery modal (no libraries)
+      function openGallery(images) {
+        const modal = document.createElement("div");
+        modal.className = "modal";
+        modal.innerHTML = `
+          <div class="modal-backdrop" onclick="this.parentElement.remove()"></div>
+          <div class="modal-panel">
+            <button class="modal-close" onclick="this.closest('.modal').remove()">✕</button>
+            <div class="modal-strip">
+              ${images
+                .map(
+                  (src) =>
+                    `<img src="${src}" alt="Product image" loading="lazy" />`
+                )
+                .join("")}
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+      window.openGallery = openGallery;
+    </script>
+  </body>
 </html>
