@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Opening Store…</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="wrap" style="padding-top: 72px;">
+      <h1>Opening Store…</h1>
+      <p class="muted">If you are not redirected, tap the button below.</p>
+      <p><a class="btn primary" id="openStoreBtn" href="#" target="_blank" rel="noopener">Open Store</a></p>
+    </main>
+
+    <script src="/products.js"></script>
+    <script>
+      // uses OPEN_STORE_URL from products.js
+      const btn = document.getElementById("openStoreBtn");
+      btn.href = OPEN_STORE_URL;
+
+      // auto redirect after a short moment
+      setTimeout(() => {
+        window.location.href = OPEN_STORE_URL;
+      }, 600);
+    </script>
+  </body>
+</html>
