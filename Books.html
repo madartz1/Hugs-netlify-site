@@ -25,31 +25,35 @@ body{
 .book{
     width:280px;
     margin:auto;
-    animation:float 5s ease-in-out infinite;
-    filter:drop-shadow(0 0 35px rgba(255,190,90,.3));
+    transform-style:preserve-3d;
+    animation:rotateBook 10s ease-in-out infinite;
+    filter:drop-shadow(0 0 35px rgba(255,190,90,.35));
 }
 
 .book img{
     width:100%;
     border-radius:10px;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.8),
+        0 0 30px rgba(255,180,70,.25);
 }
 
-@keyframes float{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-20px);}
-}
-
-h1{
-    color:#e0b45c;
-    font-size:42px;
-    margin:30px 0 15px;
-}
-
-p{
-    max-width:600px;
-    margin:auto;
-    color:#ccc;
-    line-height:1.7;
+@keyframes rotateBook{
+    0%{
+        transform:rotateY(-12deg) translateY(0px);
+    }
+    25%{
+        transform:rotateY(0deg) translateY(-10px);
+    }
+    50%{
+        transform:rotateY(12deg) translateY(0px);
+    }
+    75%{
+        transform:rotateY(0deg) translateY(-10px);
+    }
+    100%{
+        transform:rotateY(-12deg) translateY(0px);
+    }
 }
 
 .buy-btn{
