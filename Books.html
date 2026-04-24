@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Books | HUGS</title>
+
+<style>
+body{
+    margin:0;
+    background:#000;
+    color:white;
+    font-family:Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    text-align:center;
+}
+
+.container{
+    padding:40px 20px;
+}
+
+.book{
+    width:280px;
+    margin:auto;
+    animation:float 5s ease-in-out infinite;
+    filter:drop-shadow(0 0 35px rgba(255,190,90,.3));
+}
+
+.book img{
+    width:100%;
+    border-radius:10px;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+}
+
+h1{
+    color:#e0b45c;
+    font-size:42px;
+    margin:30px 0 15px;
+}
+
+p{
+    max-width:600px;
+    margin:auto;
+    color:#ccc;
+    line-height:1.7;
+}
+
+.buy-btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:16px 40px;
+    background:#d8a646;
+    color:#000;
+    text-decoration:none;
+    border-radius:40px;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="book">
+<img src="images/book-cover.jpg" alt="Book Cover">
+</div>
+
+<h1>HUGS Book</h1>
+
+<p>
+A powerful story of healing, community, and hope —
+created to inspire real people helping real people.
+</p>
+
+<a class="buy-btn" href="YOUR_STRIPE_LINK_HERE">
+Buy Now
+</a>
+
+</div>
+
+</body>
+</html>
