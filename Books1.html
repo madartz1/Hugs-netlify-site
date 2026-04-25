@@ -3,28 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crushed but Not Scilenced</title>
+<title>Crushed but Not Silenced</title>
 <link rel="stylesheet" href="/styles.css">
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:radial-gradient(circle at center,#111,#000);
+  background:
+    radial-gradient(circle at center, #1a1405 0%, #090909 45%, #000 100%);
   color:white;
   font-family:Arial,sans-serif;
   overflow:hidden;
+  position:relative;
 }
 
-.books-page{
-  text-align:center;
-  position:relative;
+/* GOLD PARTICLE BACKGROUND */
+.gold-particles{
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(circle, rgba(255,215,0,.18) 1px, transparent 1px);
+  background-size:55px 55px;
+  animation:driftParticles 20s linear infinite;
+  z-index:1;
+  pointer-events:none;
+}
+
+@keyframes driftParticles{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(-80px); }
+}
+
+/* FLOATING GOLD HEARTS */
+.gold-hearts-container{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
   z-index:2;
 }
 
+.gold-heart{
+  position:absolute;
+  bottom:-50px;
+  color:rgba(212,175,55,0.85);
+  text-shadow:
+    0 0 8px rgba(255,215,0,.7),
+    0 0 18px rgba(255,223,100,.5),
+    0 0 28px rgba(212,175,55,.35);
+  animation:floatHeart linear infinite;
+  opacity:.9;
+}
+
+@keyframes floatHeart{
+  0%{
+    transform:translateY(0) translateX(0) rotate(0deg);
+    opacity:0;
+  }
+  10%{opacity:1;}
+  50%{
+    transform:translateY(-50vh) translateX(25px) rotate(180deg);
+  }
+  100%{
+    transform:translateY(-120vh) translateX(-35px) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* PAGE CONTENT */
+.books-page{
+  text-align:center;
+  position:relative;
+  z-index:5;
+  padding:20px;
+  max-width:90%;
+}
+
+/* LOGO */
 .back-logo{
   display:inline-block;
   margin-bottom:25px;
@@ -39,72 +102,78 @@ body{
 }
 
 .back-logo:hover{
-  transform:scale(1.06);
+  transform:scale(1.08);
 }
 
-.back-logo:hover img{
-  filter:
-    drop-shadow(0 0 14px rgba(255,215,0,.75))
-    drop-shadow(0 0 28px rgba(255,180,0,.45));
-}
-
+/* TITLE */
 .books-page h1{
-  font-size:3rem;
+  font-size:clamp(2rem,5vw,3.3rem);
   color:#ffd700;
   text-shadow:
-    0 0 10px rgba(255,215,0,.6),
-    0 0 20px rgba(255,215,0,.4);
+    0 0 10px rgba(255,215,0,.65),
+    0 0 22px rgba(255,215,0,.4);
   margin-bottom:10px;
 }
 
+/* SUBTITLE */
 .books-page p{
-  color:#ccc;
-  font-size:1.1rem;
-  margin-bottom:40px;
+  color:#ddd;
+  font-size:1.08rem;
+  margin-bottom:38px;
 }
 
+/* BOOK WRAP */
 .book-wrap{
-  perspective:1200px;
+  perspective:1400px;
   display:flex;
   justify-content:center;
   margin-bottom:40px;
 }
 
+.book-holder{
+  animation:floatBook 6s ease-in-out infinite;
+}
+
 .book{
-  width:260px;
+  width:min(260px,70vw);
   border-radius:16px;
   box-shadow:
-    0 0 30px rgba(255,215,0,.25),
-    0 20px 60px rgba(0,0,0,.6);
-  animation:floatBook 6s ease-in-out infinite,
-            rotateBook 12s linear infinite;
+    0 0 35px rgba(255,215,0,.25),
+    0 20px 60px rgba(0,0,0,.7);
+  animation:rotateBook 10s ease-in-out infinite;
   transform-style:preserve-3d;
 }
 
 @keyframes rotateBook{
-  0%{ transform:rotateY(-18deg); }
-  50%{ transform:rotateY(18deg); }
-  100%{ transform:rotateY(-18deg); }
+  0%{ transform:rotateY(-15deg); }
+  50%{ transform:rotateY(15deg); }
+  100%{ transform:rotateY(-15deg); }
 }
 
 @keyframes floatBook{
   0%,100%{ transform:translateY(0); }
-  50%{ transform:translateY(-14px); }
+  50%{ transform:translateY(-15px); }
 }
 
+/* BUY BUTTON */
 .buy-book-btn{
   position:relative;
   display:inline-block;
-  padding:16px 34px;
+  padding:17px 38px;
   border-radius:14px;
   text-decoration:none;
   font-weight:700;
   color:#111;
-  background:linear-gradient(135deg,#ffd700,#ffb300,#fff3b0);
+  background:linear-gradient(135deg,#ffd700,#ffb300,#fff2a0);
   overflow:hidden;
   box-shadow:
-    0 0 14px rgba(255,215,0,.55),
-    0 0 28px rgba(255,180,0,.35);
+    0 0 16px rgba(255,215,0,.6),
+    0 0 34px rgba(255,180,0,.4);
+  transition:transform .3s ease;
+}
+
+.buy-book-btn:hover{
+  transform:scale(1.05);
 }
 
 .buy-book-btn::before{
@@ -117,7 +186,7 @@ body{
   background:linear-gradient(
     120deg,
     rgba(255,255,255,0),
-    rgba(255,255,255,.8),
+    rgba(255,255,255,.85),
     rgba(255,255,255,0)
   );
   transform:skewX(-25deg);
@@ -129,19 +198,10 @@ body{
   to{ left:130%; }
 }
 
-.gold-particles{
-  position:absolute;
-  inset:0;
-  background-image:
-    radial-gradient(circle, rgba(255,215,0,.25) 1px, transparent 1px);
-  background-size:60px 60px;
-  animation:drift 18s linear infinite;
-  z-index:1;
-}
-
-@keyframes drift{
-  from{ transform:translateY(0); }
-  to{ transform:translateY(-60px); }
+@media(max-width:600px){
+  .books-page p{
+    font-size:.95rem;
+  }
 }
 </style>
 </head>
@@ -149,6 +209,7 @@ body{
 <body>
 
 <div class="gold-particles"></div>
+<div class="gold-hearts-container" id="goldHearts"></div>
 
 <div class="books-page">
 
@@ -160,7 +221,9 @@ body{
   <p>A powerful story of healing, hope, and community.</p>
 
   <div class="book-wrap">
-    <img src="/images/book-cover.jpg" alt="HUGS Book" class="book">
+    <div class="book-holder">
+      <img src="/images/book-cover.jpg" alt="HUGS Book" class="book">
+    </div>
   </div>
 
   <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" class="buy-book-btn">
@@ -168,6 +231,29 @@ body{
   </a>
 
 </div>
+
+<script>
+const heartsContainer = document.getElementById("goldHearts");
+
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("gold-heart");
+  heart.innerHTML = "❤";
+
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (10 + Math.random()*22) + "px";
+  heart.style.animationDuration = (8 + Math.random()*10) + "s";
+  heart.style.opacity = Math.random();
+
+  heartsContainer.appendChild(heart);
+
+  setTimeout(()=>{
+    heart.remove();
+  },18000);
+}
+
+setInterval(createHeart,800);
+</script>
 
 </body>
 </html>
