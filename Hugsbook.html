@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HUGS Book</title>
+
+<link rel="stylesheet" href="/styles.css">
+
+<style>
+
+/* 🎨 BRAND COLORS */
+:root{
+  --cream:#EDE6D6;
+  --bg:#F7F3EA;
+  --brown:#3B332B;
+  --heart:#8B3A44;
+}
+
+/* BASE */
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle at top,#ffffff,#F7F3EA);
+  color:var(--brown);
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+  overflow:hidden;
+}
+
+/* SOFT PARTICLE BACKGROUND */
+.soft-particles{
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle, rgba(139,58,68,.15) 1px, transparent 1px);
+  background-size:80px 80px;
+  animation:drift 25s linear infinite;
+  z-index:1;
+}
+
+@keyframes drift{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(-80px); }
+}
+
+/* PAGE WRAP */
+.books-page{
+  text-align:center;
+  position:relative;
+  z-index:2;
+}
+
+/* LOGO */
+.back-logo{
+  display:inline-block;
+  margin-bottom:25px;
+  transition:.35s ease;
+}
+
+.back-logo img{
+  width:100px;
+  animation:logoGlow 4s ease-in-out infinite;
+}
+
+/* 🔥 LOGO GLOW */
+@keyframes logoGlow{
+  0%{ filter:drop-shadow(0 0 6px rgba(139,58,68,.25)); }
+  50%{ filter:drop-shadow(0 0 22px rgba(139,58,68,.6)); }
+  100%{ filter:drop-shadow(0 0 6px rgba(139,58,68,.25)); }
+}
+
+.back-logo:hover{
+  transform:scale(1.08);
+}
+
+/* TITLE */
+.books-page h1{
+  font-size:3rem;
+  margin-bottom:10px;
+}
+
+/* SUBTEXT */
+.books-page p{
+  color:#6b6258;
+  font-size:1.1rem;
+  margin-bottom:40px;
+}
+
+/* BOOK WRAP */
+.book-wrap{
+  perspective:1200px;
+  display:flex;
+  justify-content:center;
+  margin-bottom:40px;
+}
+
+/* BOOK */
+.book{
+  width:260px;
+  border-radius:18px;
+  box-shadow:
+    0 10px 40px rgba(0,0,0,.15),
+    0 0 25px rgba(139,58,68,.2);
+  animation:floatBook 6s ease-in-out infinite,
+            rotateBook 12s ease-in-out infinite;
+}
+
+/* ROTATION */
+@keyframes rotateBook{
+  0%{ transform:rotateY(-12deg); }
+  50%{ transform:rotateY(12deg); }
+  100%{ transform:rotateY(-12deg); }
+}
+
+/* FLOAT */
+@keyframes floatBook{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-12px); }
+}
+
+/* CTA BUTTON */
+.buy-book-btn{
+  display:inline-block;
+  padding:16px 34px;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:700;
+  color:white;
+  background:var(--heart);
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
+
+/* BUTTON GLOW */
+.buy-book-btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 18px rgba(139,58,68,.6);
+}
+
+/* SHIMMER EFFECT */
+.buy-book-btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-80%;
+  width:50%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    rgba(255,255,255,0),
+    rgba(255,255,255,.6),
+    rgba(255,255,255,0)
+  );
+  transform:skewX(-25deg);
+  animation:shimmer 3s infinite;
+}
+
+@keyframes shimmer{
+  from{ left:-80%; }
+  to{ left:130%; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="soft-particles"></div>
+
+<div class="books-page">
+
+  <a href="/shop" class="back-logo">
+    <img src="/images/hugs-logo.png" alt="HUGS">
+  </a>
+
+  <h1>HUGS Book</h1>
+  <p>A powerful story of healing, hope, and community.</p>
+
+  <div class="book-wrap">
+    <img src="/images/book-cover.jpg" alt="HUGS Book" class="book">
+  </div>
+
+  <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" class="buy-book-btn">
+    Buy Now
+  </a>
+
+</div>
+
+</body>
+</html>
