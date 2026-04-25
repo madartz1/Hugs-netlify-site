@@ -3,11 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<a href="/shop.html" class="back-btn">← Back to Shop</a>
- <a href="/shop" class="back-logo">
-  <img src="/images/hugs-logo.png" alt="HUGS">
-</a>
-  <title>HUGS Book</title>
+<title>HUGS Book</title>
 <link rel="stylesheet" href="/styles.css">
 
 <style>
@@ -27,6 +23,29 @@ body{
   text-align:center;
   position:relative;
   z-index:2;
+}
+
+.back-logo{
+  display:inline-block;
+  margin-bottom:25px;
+  transition:all .35s ease;
+}
+
+.back-logo img{
+  width:90px;
+  filter:
+    drop-shadow(0 0 8px rgba(255,215,0,.45))
+    drop-shadow(0 0 18px rgba(255,180,0,.25));
+}
+
+.back-logo:hover{
+  transform:scale(1.06);
+}
+
+.back-logo:hover img{
+  filter:
+    drop-shadow(0 0 14px rgba(255,215,0,.75))
+    drop-shadow(0 0 28px rgba(255,180,0,.45));
 }
 
 .books-page h1{
@@ -110,10 +129,6 @@ body{
   to{ left:130%; }
 }
 
-.buy-book-btn:hover{
-  transform:scale(1.04);
-}
-
 .gold-particles{
   position:absolute;
   inset:0;
@@ -136,6 +151,11 @@ body{
 <div class="gold-particles"></div>
 
 <div class="books-page">
+
+  <a href="/shop" class="back-logo">
+    <img src="/images/hugs-logo.png" alt="HUGS">
+  </a>
+
   <h1>HUGS Book</h1>
   <p>A powerful story of healing, hope, and community.</p>
 
@@ -143,7 +163,10 @@ body{
     <img src="/images/book-cover.jpg" alt="HUGS Book" class="book">
   </div>
 
-  <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" class="buy-book-btn">Buy Now</a>
+  <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" class="buy-book-btn">
+    Buy Now
+  </a>
+
 </div>
 
 </body>
