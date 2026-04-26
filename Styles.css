@@ -12,7 +12,18 @@
   --brand:#00E5FF;
   --brand-strong:#00BFFF;
   --glow:rgba(0,229,255,0.7);
+
+  /* 🧠 Z-LAYERS */
+  --z-base:1;
+  --z-particles:2;
+  --z-hearts:3;
+  --z-header:50;
+  --z-cart:999;
 }
+
+/* =========================
+   BASE RESET
+========================= */
 
 *{box-sizing:border-box}
 
@@ -23,26 +34,46 @@ html,body{
 }
 
 body{
+  color:var(--text);
+  overflow-x:hidden;
+
   background:
     radial-gradient(circle at 20% 0%, rgba(0,229,255,0.15), transparent 40%),
     linear-gradient(180deg,var(--bg-deep), var(--bg));
-  color:var(--text);
-  overflow-x:hidden;
+
+  animation:softFadeIn 0.8s ease-out;
+}
+
+@keyframes softFadeIn{
+  from{opacity:0; transform:translateY(6px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 a{color:inherit;text-decoration:none}
 
-/* ---------- LAYOUT ---------- */
-.wrap{max-width:1100px;margin:0 auto;padding:24px}
+/* =========================
+   LAYOUT
+========================= */
 
-/* ---------- HEADER ---------- */
+.wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
 .site-header{
   position:sticky;
   top:0;
+  z-index:var(--z-header);
+
   background:rgba(10,26,42,0.7);
   backdrop-filter:blur(12px);
+
   border-bottom:1px solid var(--border);
-  z-index:20;
 }
 
 .header-inner{
@@ -65,8 +96,15 @@ a{color:inherit;text-decoration:none}
   margin-top:4px;
 }
 
-/* ---------- NAV ---------- */
-.nav{display:flex;gap:12px;flex-wrap:wrap}
+/* =========================
+   NAV
+========================= */
+
+.nav{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
 
 .nav-link{
   font-size:14px;
@@ -87,12 +125,16 @@ a{color:inherit;text-decoration:none}
   background:rgba(255,255,255,0.06);
 }
 
-/* ---------- HERO ---------- */
+/* =========================
+   HERO
+========================= */
+
 .hero{padding:34px 0 10px}
 
 .hero h1{
   margin:0 0 8px;
   font-size:34px;
+
   background:linear-gradient(90deg,#00e5ff,#0077ff);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -107,7 +149,10 @@ a{color:inherit;text-decoration:none}
   margin-top:18px;
 }
 
-/* ---------- GRID ---------- */
+/* =========================
+   GRID + CARD SYSTEM
+========================= */
+
 .grid{
   display:grid;
   grid-template-columns:repeat(12,1fr);
@@ -115,15 +160,18 @@ a{color:inherit;text-decoration:none}
   margin-top:16px;
 }
 
-/* ---------- CARD ---------- */
 .card{
   grid-column:span 12;
+
   background:var(--card);
   border:1px solid var(--border);
   border-radius:16px;
+
   overflow:hidden;
-  transition:.35s ease;
   position:relative;
+
+  transition:.35s ease;
+  will-change:transform;
 }
 
 @media(min-width:760px){
@@ -136,19 +184,57 @@ a{color:inherit;text-decoration:none}
   box-shadow:0 0 25px rgba(0,229,255,0.2);
 }
 
+.card:active{
+  transform:scale(0.985);
+  transition:.15s ease;
+}
+
+/* =========================
+   IMAGE SYSTEM
+========================= */
+
+.card-img{
+  overflow:hidden;
+  position:relative;
+}
+
 .card-img img{
   width:100%;
   height:320px;
   object-fit:cover;
   display:block;
   background:#000;
+
+  transition:transform .6s ease;
+  transform-origin:center;
+  will-change:transform;
 }
+
+.card:hover .card-img img{
+  transform:scale(1.08);
+}
+
+.card-img::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle, rgba(0,229,255,0.2), transparent 70%);
+  opacity:0;
+  transition:.4s;
+}
+
+.card:hover .card-img::after{
+  opacity:1;
+}
+
+/* =========================
+   CARD CONTENT
+========================= */
 
 .card-body{padding:16px}
 
 .card-top{
   display:flex;
-  align-items:flex-start;
   justify-content:space-between;
   gap:12px;
 }
@@ -165,58 +251,33 @@ a{color:inherit;text-decoration:none}
   margin-top:14px;
   flex-wrap:wrap;
 }
-/* 🔍 IMAGE HOVER ZOOM */
-.card-img{
-  overflow:hidden;
-  position:relative;
-}
 
-.card-img img{
-  transition:transform .6s ease;
-}
-
-.card:hover .card-img img{
-  transform:scale(1.08);
-}
-
-/* subtle glow overlay */
-.card-img::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle, rgba(0,229,255,0.2), transparent 70%);
-  opacity:0;
-  transition:.4s;
-}
-
-.card:hover .card-img::after{
-  opacity:1;
-}
 /* =========================
-   ⚡ NEON BUTTONS
-   ========================= */
+   BUTTONS (NEON SYSTEM)
+========================= */
 
 .btn{
   display:inline-flex;
   align-items:center;
   justify-content:center;
+
   padding:10px 14px;
   border-radius:12px;
+
   border:1px solid var(--border);
-
   background:rgba(255,255,255,0.06);
-  color:var(--text);
 
+  color:var(--text);
   font-weight:600;
   font-size:14px;
-  cursor:pointer;
 
-  transition:.3s;
+  cursor:pointer;
   position:relative;
   overflow:hidden;
+
+  transition:.3s;
 }
 
-/* glow layer */
 .btn::before{
   content:"";
   position:absolute;
@@ -226,7 +287,6 @@ a{color:inherit;text-decoration:none}
   transition:.4s;
 }
 
-/* hover */
 .btn:hover{
   transform:translateY(-2px);
 }
@@ -235,7 +295,11 @@ a{color:inherit;text-decoration:none}
   opacity:1;
 }
 
-/* PRIMARY (⚡ ELECTRIC) */
+.btn:active{
+  transform:scale(0.96);
+}
+
+/* PRIMARY */
 .btn.primary{
   background:linear-gradient(90deg,#00e5ff,#0077ff);
   border:none;
@@ -250,95 +314,29 @@ a{color:inherit;text-decoration:none}
     0 0 70px rgba(0,119,255,.6);
 }
 
-/* ---------- FAQ ---------- */
-.faq details{
-  background:rgba(255,255,255,0.04);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:12px 14px;
-  margin:10px 0;
-}
-
-/* ---------- FOOTER ---------- */
-.footer{
-  padding:26px 0;
-  border-top:1px solid var(--border);
-  margin-top:24px;
-}
-
 /* =========================
-   💙 FLOATING HEARTS
-   ========================= */
+   CART DRAWER (PREMIUM)
+========================= */
 
-.blue-hearts-container{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-}
-
-.blue-heart{
-  position:absolute;
-  bottom:-20px;
-  color:#00e5ff;
-  animation:floatUp linear forwards;
-  text-shadow:0 0 10px #00e5ff,0 0 20px #0077ff;
-}
-
-@keyframes floatUp{
-  from{
-    transform:translateY(0) scale(1);
-  }
-  to{
-    transform:translateY(-120vh) scale(1.5);
-  }
-}
-
-/* ---------- GOLD PARTICLES (SUBTLE) ---------- */
-.gold-particles{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background-image:radial-gradient(rgba(255,215,0,0.15) 1px, transparent 1px);
-  background-size:40px 40px;
-  opacity:.2;
-}
-/* 🌊 subtle page motion breathing */
-body{
-  animation:softFadeIn 0.8s ease-out;
-}
-
-@keyframes softFadeIn{
-  from{opacity:0; transform:translateY(6px);}
-  to{opacity:1; transform:translateY(0);}
-}
-/* ✨ enhanced hover micro-depth (no visual redesign) */
-.card{
-  will-change:transform;
-}
-
-.card:active{
-  transform:scale(0.985);
-  transition:.15s ease;
-}
-/* ⚡ press-down tactile feel */
-.btn:active{
-  transform:scale(0.96);
-  filter:brightness(1.1);
-}
-/* 🛒 CART DRAWER */
 .cart-drawer{
   position:fixed;
   top:0;
   right:-420px;
   width:360px;
   height:100vh;
-  background:#07131f;
+
+  background:rgba(7,19,31,0.95);
+  backdrop-filter:blur(14px);
+
   border-left:1px solid rgba(255,255,255,0.14);
-  z-index:1000;
-  transition:.4s ease;
+
+  z-index:var(--z-cart);
+
   display:flex;
   flex-direction:column;
+
+  transition:.4s ease;
+  box-shadow:-20px 0 60px rgba(0,0,0,0.4);
 }
 
 .cart-drawer.open{
@@ -350,6 +348,7 @@ body{
   justify-content:space-between;
   align-items:center;
   padding:16px;
+
   border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
@@ -362,10 +361,19 @@ body{
 .cart-item{
   display:flex;
   gap:10px;
-  margin-bottom:12px;
-  background:rgba(255,255,255,0.04);
+
   padding:10px;
+  margin-bottom:12px;
+
+  background:rgba(255,255,255,0.04);
   border-radius:10px;
+
+  transition:.25s ease;
+}
+
+.cart-item:hover{
+  transform:translateX(-4px);
+  border:1px solid rgba(0,229,255,0.2);
 }
 
 .cart-item img{
@@ -378,4 +386,39 @@ body{
 .cart-footer{
   padding:16px;
   border-top:1px solid rgba(255,255,255,0.1);
+}
+
+/* =========================
+   FLOATING EFFECTS
+========================= */
+
+.blue-hearts-container{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:var(--z-hearts);
+}
+
+.blue-heart{
+  position:absolute;
+  bottom:-20px;
+  color:#00e5ff;
+  text-shadow:0 0 10px #00e5ff;
+  animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0) scale(1);}
+  to{transform:translateY(-120vh) scale(1.5);}
+}
+
+.gold-particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:var(--z-particles);
+
+  background-image:radial-gradient(rgba(255,215,0,0.15) 1px, transparent 1px);
+  background-size:40px 40px;
+  opacity:.2;
 }
