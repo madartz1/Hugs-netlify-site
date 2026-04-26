@@ -1,136 +1,196 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HUGS Shop</title>
-  <meta name="description" content="Shop HUGS hoodies. Support the mission through community-first merch." />
-  <link rel="stylesheet" href="/styles.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HUGS Shop</title>
+<meta name="description" content="Shop HUGS hoodies. Support the mission through community-first merch." />
+<link rel="stylesheet" href="/styles.css" />
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a class="brand" href="/">
-        <span class="brand-mark">HUGS</span>
-        <span class="brand-sub">Help Under Good Service</span>
-      </a>
 
-      <nav class="nav">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/shop.html" class="nav-link active">Shop</a>
-        <a href="/open-store.html" class="nav-link">Open Store</a>
-        <a href="/books.html" class="nav-link">Books</a>
-      </nav>
+<!-- BACKGROUND EFFECTS -->
+<div class="gold-particles"></div>
+<div class="blue-hearts-container" id="blueHearts"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">HUGS</span>
+      <span class="brand-sub">Help Under Good Service</span>
+    </a>
+
+    <nav class="nav">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/shop.html" class="nav-link active">Shop</a>
+      <a href="/open-store.html" class="nav-link">Open Store</a>
+      <a href="/Books1.html" class="nav-link">Books</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+  <h1>HUGS Hoodies</h1>
+  <p class="muted">
+    Premium community merch that supports real-world initiatives.
+  </p>
+
+  <div class="hero-actions">
+    <a class="btn primary" href="/open-store.html">Open Store</a>
+    <a class="btn" href="#products">View Products</a>
+    <a class="btn primary" href="/Books1.html">Buy Book</a>
+  </div>
+</section>
+
+<section id="products" class="section">
+  <div class="section-head">
+    <h2>Featured</h2>
+    <p class="muted">Launch collection (2 hero hoodies).</p>
+  </div>
+
+  <div id="productGrid" class="grid"></div>
+</section>
+
+<section class="section" id="faq">
+  <div class="section-head">
+    <h2>FAQ</h2>
+  </div>
+
+  <div class="faq">
+    <details>
+      <summary>Is this a donation?</summary>
+      <p>This is a retail product. Proceeds help support community initiatives.</p>
+    </details>
+
+    <details>
+      <summary>How does ordering work?</summary>
+      <p>Clicking “Buy Now” takes you to our secure checkout/store link.</p>
+    </details>
+
+    <details>
+      <summary>How long does shipping take?</summary>
+      <p>Typically 7–14 days depending on fulfillment.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="footer">
+  <p class="muted">© <span id="year"></span> HUGS. All rights reserved.</p>
+</footer>
+
+</main>
+
+<script src="/products.js"></script>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const grid = document.getElementById("productGrid");
+
+function money(n){
+  return `$${Number(n).toFixed(0)}`;
+}
+
+function card(p){
+return `
+<article class="card">
+  <a class="card-img" href="${p.buyLink}" target="_blank">
+    <img src="${p.image}" alt="${p.name}">
+  </a>
+
+  <div class="card-body">
+    <div class="card-top">
+      <h3>${p.name}</h3>
+      <div class="price">${money(p.price)}</div>
     </div>
-  </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <h1>HUGS Hoodies</h1>
-      <p class="muted">
-        Premium community merch that supports real-world initiatives.
-      </p>
+    <p class="muted">${p.description}</p>
 
-      <div class="hero-actions">
-        <a class="btn primary" href="/open-store.html">Open Store</a>
-        <a class="btn" href="#products">View Products</a>
-        <a class="btn primary" href="/Books1.html">Buy Book</a>
-      </div>
-    </section>
+    <div class="card-actions">
+      <a class="btn primary" href="${p.buyLink}" target="_blank">Buy Now</a>
+      <button class="btn" onclick='openGallery(${JSON.stringify(p.gallery)})'>View</button>
+    </div>
+  </div>
+</article>`;
+}
 
-    <section id="products" class="section">
-      <div class="section-head">
-        <h2>Featured</h2>
-        <p class="muted">Launch collection (2 hero hoodies).</p>
-      </div>
+grid.innerHTML = products.map(card).join("");
 
-      <div id="productGrid" class="grid"></div>
-    </section>
+/* 🔥 UPGRADED MODAL */
+function openGallery(images){
+  const modal=document.createElement("div");
+  modal.className="modal";
 
-    <section class="section" id="faq">
-      <div class="section-head">
-        <h2>FAQ</h2>
-      </div>
+  modal.innerHTML=`
+    <div onclick="this.parentElement.remove()" style="
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.88);
+      backdrop-filter:blur(10px);
+      z-index:99;"></div>
 
-      <div class="faq">
-        <details>
-          <summary>Is this a donation?</summary>
-          <p>
-            This is a retail product. Proceeds help support community initiatives.
-          </p>
-        </details>
+    <div style="
+      position:fixed;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      max-width:900px;
+      width:92%;
+      max-height:90%;
+      overflow:auto;
+      background:#07111f;
+      border-radius:20px;
+      padding:25px;
+      z-index:100;
+      box-shadow:0 0 40px rgba(0,153,255,.25);">
 
-        <details>
-          <summary>How does ordering work?</summary>
-          <p>
-            Clicking “Buy Now” takes you to our secure checkout/store link.
-          </p>
-        </details>
+      <button onclick="this.closest('.modal').remove()" style="
+        float:right;
+        padding:8px 14px;
+        border:none;
+        border-radius:10px;
+        cursor:pointer;">✕</button>
 
-        <details>
-          <summary>How long does shipping take?</summary>
-          <p>
-            Typically production + shipping ranges 7–14 days depending on fulfillment.
-          </p>
-        </details>
-      </div>
-    </section>
+      ${images.map(src => `
+        <img src="${src}" style="
+          width:100%;
+          margin:12px 0;
+          border-radius:14px;
+          box-shadow:0 0 20px rgba(0,0,0,.4);">
+      `).join("")}
+    </div>
+  `;
 
-    <footer class="footer">
-      <p class="muted">© <span id="year"></span> HUGS. All rights reserved.</p>
-    </footer>
-  </main>
+  document.body.appendChild(modal);
+}
 
-  <script src="/products.js"></script>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+window.openGallery = openGallery;
 
-    const grid = document.getElementById("productGrid");
+/* 🔥 ELECTRIC BLUE HEARTS */
+const heartsContainer = document.getElementById("blueHearts");
 
-    function money(n) {
-      return `$${Number(n).toFixed(0)}`;
-    }
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("blue-heart");
+  heart.innerHTML = "❤";
 
-    function card(p) {
-      return `
-        <article class="card">
-          <a class="card-img" href="${p.buyLink}" target="_blank" rel="noopener">
-            <img src="${p.image}" alt="${p.name}" loading="lazy" />
-          </a>
-          <div class="card-body">
-            <div class="card-top">
-              <h3>${p.name}</h3>
-              <div class="price">${money(p.price)}</div>
-            </div>
-            <p class="muted">${p.description}</p>
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (10 + Math.random()*18) + "px";
+  heart.style.animationDuration = (10 + Math.random()*12) + "s";
+  heart.style.opacity = .4 + Math.random()*.4;
 
-            <div class="card-actions">
-              <a class="btn primary" href="${p.buyLink}" target="_blank" rel="noopener">Buy Now</a>
-              <button class="btn" type="button" onclick='openGallery(${JSON.stringify(p.gallery)})'>View</button>
-            </div>
-          </div>
-        </article>
-      `;
-    }
+  heartsContainer.appendChild(heart);
 
-    grid.innerHTML = products.map(card).join("");
+  setTimeout(()=>{
+    heart.remove();
+  },22000);
+}
 
-    function openGallery(images) {
-      const modal = document.createElement("div");
-      modal.className = "modal";
-      modal.innerHTML = `
-        <div class="modal-backdrop" onclick="this.parentElement.remove()"></div>
-        <div class="modal-panel">
-          <button class="modal-close" onclick="this.closest('.modal').remove()">✕</button>
-          <div class="modal-strip">
-            ${images.map(src => `<img src="${src}" alt="Product image" loading="lazy" />`).join("")}
-          </div>
-        </div>
-      `;
-      document.body.appendChild(modal);
-    }
+setInterval(createHeart,1200);
+</script>
 
-    window.openGallery = openGallery;
-  </script>
 </body>
 </html>
