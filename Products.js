@@ -42,8 +42,13 @@ document.addEventListener("click", function(e){
   const btn = e.target.closest(".add-cart");
   if(!btn) return;
 
-  btn.classList.add("clicked");
+  const product = products.find(p => p.name === btn.dataset.name);
 
+  if(!product) return;
+
+  addToCart(product);
+
+  btn.classList.add("clicked");
   const originalText = btn.innerHTML;
   btn.innerHTML = "✓ Added";
 
@@ -70,4 +75,23 @@ function createFloatingItem(sourceBtn){
   setTimeout(()=>{
     item.remove();
   },900);
+}
+let cart = JSON.parse(localStorage.getItem("hugs_cart")) || [];
+
+/* Save cart */
+function saveCart(){
+  localStorage.setItem("hugs_cart", JSON.stringify(cart));
+  updateCartCount();
+}
+
+/* Add item */
+function addToCart(product){
+  cart.push(product);
+  saveCart();
+}
+
+/* Remove item */
+function removeFromCart(id){
+  cart = cart.filter(item => item.id !== id);
+  saveCart();
 }
