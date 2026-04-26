@@ -95,3 +95,39 @@ function removeFromCart(id){
   cart = cart.filter(item => item.id !== id);
   saveCart();
 }
+function openCart(){
+  document.getElementById("cartDrawer").classList.add("open");
+  renderCart();
+}
+
+function closeCart(){
+  document.getElementById("cartDrawer").classList.remove("open");
+}
+
+function renderCart(){
+  const container = document.getElementById("cartItems");
+  if(!container) return;
+
+  container.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <img src="${item.image}" />
+      <div>
+        <p>${item.name}</p>
+        <p>$${item.price}</p>
+        <button onclick="removeItem('${item.id}')">Remove</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function removeItem(id){
+  removeFromCart(id);
+  renderCart();
+}
+
+function checkout(){
+  if(cart.length === 0) return alert("Cart is empty");
+
+  // Simple Stripe redirect checkout (upgrade later to full session API)
+  window.location.href = "https://buy.stripe.com/aFabJ0fpq1w4d0P18c8ww01";
+}
