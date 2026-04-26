@@ -143,28 +143,29 @@ function renderCart(){
 /* =========================
    CHECKOUT (READY FOR STRIPE UPGRADE)
 ========================= */
-
-function checkout(){
+async function checkout(){
 
   if(cart.length === 0){
     alert("Cart is empty");
     return;
   }
 
-  /* CURRENT SAFE FALLBACK (your existing Stripe links) */
-  window.location.href = cart[0].buyLink;
-
-  /* 🔥 FUTURE UPGRADE HOOK (Stripe Session API)
-  fetch("/api/create-checkout-session", {
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body: JSON.stringify({ cart })
-  })
-  .then(res => res.json())
-  .then(data => {
-    window.location.href = data.url;
+  const res = await fetch("/api/create-checkout-session", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      cart,
+      total: getCartTotal()
+    })
   });
-  */
+
+  const data = await res.json();
+
+  if(data.url){
+    window.location.href = data.url;
+  } else {
+    alert("Checkout failed");
+  }
 }
 
 /* =========================
