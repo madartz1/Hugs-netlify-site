@@ -1,26 +1,29 @@
-import Stripe from "stripe";
+import { stripe } from "../lib/stripe.js";
+import { saveOrder } from "../lib/db.js";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-export default async function handler(req, res){
-
+export default async function handler(req, res) {
   const event = req.body;
 
-  if(event.type === "checkout.session.completed"){
+  try {
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object;
 
-    const session = event.data.object;
+      const order = {
+        id: session.id,
+        email: session.customer_details?.email || null,
+        amount: session.amount_total,
+        currency: session.currency,
+        status: "paid",
+        createdAt: new Date().toISOString()
+      };
 
-    const order = {
-      id: session.id,
-      email: session.customer_details?.email,
-      amount: session.amount_total,
-      status: "paid",
-      created: new Date().toISOString()
-    };
+      await saveOrder(order);
+    }
 
-    // 👉 SAVE TO DATABASE
-    console.log("ORDER:", order);
+    res.json({ received: true });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Webhook failed" });
   }
-
-  res.json({ received: true });
 }
