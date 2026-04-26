@@ -74,7 +74,11 @@ function addToCart(product){
   saveCart();
   renderCart();
 }
-
+function getCartTotal(){
+  return cart.reduce((sum,item)=>{
+    return sum + (item.price * item.quantity);
+  },0);
+}
 /* =========================
    REMOVE ITEM
 ========================= */
