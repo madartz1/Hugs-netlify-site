@@ -1,189 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Crushed but Not Silenced</title>
-<link rel="stylesheet" href="/styles.css">
-
-<style>
-*{box-sizing:border-box;}
-
-body{
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:radial-gradient(circle at center,#1a1405 0%,#090909 45%,#000 100%);
-  color:white;
-  font-family:Arial,sans-serif;
-  overflow:hidden;
-  position:relative;
-}
-
-/* GOLD PARTICLES */
-.gold-particles{
-  position:fixed;
-  inset:0;
-  background-image:radial-gradient(circle, rgba(255,215,0,.18) 1px, transparent 1px);
-  background-size:55px 55px;
-  animation:driftParticles 20s linear infinite;
-  z-index:1;
-  pointer-events:none;
-}
-
-@keyframes driftParticles{
-  from{transform:translateY(0);}
-  to{transform:translateY(-80px);}
-}
-
-/* GOLD HEARTS */
-.gold-hearts-container{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  z-index:2;
-}
-
-.gold-heart{
-  position:absolute;
-  bottom:-50px;
-  color:rgba(212,175,55,.85);
-  text-shadow:
-    0 0 8px rgba(255,215,0,.7),
-    0 0 18px rgba(255,223,100,.5),
-    0 0 28px rgba(212,175,55,.35);
-  animation:floatHeart linear infinite;
-  opacity:.9;
-}
-
-@keyframes floatHeart{
-  0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:0;}
-  10%{opacity:1;}
-  50%{transform:translateY(-50vh) translateX(25px) rotate(180deg);}
-  100%{transform:translateY(-120vh) translateX(-35px) rotate(360deg);opacity:0;}
-}
-
-/* CONTENT */
-.books-page{
-  text-align:center;
-  position:relative;
-  z-index:5;
-  padding:20px;
-  max-width:90%;
-}
-
-/* TOP LOGO */
-.back-logo{
-  display:inline-block;
-  margin-bottom:25px;
-  transition:all .35s ease;
-}
-
-.back-logo img{
-  width:90px;
-  filter:
-    drop-shadow(0 0 8px rgba(255,215,0,.45))
-    drop-shadow(0 0 18px rgba(255,180,0,.25));
-}
-
-.back-logo:hover{
-  transform:scale(1.08);
-}
-
-/* TITLE */
-.books-page h1{
-  font-size:clamp(2rem,5vw,3.1rem);
-  color:#ffd700;
-  text-shadow:
-    0 0 10px rgba(255,215,0,.65),
-    0 0 22px rgba(255,215,0,.4);
-  margin-bottom:10px;
-}
-
-/* SUBTITLE */
-.books-page p{
-  color:#ddd;
-  font-size:1.05rem;
-  margin-bottom:38px;
-}
-
-/* BOOK */
-.book-wrap{
-  perspective:1400px;
-  display:flex;
-  justify-content:center;
-  margin-bottom:40px;
-}
-
-.book-holder{
-  animation:floatBook 6s ease-in-out infinite;
-}
-
-.book{
-  width:min(290px,72vw);
-  border-radius:16px;
-  box-shadow:
-    0 0 35px rgba(255,215,0,.25),
-    0 20px 60px rgba(0,0,0,.7);
-  animation:rotateBook 10s ease-in-out infinite;
-}
-
-@keyframes rotateBook{
-  0%{transform:rotateY(-15deg);}
-  50%{transform:rotateY(15deg);}
-  100%{transform:rotateY(-15deg);}
-}
-
-@keyframes floatBook{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
-}
-
-/* BUTTON */
-.buy-book-btn{
-  position:relative;
-  display:inline-block;
-  padding:17px 38px;
-  border-radius:14px;
-  text-decoration:none;
-  font-weight:700;
-  color:#111;
-  background:linear-gradient(135deg,#ffd700,#ffb300,#fff2a0);
-  overflow:hidden;
-  box-shadow:
-    0 0 16px rgba(255,215,0,.6),
-    0 0 34px rgba(255,180,0,.4);
-  transition:transform .3s ease;
-}
-
-.buy-book-btn:hover{
-  transform:scale(1.05);
-}
-
-.buy-book-btn::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-80%;
-  width:50%;
-  height:100%;
-  background:linear-gradient(120deg, rgba(255,255,255,0), rgba(255,255,255,.85), rgba(255,255,255,0));
-  transform:skewX(-25deg);
-  animation:shimmer 3s infinite;
-}
-
-@keyframes shimmer{
-  from{left:-80%;}
-  to{left:130%;}
-}
-
-@media(max-width:600px){
-  .books-page p{font-size:.95rem;}
-}
-</style>
+<meta name="description" content="Explore Crushed but Not Silenced — a powerful story of pain, resilience, healing and hope." />
+<link rel="stylesheet" href="/styles.css" />
 </head>
 
 <body>
@@ -191,14 +13,37 @@ body{
 <div class="gold-particles"></div>
 <div class="gold-hearts-container" id="goldHearts"></div>
 
-<div class="books-page">
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <span class="brand-mark">HUGS</span>
+      <span class="brand-sub">Help Under Good Service</span>
+    </a>
+
+    <nav class="nav">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/shop.html" class="nav-link">Shop</a>
+      <a href="/open-store.html" class="nav-link">Join Movement</a>
+      <a href="/Books1.html" class="nav-link active">Books</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+  <h1>Crushed but Not Silenced</h1>
+  <p>
+    A transformational journey through suffering, endurance, emotional collapse,
+    resilience, survival and the fight to reclaim voice after life attempts to bury truth.
+  </p>
+</section>
+
+<section class="books-page">
 
   <a href="/shop.html" class="back-logo">
     <img src="/images/X_logo_gold.jpg" alt="HUGS Logo">
   </a>
-
-  <h1>Crushed but Not Silenced</h1>
-  <p>A powerful story of pain, healing, resilience, and hope.</p>
 
   <div class="book-wrap">
     <div class="book-holder">
@@ -206,13 +51,49 @@ body{
     </div>
   </div>
 
-  <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" class="buy-book-btn">
+  <a href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00" class="btn primary buy-book-btn">
     Buy Now
   </a>
 
-</div>
+</section>
+
+<section class="section">
+  <div class="cards3">
+    <div class="info-card">
+      <h3>Pain Into Purpose</h3>
+      <p>A deeply human story that exposes what crushing seasons can do to the mind, body and soul.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Voice After Silence</h3>
+      <p>This release speaks to those who have felt ignored, displaced, unseen or emotionally suffocated.</p>
+    </div>
+
+    <div class="info-card">
+      <h3>Hope Through Healing</h3>
+      <p>Not simply a story of hardship — but a blueprint of endurance, truth and spiritual rebuilding.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="book-promo">
+    <h2 style="color:#ffd700;">Support The Mission Beyond The Pages</h2>
+    <p class="muted">Every purchase helps strengthen the HUGS movement of service, outreach, and healing support.</p>
+    <br>
+    <a class="btn primary" href="/shop.html">Visit HUGS Shop</a>
+  </div>
+</section>
+
+<footer class="footer">
+  © <span id="year"></span> HUGS | Help Under Good Service
+</footer>
+
+</main>
 
 <script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
 const heartsContainer=document.getElementById("goldHearts");
 
 function createHeart(){
@@ -220,11 +101,9 @@ function createHeart(){
   heart.classList.add("gold-heart");
   heart.innerHTML="❤";
   heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(10+Math.random()*22)+"px";
+  heart.style.fontSize=(10+Math.random()*20)+"px";
   heart.style.animationDuration=(8+Math.random()*10)+"s";
-  heart.style.opacity=Math.random();
   heartsContainer.appendChild(heart);
-
   setTimeout(()=>{heart.remove();},18000);
 }
 setInterval(createHeart,800);
