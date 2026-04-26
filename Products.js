@@ -3,7 +3,7 @@ const products = [
     id: "time-4-healing-hoodie",
     name: "HUGS – Time 4 Healing Hoodie",
     price: 70,
-    image: "/assets/hugs-hoodie-promo.JPEG",
+    image: "/assets/hugs-time-4-healing-front.jpg",
     gallery: [
       "/assets/hugs-time-4-healing-front.jpg",
       "/assets/hugs-time-4-healing-back.jpg",
@@ -11,9 +11,10 @@ const products = [
       "/assets/hugs-time-4-healing-model-2.jpg"
     ],
     description:
-      "A premium hoodie designed to represent patience, recovery, and personal healing. Proceeds help support community wellness initiatives.",
+      "A premium hoodie designed to represent patience, recovery, and personal healing. Every purchase helps support community wellness initiatives through HUGS.",
     buyLink: "https://buy.stripe.com/aFabJ0fpq1w4d0P18c8ww01"
   },
+
   {
     id: "hugs-community-hoodie",
     name: "HUGS Community Hoodie",
@@ -26,7 +27,7 @@ const products = [
       "/assets/hugs-community-model-2.jpg"
     ],
     description:
-      "A community-first hoodie built around dignity, care, and visible impact. HUGS stands for Help Under Good Service.",
+      "A premium community-first hoodie built around dignity, care, resilience and visible impact. HUGS stands for Help Under Good Service.",
     buyLink: "https://buy.stripe.com/8x2bJ06SU6Qo4ujg368ww02"
   }
 ];
