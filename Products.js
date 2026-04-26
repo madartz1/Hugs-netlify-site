@@ -83,7 +83,14 @@ function saveCart(){
   localStorage.setItem("hugs_cart", JSON.stringify(cart));
   updateCartCount();
 }
+function updateCartCount(){
+  const el = document.getElementById("cartCount");
+  if(el){
+    el.textContent = cart.length;
+  }
+}
 
+updateCartCount();
 /* Add item */
 function addToCart(product){
   cart.push(product);
