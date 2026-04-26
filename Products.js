@@ -12,7 +12,8 @@ const products = [
     ],
     description:
       "A premium hoodie designed to represent patience, recovery, and personal healing. Every purchase helps support community wellness initiatives through HUGS.",
-    buyLink: "https://buy.stripe.com/aFabJ0fpq1w4d0P18c8ww01"
+    buyLink: "https://buy.stripe.com/aFabJ0fpq1w4d0P18c8ww01",
+    limited: true
   },
 
   {
@@ -30,13 +31,19 @@ const products = [
       "A premium community-first hoodie built around dignity, care, resilience and visible impact. HUGS stands for Help Under Good Service.",
     buyLink: "https://buy.stripe.com/8x2bJ06SU6Qo4ujg368ww02"
   }
-  document.addEventListener("click", function(e){
+];
+
+window.products = products;
+/* =========================
+   🛍️ MICRO CART SYSTEM
+   ========================= */
+
+document.addEventListener("click", function(e){
   const btn = e.target.closest(".add-cart");
   if(!btn) return;
 
-  const productName = btn.dataset.name;
-
   btn.classList.add("clicked");
+
   const originalText = btn.innerHTML;
   btn.innerHTML = "✓ Added";
 
@@ -64,6 +71,3 @@ function createFloatingItem(sourceBtn){
     item.remove();
   },900);
 }
-];
-
-window.products = products;
