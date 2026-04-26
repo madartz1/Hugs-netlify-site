@@ -30,6 +30,40 @@ const products = [
       "A premium community-first hoodie built around dignity, care, resilience and visible impact. HUGS stands for Help Under Good Service.",
     buyLink: "https://buy.stripe.com/8x2bJ06SU6Qo4ujg368ww02"
   }
+  document.addEventListener("click", function(e){
+  const btn = e.target.closest(".add-cart");
+  if(!btn) return;
+
+  const productName = btn.dataset.name;
+
+  btn.classList.add("clicked");
+  const originalText = btn.innerHTML;
+  btn.innerHTML = "✓ Added";
+
+  createFloatingItem(btn);
+
+  setTimeout(()=>{
+    btn.classList.remove("clicked");
+    btn.innerHTML = originalText;
+  },1200);
+});
+
+function createFloatingItem(sourceBtn){
+  const rect = sourceBtn.getBoundingClientRect();
+
+  const item = document.createElement("div");
+  item.className = "floating-item";
+  item.innerHTML = "🛍️";
+
+  item.style.left = rect.left + rect.width/2 + "px";
+  item.style.top = rect.top + "px";
+
+  document.body.appendChild(item);
+
+  setTimeout(()=>{
+    item.remove();
+  },900);
+}
 ];
 
 window.products = products;
