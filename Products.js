@@ -46,27 +46,30 @@ window.products = products;
 let cart = JSON.parse(localStorage.getItem("hugs_cart")) || [];
 
 /* =========================
-   SAVE CART
+   SAVE CART + SYNC UI
 ========================= */
 
 function saveCart(){
   localStorage.setItem("hugs_cart", JSON.stringify(cart));
-  updateCartCount();
+  syncUI();
 }
 
 /* =========================
-   ADD TO CART (SAFE + MERGE LOGIC)
+   ADD TO CART (SAFE MERGE)
 ========================= */
 
 function addToCart(product){
 
-  const existing = cart.find(item => item.id === product.id);
+  const item = cart.find(p => p.id === product.id);
 
-  if(existing){
-    existing.quantity += 1;
+  if(item){
+    item.quantity += 1;
   } else {
     cart.push({
-      ...product,
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
       quantity: 1
     });
   }
@@ -74,11 +77,7 @@ function addToCart(product){
   saveCart();
   renderCart();
 }
-function getCartTotal(){
-  return cart.reduce((sum,item)=>{
-    return sum + (item.price * item.quantity);
-  },0);
-}
+
 /* =========================
    REMOVE ITEM
 ========================= */
@@ -90,18 +89,42 @@ function removeItem(id){
 }
 
 /* =========================
-   CART COUNT (FIXED FOR QUANTITY)
+   CART TOTAL
 ========================= */
 
-function updateCartCount(){
-  const el = document.getElementById("cartCount");
-  if(el){
-    el.textContent = cart.reduce((sum,item)=>sum + item.quantity, 0);
+function getCartTotal(){
+  return cart.reduce((sum, item) => {
+    return sum + (item.price * item.quantity);
+  }, 0);
+}
+
+/* =========================
+   CART COUNT (QUANTITY SAFE)
+========================= */
+
+function getCartCount(){
+  return cart.reduce((sum, item) => sum + item.quantity, 0);
+}
+
+/* =========================
+   UI SYNC
+========================= */
+
+function syncUI(){
+
+  const countEl = document.getElementById("cartCount");
+  if(countEl){
+    countEl.textContent = getCartCount();
+  }
+
+  const totalEl = document.getElementById("cartTotal");
+  if(totalEl){
+    totalEl.textContent = getCartTotal();
   }
 }
 
 /* init */
-updateCartCount();
+syncUI();
 
 /* =========================
    CART DRAWER CONTROLS
@@ -117,7 +140,7 @@ function closeCart(){
 }
 
 /* =========================
-   RENDER CART UI
+   RENDER CART
 ========================= */
 
 function renderCart(){
@@ -138,11 +161,14 @@ function renderCart(){
       </div>
     </div>
   `).join("");
+
+  syncUI();
 }
 
 /* =========================
-   CHECKOUT (READY FOR STRIPE UPGRADE)
+   STRIPE CHECKOUT (ENTERPRISE READY)
 ========================= */
+
 async function checkout(){
 
   if(cart.length === 0){
@@ -150,26 +176,33 @@ async function checkout(){
     return;
   }
 
-  const res = await fetch("/api/create-checkout-session", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({
-      cart,
-      total: getCartTotal()
-    })
-  });
+  try {
 
-  const data = await res.json();
+    const res = await fetch("/api/create-checkout-session", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({
+        cart,
+        total: getCartTotal()
+      })
+    });
 
-  if(data.url){
-    window.location.href = data.url;
-  } else {
-    alert("Checkout failed");
+    const data = await res.json();
+
+    if(data.url){
+      window.location.href = data.url;
+    } else {
+      alert("Checkout failed");
+    }
+
+  } catch(err){
+    console.error(err);
+    alert("Checkout error");
   }
 }
 
 /* =========================
-   🛍️ MICRO INTERACTIONS
+   MICRO INTERACTIONS
 ========================= */
 
 document.addEventListener("click", function(e){
@@ -182,20 +215,20 @@ document.addEventListener("click", function(e){
 
   addToCart(product);
 
-  /* UI micro animation */
+  /* animation */
   btn.classList.add("clicked");
 
-  const originalText = btn.innerHTML;
+  const original = btn.innerHTML;
   btn.innerHTML = "✓ Added";
 
   setTimeout(()=>{
     btn.classList.remove("clicked");
-    btn.innerHTML = originalText;
+    btn.innerHTML = original;
   },900);
 });
 
 /* =========================
-   FLOATING ANIMATION
+   FLOATING EFFECT
 ========================= */
 
 function createFloatingItem(sourceBtn){
