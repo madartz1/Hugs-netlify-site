@@ -7,6 +7,14 @@
 <meta name="description" content="Shop HUGS hoodies. Support the mission through community-first merch." />
 <link rel="stylesheet" href="/styles.css" />
 </head>
+
+<body>
+
+<!-- BACKGROUND EFFECTS -->
+<div class="gold-particles"></div>
+<div class="blue-hearts-container" id="blueHearts"></div>
+
+<!-- 🛒 CART DRAWER (FIXED POSITION INSIDE BODY) -->
 <div id="cartDrawer" class="cart-drawer">
   <div class="cart-header">
     <h3>Your Cart</h3>
@@ -19,14 +27,10 @@
     <button class="btn primary" onclick="checkout()">Checkout</button>
   </div>
 </div>
-<body>
-
-<!-- BACKGROUND EFFECTS -->
-<div class="gold-particles"></div>
-<div class="blue-hearts-container" id="blueHearts"></div>
 
 <header class="site-header">
   <div class="wrap header-inner">
+
     <a class="brand" href="/">
       <span class="brand-mark">HUGS</span>
       <span class="brand-sub">Help Under Good Service</span>
@@ -37,10 +41,13 @@
       <a href="/shop.html" class="nav-link active">Shop</a>
       <a href="/open-store.html" class="nav-link">Open Store</a>
       <a href="/Books1.html" class="nav-link">Books</a>
+
+      <!-- 🛒 CART BUTTON -->
       <a href="#" class="nav-link" onclick="openCart()">
-  Cart (<span id="cartCount">0</span>)
-</a>
+        Cart (<span id="cartCount">0</span>)
+      </a>
     </nav>
+
   </div>
 </header>
 
@@ -100,22 +107,34 @@
 <script src="/products.js"></script>
 
 <script>
+/* =========================
+   INIT
+========================= */
+
 document.getElementById("year").textContent = new Date().getFullYear();
 
 const grid = document.getElementById("productGrid");
 
+/* =========================
+   MONEY FORMAT
+========================= */
 function money(n){
   return `$${Number(n).toFixed(0)}`;
 }
 
+/* =========================
+   PRODUCT CARD
+========================= */
 function card(p){
 return `
 <article class="card">
-  <a class="card-img" href="${p.buyLink}" target="_blank">
+
+  <div class="card-img">
     <img src="${p.image}" alt="${p.name}">
-  </a>
+  </div>
 
   <div class="card-body">
+
     <div class="card-top">
       <h3>${p.name}</h3>
       <div class="price">${money(p.price)}</div>
@@ -124,16 +143,29 @@ return `
     <p class="muted">${p.description}</p>
 
     <div class="card-actions">
-      <a class="btn primary" href="${p.buyLink}" target="_blank">Buy Now</a>
-      <button class="btn" onclick='openGallery(${JSON.stringify(p.gallery)})'>View</button>
+
+      <!-- 🛒 CART BUTTON (FIXED) -->
+      <button class="btn primary add-cart"
+        data-id="${p.id}">
+        Buy Now
+      </button>
+
+      <button class="btn"
+        onclick='openGallery(${JSON.stringify(p.gallery)})'>
+        View
+      </button>
+
     </div>
+
   </div>
 </article>`;
 }
 
 grid.innerHTML = products.map(card).join("");
 
-/* 🔥 UPGRADED MODAL */
+/* =========================
+   GALLERY MODAL
+========================= */
 function openGallery(images){
   const modal=document.createElement("div");
   modal.className="modal";
@@ -175,15 +207,16 @@ function openGallery(images){
           border-radius:14px;
           box-shadow:0 0 20px rgba(0,0,0,.4);">
       `).join("")}
+
     </div>
   `;
 
   document.body.appendChild(modal);
 }
 
-window.openGallery = openGallery;
-
-/* 🔥 ELECTRIC BLUE HEARTS */
+/* =========================
+   HEARTS ANIMATION
+========================= */
 const heartsContainer = document.getElementById("blueHearts");
 
 function createHeart(){
@@ -194,16 +227,19 @@ function createHeart(){
   heart.style.left = Math.random()*100 + "vw";
   heart.style.fontSize = (10 + Math.random()*18) + "px";
   heart.style.animationDuration = (10 + Math.random()*12) + "s";
-  heart.style.opacity = .4 + Math.random()*.4;
 
   heartsContainer.appendChild(heart);
 
-  setTimeout(()=>{
-    heart.remove();
-  },22000);
+  setTimeout(()=>heart.remove(),22000);
 }
 
 setInterval(createHeart,1200);
+
+/* =========================
+   CART SYSTEM HOOKS
+   (handled in products.js)
+========================= */
+
 </script>
 
 </body>
