@@ -7,7 +7,18 @@
 <meta name="description" content="Shop HUGS hoodies. Support the mission through community-first merch." />
 <link rel="stylesheet" href="/styles.css" />
 </head>
+<div id="cartDrawer" class="cart-drawer">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button onclick="closeCart()">✕</button>
+  </div>
 
+  <div id="cartItems" class="cart-items"></div>
+
+  <div class="cart-footer">
+    <button class="btn primary" onclick="checkout()">Checkout</button>
+  </div>
+</div>
 <body>
 
 <!-- BACKGROUND EFFECTS -->
@@ -26,6 +37,9 @@
       <a href="/shop.html" class="nav-link active">Shop</a>
       <a href="/open-store.html" class="nav-link">Open Store</a>
       <a href="/Books1.html" class="nav-link">Books</a>
+      <a href="#" class="nav-link" onclick="openCart()">
+  Cart (<span id="cartCount">0</span>)
+</a>
     </nav>
   </div>
 </header>
