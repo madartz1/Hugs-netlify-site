@@ -1,1 +1,36 @@
+<!-- PRODUCT VIEW CONTAINER -->
+<section class="max-w-6xl mx-auto px-4 py-10">
 
+  <!-- BACK BUTTON -->
+  <a href="/shop" class="text-hugs-light hover:text-white transition mb-6 inline-block">
+    ← Back to Shop
+  </a>
+
+  <!-- PRODUCT CONTENT (DYNAMIC) -->
+  <div id="productView" class="bg-hugs-card border border-hugs-border rounded-3xl overflow-hidden">
+
+    <!-- IMAGE (filled by JS) -->
+    <div id="productImage"></div>
+
+    <!-- DETAILS -->
+    <div class="p-6">
+
+      <h1 id="productName" class="text-3xl font-semibold"></h1>
+
+      <div id="productPrice" class="text-hugs-light text-xl font-bold mt-2"></div>
+
+      <p id="productDescription" class="text-hugs-muted mt-4"></p>
+
+      <!-- ACTION -->
+      <a
+        id="productBuy"
+        href="#"
+        class="inline-block mt-6 bg-hugs-light text-hugs-dark px-6 py-3 rounded-xl font-semibold hover:scale-[1.02] transition"
+      >
+        Buy Now
+      </a>
+
+    </div>
+  </div>
+
+</section>
