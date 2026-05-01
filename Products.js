@@ -40,6 +40,12 @@ const products = [
 window.products = products;
 
 /* =========================
+   ⚡ STORE ROUTE CONFIG
+========================= */
+
+const OPEN_STORE_URL = "/shop.html";
+
+/* =========================
    🛒 CART STATE
 ========================= */
 
@@ -55,7 +61,7 @@ function saveCart(){
 }
 
 /* =========================
-   ADD TO CART (SAFE MERGE)
+   ADD TO CART
 ========================= */
 
 function addToCart(product){
@@ -93,13 +99,11 @@ function removeItem(id){
 ========================= */
 
 function getCartTotal(){
-  return cart.reduce((sum, item) => {
-    return sum + (item.price * item.quantity);
-  }, 0);
+  return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 }
 
 /* =========================
-   CART COUNT (QUANTITY SAFE)
+   CART COUNT
 ========================= */
 
 function getCartCount(){
@@ -131,12 +135,12 @@ syncUI();
 ========================= */
 
 function openCart(){
-  document.getElementById("cartDrawer").classList.add("open");
+  document.getElementById("cartDrawer")?.classList.add("open");
   renderCart();
 }
 
 function closeCart(){
-  document.getElementById("cartDrawer").classList.remove("open");
+  document.getElementById("cartDrawer")?.classList.remove("open");
 }
 
 /* =========================
@@ -150,14 +154,10 @@ function renderCart(){
   container.innerHTML = cart.map(item => `
     <div class="cart-item">
       <img src="${item.image}" />
-
       <div>
         <p>${item.name}</p>
         <p>$${item.price} × ${item.quantity}</p>
-
-        <button onclick="removeItem('${item.id}')">
-          Remove
-        </button>
+        <button onclick="removeItem('${item.id}')">Remove</button>
       </div>
     </div>
   `).join("");
@@ -166,7 +166,7 @@ function renderCart(){
 }
 
 /* =========================
-   STRIPE CHECKOUT (ENTERPRISE READY)
+   CHECKOUT (FIXED CLEAN VERSION)
 ========================= */
 
 async function checkout(){
@@ -183,18 +183,6 @@ async function checkout(){
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({ cart })
     });
-
-    const data = await res.json();
-
-    if(data.url){
-      window.location.href = data.url;
-    }
-
-  } catch(err){
-    console.error(err);
-    alert("Checkout failed");
-  }
-}
 
     const data = await res.json();
 
@@ -224,7 +212,6 @@ document.addEventListener("click", function(e){
 
   addToCart(product);
 
-  /* animation */
   btn.classList.add("clicked");
 
   const original = btn.innerHTML;
