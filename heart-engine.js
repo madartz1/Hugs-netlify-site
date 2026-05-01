@@ -1,11 +1,11 @@
 /* =========================
-   💙 HUGS UNIFIED HEART SYSTEM
-   (BASE + REACTIVE MERGED)
+   💙 HUGS UNIFIED HEART SYSTEM v2 (STABLE)
+   (BASE + REACTIVE MERGED - FIXED)
 ========================= */
 
 (function () {
 
-  // prevent duplicates
+  // prevent duplicates across page loads
   if (window.__HUGS_HEART_SYSTEM__) return;
   window.__HUGS_HEART_SYSTEM__ = true;
 
@@ -31,6 +31,9 @@
     color = "#00f0ff";
   }
 
+  // safety clamp (prevents divide issues)
+  intensity = Math.max(0.6, Math.min(intensity, 2.2));
+
   /* =========================
      CORE HEART CREATOR
   ========================= */
@@ -44,6 +47,8 @@
     el.style.color = color;
 
     el.style.left = (x ?? Math.random() * 100) + (x ? "px" : "vw");
+
+    // FIX: never use "auto" for animated elements
     el.style.top = y ? y + "px" : "auto";
 
     el.style.fontSize = (10 + Math.random() * 18 * boost) + "px";
@@ -56,12 +61,14 @@
   }
 
   /* =========================
-     BASE FLOW (CLEAN)
+     BASE HEART FLOW
   ========================= */
+
+  const spawnRate = Math.max(400, 900 / intensity);
 
   setInterval(() => {
     createHeart(null, null, intensity);
-  }, 900 / intensity);
+  }, spawnRate);
 
   /* =========================
      CLICK REACTIONS
@@ -71,13 +78,15 @@
 
     const target = e.target;
 
-    // BUY
+    if (!target) return;
+
+    // BUY BUTTONS
     if (target.closest(".btn.primary")) {
       burst(e.pageX, e.pageY, 12);
       return;
     }
 
-    // CART
+    // ADD TO CART
     if (target.closest(".add-cart")) {
       burst(e.pageX, e.pageY, 18);
       return;
@@ -96,6 +105,12 @@
   ========================= */
 
   function burst(x, y, count) {
+
+    if (!x || !y) {
+      x = window.innerWidth / 2;
+      y = window.innerHeight / 2;
+    }
+
     for (let i = 0; i < count; i++) {
       setTimeout(() => {
         createHeart(
@@ -108,7 +123,7 @@
   }
 
   /* =========================
-     GLOBAL ACCESS (FOR CART)
+     GLOBAL ACCESS
   ========================= */
 
   window.hugsHeartBurst = function (x, y) {
