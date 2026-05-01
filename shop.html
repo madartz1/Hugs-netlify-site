@@ -52,12 +52,14 @@ body {
   opacity: 0.7;
 }
 
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 22px;
 }
 
+/* CARD */
 .card {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(0,194,255,0.15);
@@ -98,7 +100,7 @@ body {
   margin-top: 10px;
 }
 
-/* FLOAT FX SAFE */
+/* FLOAT SYSTEM */
 .blue-hearts-container,
 .floating-logo-layer {
   position: fixed;
@@ -185,6 +187,10 @@ body {
 <script>
 const grid = document.getElementById("productGrid");
 
+/* SAFE GUARD (prevents crash if products.js fails) */
+const safeProducts = typeof products !== "undefined" ? products : [];
+
+/* FEATURED */
 const featured = {
   name: "Time 4 Healing Hoodie",
   price: 88,
@@ -196,8 +202,8 @@ function card(p){
   return `
   <article class="card">
     <img src="${p.image}" />
-    <div class="card-body">
 
+    <div class="card-body">
       <div class="card-top">
         <h3>${p.name}</h3>
         <div class="price">$${p.price}</div>
@@ -209,22 +215,20 @@ function card(p){
         <a class="btn primary" href="/open-store.html">Buy</a>
         <a class="btn" href="/open-store.html">View</a>
       </div>
-
     </div>
   </article>`;
 }
 
 grid.innerHTML =
   card(featured) +
-  (typeof products !== "undefined"
-    ? products.map(card).join("")
-    : "");
+  safeProducts.map(card).join("");
 </script>
 
 <script>
 const hearts = document.getElementById("blueHearts");
 const logos = document.getElementById("logoLayer");
 
+/* HEARTS */
 function createHeart(){
   if(!hearts) return;
   const el = document.createElement("div");
@@ -238,6 +242,7 @@ function createHeart(){
 }
 setInterval(createHeart,1100);
 
+/* LOGOS */
 function createLogo(){
   if(!logos) return;
   const img = document.createElement("img");
