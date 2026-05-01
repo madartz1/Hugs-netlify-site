@@ -9,10 +9,6 @@
 <link rel="stylesheet" href="/styles.css" />
 
 <style>
-/* =========================
-   SHOP BASE THEME (MATCH HOME)
-========================= */
-
 body {
   margin: 0;
   background: radial-gradient(circle at top, #0b1b3a, #050A1F);
@@ -25,10 +21,6 @@ body {
   margin: auto;
   padding: 40px 20px;
 }
-
-/* =========================
-   HERO
-========================= */
 
 .hero {
   text-align: center;
@@ -56,19 +48,11 @@ body {
   font-weight: 800;
 }
 
-/* =========================
-   GRID
-========================= */
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 22px;
 }
-
-/* =========================
-   CARD STYLE (HOME MATCH)
-========================= */
 
 .card {
   background: rgba(255,255,255,0.03);
@@ -110,38 +94,6 @@ body {
   margin-top: 10px;
 }
 
-/* =========================
-   FEATURED HERO CARD
-========================= */
-
-.featured {
-  grid-column: 1 / -1;
-  position: relative;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 2px solid rgba(0,194,255,0.5);
-  box-shadow: 0 0 55px rgba(0,194,255,0.25);
-}
-
-.featured img {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
-}
-
-.featured-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(5,10,31,0.95), rgba(0,194,255,0.25));
-  display: flex;
-  align-items: flex-end;
-  padding: 20px;
-}
-
-/* =========================
-   FLOATING EFFECTS LAYERS
-========================= */
-
 .blue-hearts-container,
 .floating-logo-layer {
   position: fixed;
@@ -178,12 +130,11 @@ body {
   }
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- FLOATING FX LAYERS -->
+<!-- FX -->
 <div class="gold-particles"></div>
 <div class="blue-hearts-container" id="blueHearts"></div>
 <div class="floating-logo-layer" id="logoLayer"></div>
@@ -192,15 +143,12 @@ body {
 <header class="site-header">
   <div class="wrap header-inner">
 
-    <a class="brand" href="/">
-      <span class="brand-mark">HUGS</span>
-      <span class="brand-sub">Help Under Good Service</span>
-    </a>
+    <a class="brand" href="/">HUGS</a>
 
     <nav class="nav">
       <a href="/" class="nav-link">Home</a>
-      <a href="/shop.html" class="nav-link active">Shop</a>
-      <a href="/open-store.html" class="nav-link">Open Store</a>
+      <a href="/shop" class="nav-link active">Shop</a>
+      <a href="/open-store" class="nav-link">Open Store</a>
     </nav>
 
   </div>
@@ -208,41 +156,28 @@ body {
 
 <main class="wrap">
 
-<!-- HERO -->
 <section class="hero">
   <h1>HUGS Shop</h1>
   <p class="muted">Healing apparel built for community connection.</p>
 
   <div class="hero-actions">
-    <a class="btn primary" href="/open-store.html">Open Store</a>
+    <a class="btn primary" href="/open-store">Open Store</a>
     <a class="btn" href="#products">View Products</a>
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section id="products" class="section">
-
+<section id="products">
   <div id="productGrid" class="grid"></div>
-
 </section>
 
 </main>
 
-<!-- PRODUCTS DATA -->
 <script src="/products.js"></script>
 
-<!-- CART + UI RENDER -->
 <script>
-document.getElementById("year")?.append(new Date().getFullYear());
-
 const grid = document.getElementById("productGrid");
 
-/* =========================
-   FEATURED FIRST
-========================= */
-
 const featured = {
-  id: "time4healing",
   name: "Time 4 Healing Hoodie",
   price: 88,
   description: "Featured Drop • Healing Collection",
@@ -252,13 +187,11 @@ const featured = {
 function card(p){
   return `
   <article class="card">
-
     <div class="card-img">
-      <img src="${p.image}" />
+      <img src="${p.image}">
     </div>
 
     <div class="card-body">
-
       <div class="card-top">
         <h3>${p.name}</h3>
         <div class="price">$${p.price}</div>
@@ -267,62 +200,47 @@ function card(p){
       <p class="muted">${p.description}</p>
 
       <div class="card-actions">
-        <a class="btn primary" href="/open-store.html">Buy</a>
-        <a class="btn" href="/open-store.html">View</a>
+        <a class="btn primary" href="/open-store">Buy</a>
+        <a class="btn" href="/open-store">View</a>
       </div>
-
     </div>
-
   </article>`;
 }
 
 grid.innerHTML =
   card(featured) +
-  (products ? products.map(card).join("") : "");
+  (typeof products !== "undefined" ? products.map(card).join("") : "");
 </script>
 
-<!-- FLOATING HEARTS + LOGOS -->
 <script>
-
 const hearts = document.getElementById("blueHearts");
 const logos = document.getElementById("logoLayer");
 
-/* HEARTS */
 function createHeart(){
   if(!hearts) return;
-
   const el = document.createElement("div");
   el.className = "blue-heart";
   el.innerHTML = "❤";
-
   el.style.left = Math.random()*100+"vw";
   el.style.fontSize = (10+Math.random()*16)+"px";
   el.style.animationDuration = (9+Math.random()*10)+"s";
-
   hearts.appendChild(el);
   setTimeout(()=>el.remove(),20000);
 }
-
 setInterval(createHeart,1100);
 
-/* LOGOS */
 function createLogo(){
   if(!logos) return;
-
   const img = document.createElement("img");
   img.src = "/assets/hugs-gold-logo.png";
   img.className = "floating-logo";
-
   img.style.left = Math.random()*100+"vw";
   img.style.width = (26+Math.random()*28)+"px";
   img.style.animationDuration = (11+Math.random()*9)+"s";
-
   logos.appendChild(img);
   setTimeout(()=>img.remove(),22000);
 }
-
 setInterval(createLogo,1500);
-
 </script>
 
 </body>
