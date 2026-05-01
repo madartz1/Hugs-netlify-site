@@ -1,127 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HUGS — Help Under Good Service</title>
-    <meta
-      name="description"
-      content="HUGS is a community-driven initiative built to support people through direct action, creative empowerment, and long-term solutions."
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <title>HUGS — Help Under Good Service</title>
+  <meta name="description" content="HUGS is a community-driven initiative built to support people through direct action, creative empowerment, and long-term solutions." />
 
-    <!-- HUGS Brand Colors -->
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              hugs: {
-                light: "#6ED3F5",
-                mid: "#3BAEDC",
-                navy: "#0B2A4A",
-                dark: "#0A1A2A",
-                silver: "#C9CCD1",
-                bg: "#0A1A2A",
-                card: "rgba(255,255,255,0.06)",
-                border: "rgba(255,255,255,0.14)",
-                glow: "rgba(110,211,245,0.45)",
-                text: "rgba(255,255,255,0.92)",
-                muted: "rgba(255,255,255,0.70)"
-              }
-            },
-            boxShadow: {
-              soft: "0 20px 55px rgba(0,0,0,0.45)"
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hugs: {
+              light: "#6ED3F5",
+              mid: "#3BAEDC",
+              navy: "#0B2A4A",
+              dark: "#0A1A2A",
+              silver: "#C9CCD1",
+              bg: "#0A1A2A",
+              card: "rgba(255,255,255,0.06)",
+              border: "rgba(255,255,255,0.14)",
+              glow: "rgba(110,211,245,0.45)",
+              text: "rgba(255,255,255,0.92)",
+              muted: "rgba(255,255,255,0.70)"
             }
+          },
+          boxShadow: {
+            soft: "0 20px 55px rgba(0,0,0,0.45)"
           }
         }
-      };
-    </script>
-
-    <style>
-      .bg-grid {
-        background-image: radial-gradient(
-          circle at 1px 1px,
-          rgba(255, 255, 255, 0.06) 1px,
-          transparent 0
-        );
-        background-size: 26px 26px;
       }
-    </style>
-  </head>
+    };
+  </script>
 
-  <body class="bg-hugs-bg text-white min-h-screen">
-    <div class="blue-hearts-container"></div>
-    <!-- HEADER -->
-    <header class="sticky top-0 z-40 border-b border-hugs-border bg-hugs-bg/80 backdrop-blur">
-  <nav class="mx-auto max-w-6xl flex items-center justify-between px-4 py-3">
-    <a href="/" class="flex items-center gap-3">
-  <img
-    src="./assets/hugs_logo.jpg"
-    alt="HUGS logo"
-    class="h-9 w-auto rounded-lg bg-white/10 p-1 ring-1 ring-hugs-border"
-  />
-  <span class="font-semibold"></span>
-</a>
-    
+  <style>
+    .bg-grid {
+      background-image: radial-gradient(
+        circle at 1px 1px,
+        rgba(255, 255, 255, 0.06) 1px,
+        transparent 0
+      );
+      background-size: 26px 26px;
+    }
+  </style>
+</head>
 
-    <div class="hidden md:flex gap-6 text-sm items-center">
-      <a href="#about" class="text-hugs-muted hover:text-white">About</a>
-      <a href="#how" class="text-hugs-muted hover:text-white">How We Help</a>
-      <a href="#funds" class="text-hugs-muted hover:text-white">Funds</a>
-      <a href="/resources.html" class="bg-hugs-light text-hugs-dark px-3 py-1 rounded-lg font-semibold hover:scale-105 transition">Resources</a>
-      <a href="/shop.html" class="text-hugs-light font-medium hover:text-white">Shop</a>
-      <a href="/send-a-hug.html" class="text-hugs-light font-medium hover:text-white">Send a Hug</a>
-      <a href="/receipt-rewards.html" class="text-hugs-muted hover:text-white">Rewards</a>
-    </div>
-  </nav>
-</header>
-<main id="app"></main>
+<body class="bg-hugs-bg text-white min-h-screen">
+
+  <!-- 💙 HEART SYSTEM LAYER -->
+  <div class="blue-hearts-container"></div>
+
+  <!-- =========================
+       HEADER (PERSISTENT SHELL)
+  ========================== -->
+  <header class="sticky top-0 z-40 border-b border-hugs-border bg-hugs-bg/80 backdrop-blur">
+    <nav class="mx-auto max-w-6xl flex items-center justify-between px-4 py-3">
+
+      <a href="/" data-link class="flex items-center gap-3">
+        <img src="./assets/hugs_logo.jpg"
+             class="h-9 w-auto rounded-lg bg-white/10 p-1 ring-1 ring-hugs-border" />
+      </a>
+
+      <div class="hidden md:flex gap-6 text-sm items-center">
+        <a href="/" data-link class="text-hugs-muted hover:text-white">About</a>
+        <a href="/shop" data-link class="text-hugs-light">Shop</a>
+        <a href="/send-a-hug" data-link class="text-hugs-light">Send a Hug</a>
+        <a href="/resources.html" class="bg-hugs-light text-hugs-dark px-3 py-1 rounded-lg font-semibold">
+          Resources
+        </a>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- =========================
+       ROUTE CONTAINER (ONLY DYNAMIC PART)
+  ========================== -->
+  <main id="app">
+
     <!-- HERO -->
     <section class="relative overflow-hidden">
-  <div class="absolute inset-0 bg-grid opacity-60"></div>
-  <div class="absolute -top-32 left-1/2 -translate-x-1/2 h-72 w-[40rem] bg-hugs-glow blur-3xl rounded-full"></div>
+      <div class="absolute inset-0 bg-grid opacity-60"></div>
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 h-72 w-[40rem] bg-hugs-glow blur-3xl rounded-full"></div>
 
-  <div class="relative max-w-6xl mx-auto px-4 py-20">
-    <h1 class="text-4xl md:text-5xl font-semibold max-w-3xl">
-      Building systems of care that actually reach people.
-    </h1>
+      <div class="relative max-w-6xl mx-auto px-4 py-20">
+        <h1 class="text-4xl md:text-5xl font-semibold max-w-3xl">
+          Building systems of care that actually reach people.
+        </h1>
 
-    <p class="mt-4 max-w-xl text-hugs-muted">
-      HUGS is a community-driven initiative built to support people through direct action,
-      creative empowerment, and long-term solutions.
-    </p>
+        <p class="mt-4 max-w-xl text-hugs-muted">
+          HUGS is a community-driven initiative built to support people through direct action,
+          creative empowerment, and long-term solutions.
+        </p>
 
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a
-        href="/resources.html"
-        class="inline-flex items-center rounded-2xl border border-hugs-border bg-white/5 px-6 py-3 font-semibold text-white transition hover:border-hugs-light hover:bg-white/10"
-      >
-        Find Help Resources
-      </a>
+        <div class="mt-8 flex flex-wrap gap-4">
 
-      <a
-        href="/send-a-hug.html"
-        class="inline-flex items-center rounded-2xl bg-hugs-light px-6 py-3 font-semibold text-hugs-dark transition hover:scale-[1.02]"
-      >
-        Send a Digital Hug ❤️
-      </a>
+          <a href="/resources.html"
+             class="inline-flex items-center rounded-2xl border border-hugs-border bg-white/5 px-6 py-3 font-semibold">
+            Find Help Resources
+          </a>
 
-      <a
-        href="/shop.html"
-        class="inline-flex items-center rounded-2xl border border-hugs-border bg-white/5 px-6 py-3 font-semibold text-white transition hover:border-hugs-light hover:bg-white/10"
-      >
-        Shop HUGS Merch
-      </a>
-    </div>
-  </div>
-</section>
+          <a href="/send-a-hug.html"
+             class="inline-flex items-center rounded-2xl bg-hugs-light px-6 py-3 font-semibold text-hugs-dark">
+            Send a Digital Hug ❤️
+          </a>
+
+          <a href="/shop"
+             data-link
+             class="inline-flex items-center rounded-2xl border border-hugs-border bg-white/5 px-6 py-3 font-semibold">
+            Shop HUGS Merch
+          </a>
+
+        </div>
+      </div>
+    </section>
 
     <!-- ABOUT -->
     <section id="about" class="max-w-6xl mx-auto px-4 py-16">
       <div class="grid md:grid-cols-2 gap-10">
+
         <div>
           <h2 class="text-3xl font-semibold">About HUGS</h2>
           <p class="mt-4 text-hugs-muted">
@@ -130,97 +132,97 @@
         </div>
 
         <div class="bg-hugs-card border border-hugs-border rounded-3xl p-8">
-          <p>
-            <strong>Our mission is simple:</strong><br />
+          <p><strong>Our mission is simple:</strong><br />
             Create systems of care that actually reach people.
           </p>
 
           <p class="mt-4 text-hugs-muted">
-            Merchandise sales help fund outreach, programs, and infrastructure that allow
-            HUGS to continue serving communities with integrity.
+            Merchandise sales help fund outreach, programs, and infrastructure.
           </p>
         </div>
+
       </div>
     </section>
 
-    <!-- HOW WE HELP -->
+    <!-- HOW -->
     <section id="how" class="max-w-6xl mx-auto px-4 pb-16">
       <h2 class="text-3xl font-semibold">How We Help</h2>
 
       <div class="mt-8 grid md:grid-cols-3 gap-6">
+
         <div class="bg-hugs-card border border-hugs-border rounded-3xl p-6">
           <h3 class="font-semibold">Direct Action</h3>
-          <p class="mt-2 text-hugs-muted">Immediate, respectful, real-world support.</p>
+          <p class="mt-2 text-hugs-muted">Immediate, real-world support.</p>
         </div>
 
         <div class="bg-hugs-card border border-hugs-border rounded-3xl p-6">
           <h3 class="font-semibold">Creative Empowerment</h3>
-          <p class="mt-2 text-hugs-muted">Tools and expression that open new pathways.</p>
+          <p class="mt-2 text-hugs-muted">Tools and expression.</p>
         </div>
 
         <div class="bg-hugs-card border border-hugs-border rounded-3xl p-6">
           <h3 class="font-semibold">Long-Term Solutions</h3>
-          <p class="mt-2 text-hugs-muted">Infrastructure that lasts beyond moments.</p>
+          <p class="mt-2 text-hugs-muted">Sustainable systems.</p>
         </div>
+
       </div>
     </section>
 
-    <!-- SEND A HUG CTA -->
+    <!-- CTA -->
     <section class="max-w-6xl mx-auto px-4 pb-16">
       <a href="/send-a-hug.html" class="block group">
-        <div class="bg-hugs-card border border-hugs-border rounded-3xl p-8 transition duration-300 hover:scale-[1.02] hover:border-hugs-light hover:shadow-soft cursor-pointer">
+
+        <div class="bg-hugs-card border border-hugs-border rounded-3xl p-8 hover:border-hugs-light transition">
+
           <h2 class="text-3xl font-semibold flex items-center gap-2">
             Send a Hug — Feed Someone in Need
-            <span class="text-hugs-light group-hover:translate-x-1 transition">→</span>
+            <span class="text-hugs-light">→</span>
           </h2>
 
-          <p class="mt-4 max-w-2xl text-hugs-muted">
-            Someone you love far away? Send them a digital hug while helping support food outreach
-            and real people in need through the HUGS mission.
+          <p class="mt-4 text-hugs-muted">
+            Send support while helping real people in need.
           </p>
 
-          <p class="mt-4 text-hugs-light font-medium">
-            ❤️ Send a digital hug and support the community
-          </p>
         </div>
+
       </a>
     </section>
 
-    <!-- FUNDS / MERCH CTA -->
+    <!-- FUNDS -->
     <section id="funds" class="max-w-6xl mx-auto px-4 pb-20">
+
       <a href="/receipt-rewards.html" class="block group">
-        <div class="bg-hugs-card border border-hugs-border rounded-3xl p-8 transition duration-300 hover:scale-[1.02] hover:border-hugs-light hover:shadow-soft cursor-pointer">
+
+        <div class="bg-hugs-card border border-hugs-border rounded-3xl p-8 hover:border-hugs-light transition">
+
           <h2 class="text-3xl font-semibold flex items-center gap-2">
-            Where Merch Funds Go
-            <span class="text-hugs-light group-hover:translate-x-1 transition">→</span>
+            Where Merch Funds Go <span class="text-hugs-light">→</span>
           </h2>
 
           <ul class="mt-6 space-y-2 text-hugs-muted">
             <li>• Outreach & supplies</li>
             <li>• Community programs</li>
             <li>• Infrastructure & tools</li>
-            <li class="text-hugs-light font-medium mt-4">
-              🎁 View receipt rewards & supporter benefits
-            </li>
           </ul>
+
         </div>
+
       </a>
+
     </section>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-hugs-border py-10">
-      <div class="max-w-6xl mx-auto px-4 flex items-center gap-3">
-        <img
-          src="./assets/hugs_logo.jpg"
-          alt="HUGS logo"
-          class="h-8 w-auto rounded-lg bg-white/10 p-1 ring-1 ring-hugs-border"
-        />
-        <p class="text-sm text-hugs-muted">
-          © HUGS — Help Under Good Service.
-        </p>
-      </div>
-    </footer>
-    <script src="/heart-engine.js"></script>
-    <script src="/app-router.js"></script>
-  </body>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-hugs-border py-10">
+    <div class="max-w-6xl mx-auto px-4 text-sm text-hugs-muted">
+      © HUGS — Help Under Good Service.
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="/heart-engine.js"></script>
+  <script src="/app-router.js"></script>
+
+</body>
 </html>
