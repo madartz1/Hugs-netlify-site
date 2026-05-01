@@ -1,28 +1,144 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Opening Store…</title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <main class="wrap" style="padding-top: 72px;">
-      <h1>Opening Store…</h1>
-      <p class="muted">If you are not redirected, tap the button below.</p>
-      <p><a class="btn primary" id="openStoreBtn" href="#" target="_blank" rel="noopener">Open Store</a></p>
-    </main>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="/products.js"></script>
-    <script>
-      // uses OPEN_STORE_URL from products.js
-      const btn = document.getElementById("openStoreBtn");
-      btn.href = OPEN_STORE_URL;
+<title>HUGS Open Store</title>
 
-      // auto redirect after a short moment
-      setTimeout(() => {
-        window.location.href = OPEN_STORE_URL;
-      }, 600);
-    </script>
-  </body>
+<link rel="stylesheet" href="/styles.css" />
+
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #0b1b3a, #050A1F);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.wrap {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, #2F80FF, #00C2FF);
+  box-shadow: 0 0 20px rgba(0,194,255,0.5);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.03);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(0,194,255,0.15);
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+.card-body {
+  padding: 12px;
+}
+
+.price {
+  color: #5AF0FF;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<main class="wrap">
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Opening Store…</h1>
+  <p class="muted">Browse below or continue to full checkout.</p>
+
+  <a class="btn primary" id="openStoreBtn" href="#" target="_blank">Open Full Store</a>
+</section>
+
+<!-- PRODUCTS -->
+<section>
+  <div id="productGrid" class="grid"></div>
+</section>
+
+</main>
+
+<script src="/products.js"></script>
+
+<script>
+/* =========================
+   CONNECT STORE LINK
+========================= */
+const btn = document.getElementById("openStoreBtn");
+btn.href = OPEN_STORE_URL;
+
+/* =========================
+   AUTO REDIRECT (optional)
+========================= */
+setTimeout(() => {
+  window.location.href = OPEN_STORE_URL;
+}, 1500);
+
+
+/* =========================
+   PRODUCT DISPLAY
+========================= */
+
+const grid = document.getElementById("productGrid");
+
+/* FEATURED FIRST */
+const featured = {
+  name: "Time 4 Healing Hoodie",
+  price: 88,
+  description: "Featured Drop",
+  image: "/assets/time-4-healing-hoodie.JPEG"
+};
+
+function card(p){
+  return `
+  <div class="card">
+    <img src="${p.image}" alt="${p.name}">
+    <div class="card-body">
+      <h3>${p.name}</h3>
+      <div class="price">$${p.price}</div>
+      <p>${p.description}</p>
+      <a class="btn primary" href="${OPEN_STORE_URL}" target="_blank">Buy</a>
+    </div>
+  </div>`;
+}
+
+/* RENDER */
+grid.innerHTML =
+  card(featured) +
+  (typeof products !== "undefined"
+    ? products.map(card).join("")
+    : "");
+</script>
+
+</body>
 </html>
