@@ -1,1 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HUGS Shop</title>
 
+<link rel="stylesheet" href="/styles.css" />
+
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #0b1b3a, #050A1F);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero h1 {
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.muted {
+  opacity: 0.7;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: inline-block;
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, #2F80FF, #00C2FF);
+  box-shadow: 0 0 20px rgba(0,194,255,0.5);
+  font-weight: 800;
+}
+
+/* PRODUCT GRID (OLD SIMPLE STYLE) */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* PRODUCT WINDOW */
+.card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,194,255,0.15);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0,194,255,0.08);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 45px rgba(0,194,255,0.25);
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+.card-body {
+  padding: 14px;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  color: #5AF0FF;
+  font-weight: bold;
+}
+
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+/* FLOAT FX SAFE */
+.blue-hearts-container,
+.floating-logo-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.blue-heart {
+  position: absolute;
+  bottom: -20px;
+  color: #00C2FF;
+  animation: floatUp linear forwards;
+}
+
+.floating-logo {
+  position: absolute;
+  bottom: -60px;
+  opacity: 0.25;
+  animation: drift linear forwards;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- FLOAT EFFECTS -->
+<div class="gold-particles"></div>
+<div class="blue-hearts-container" id="blueHearts"></div>
+<div class="floating-logo-layer" id="logoLayer"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">HUGS</a>
+
+    <nav class="nav">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/shop.html" class="nav-link active">Shop</a>
+      <a href="/open-store.html" class="nav-link">Open Store</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- HERO -->
+<section class="hero">
+  <h1>HUGS Shop</h1>
+  <p class="muted">Community healing apparel</p>
+
+  <a class="btn primary" href="/open-store.html">Open Store</a>
+</section>
+
+<!-- PRODUCTS (ONLY 2 WINDOWS RESTORED) -->
+<section class="grid">
+
+  <!-- ⭐ TIME 4 HEALING (FEATURED FIRST) -->
+  <div class="card">
+    <img src="/assets/time-4-healing-hoodie.JPEG" alt="Time 4 Healing Hoodie">
+
+    <div class="card-body">
+      <div class="card-top">
+        <h3>Time 4 Healing</h3>
+        <div class="price">$88</div>
+      </div>
+
+      <p class="muted">Featured healing drop</p>
+
+      <div class="card-actions">
+        <a class="btn primary" href="/open-store.html">Buy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🧡 HERO / COMMUNITY HOODIE -->
+  <div class="card">
+    <img src="/assets/hugs-hoodie-promo.JPEG" alt="Community Hoodie">
+
+    <div class="card-body">
+      <div class="card-top">
+        <h3>Community Hoodie</h3>
+        <div class="price">$72</div>
+      </div>
+
+      <p class="muted">Core community drop</p>
+
+      <div class="card-actions">
+        <a class="btn primary" href="/open-store.html">Buy</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+</main>
+
+<!-- FLOATING JS -->
+<script>
+const hearts = document.getElementById("blueHearts");
+const logos = document.getElementById("logoLayer");
+
+function createHeart(){
+  if(!hearts) return;
+
+  const el = document.createElement("div");
+  el.className = "blue-heart";
+  el.innerHTML = "❤";
+
+  el.style.left = Math.random()*100+"vw";
+  el.style.fontSize = (10+Math.random()*16)+"px";
+  el.style.animationDuration = (9+Math.random()*10)+"s";
+
+  hearts.appendChild(el);
+  setTimeout(()=>el.remove(),20000);
+}
+
+setInterval(createHeart,1200);
+
+function createLogo(){
+  if(!logos) return;
+
+  const img = document.createElement("img");
+  img.src = "/assets/hugs-gold-logo.png";
+  img.className = "floating-logo";
+
+  img.style.left = Math.random()*100+"vw";
+  img.style.width = (26+Math.random()*28)+"px";
+  img.style.animationDuration = (11+Math.random()*9)+"s";
+
+  logos.appendChild(img);
+  setTimeout(()=>img.remove(),22000);
+}
+
+setInterval(createLogo,1600);
+</script>
+
+</body>
+</html>
