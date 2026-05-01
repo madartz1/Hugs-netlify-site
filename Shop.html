@@ -2,321 +2,184 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>HUGS Shop</title>
-<meta name="description" content="Shop HUGS hoodies. Support the mission through community-first merch." />
+<title>HUGS Open Store</title>
 
 <link rel="stylesheet" href="/styles.css" />
-
-<style>
-/* =========================
-   FEATURED HERO FIX
-========================= */
-
-.featured-hero {
-  grid-column: 1 / -1;
-  border: 2px solid rgba(0,194,255,0.7);
-  box-shadow: 0 0 50px rgba(0,194,255,0.25);
-  border-radius: 18px;
-  overflow: hidden;
-  position: relative;
-}
-
-.featured-hero img {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
-}
-
-/* overlay glow */
-.featured-hero .overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(5,10,31,0.95),
-    rgba(0,194,255,0.25)
-  );
-  display: flex;
-  align-items: flex-end;
-  padding: 20px;
-  color: white;
-}
-
-.featured-hero h2 {
-  margin: 0;
-  color: #5AF0FF;
-}
-
-.featured-hero p {
-  opacity: 0.85;
-}
-
-/* BUTTON FIX */
-.featured-btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #2F80FF, #00C2FF);
-  color: white;
-  font-weight: 800;
-  text-decoration: none;
-  box-shadow: 0 0 20px rgba(0,194,255,0.6);
-}
-</style>
 
 </head>
 
 <body>
 
-<!-- BACKGROUND EFFECTS (UNCHANGED) -->
+<!-- background effects (same system as home) -->
 <div class="gold-particles"></div>
 <div class="blue-hearts-container" id="blueHearts"></div>
 
-<!-- CART DRAWER (UNCHANGED) -->
-<div id="cartDrawer" class="cart-drawer">
-  <div class="cart-header">
-    <h3>Your Cart</h3>
-    <button onclick="closeCart()">✕</button>
-  </div>
-
-  <div id="cartItems" class="cart-items"></div>
-
-  <div class="cart-footer">
-    <button class="btn primary" onclick="checkout()">Checkout</button>
-  </div>
-</div>
-
-<header class="site-header">
-  <div class="wrap header-inner">
-
-    <a class="brand" href="/">
-      <span class="brand-mark">HUGS</span>
-      <span class="brand-sub">Help Under Good Service</span>
-    </a>
-
-    <nav class="nav">
-      <a href="/" class="nav-link">Home</a>
-      <a href="/shop.html" class="nav-link active">Shop</a>
-
-      <!-- FIXED OPEN STORE LINK -->
-      <a href="/shop.html" class="nav-link">Open Store</a>
-
-      <a href="/Books1.html" class="nav-link">Books</a>
-
-      <a href="#" class="nav-link" onclick="openCart()">
-        Cart (<span id="cartCount">0</span>)
-      </a>
-    </nav>
-
-  </div>
-</header>
-
 <main class="wrap">
 
-<!-- HERO -->
-<section class="hero">
-  <h1>HUGS Hoodies</h1>
-  <p class="muted">Premium community merch that supports real-world healing initiatives.</p>
+  <!-- HERO (same structure as homepage) -->
+  <section class="hero">
 
-  <div class="hero-actions">
-    <a class="btn primary" href="/shop.html">Open Store</a>
-    <a class="btn" href="#products">View Products</a>
-    <a class="btn primary" href="/Books1.html">Buy Book</a>
-  </div>
-</section>
+    <h1>HUGS Open Store</h1>
+    <p class="muted">
+      Community-first healing apparel built on connection & purpose.
+    </p>
 
-<!-- PRODUCTS -->
-<section id="products" class="section">
+    <div class="hero-actions">
+      <a class="btn primary" href="/shop.html">Go to Shop</a>
+      <a class="btn" href="#store">Browse Collection</a>
+    </div>
 
-  <div class="section-head">
-    <h2>Featured</h2>
-    <p class="muted">Launch collection (Time 4 Healing featured drop).</p>
-  </div>
+  </section>
 
-  <div id="productGrid" class="grid"></div>
+  <!-- STORE GRID -->
+  <section id="store" class="section">
 
-</section>
+    <div class="section-head">
+      <h2>Featured Collection</h2>
+      <p class="muted">Time 4 Healing + Community Drops</p>
+    </div>
 
-<!-- FAQ -->
-<section class="section" id="faq">
-  <div class="section-head">
-    <h2>FAQ</h2>
-  </div>
+    <div class="grid">
 
-  <div class="faq">
-    <details>
-      <summary>Is this a donation?</summary>
-      <p>This is a retail product. Proceeds support community initiatives.</p>
-    </details>
+      <!-- ⭐ FEATURED HOODIE -->
+      <article class="card featured-card">
 
-    <details>
-      <summary>How does ordering work?</summary>
-      <p>Click Buy Now → secure checkout page.</p>
-    </details>
+        <div class="card-img">
+          <img src="/assets/time-4-healing-hoodie.JPEG" alt="Time 4 Healing Hoodie">
+        </div>
 
-    <details>
-      <summary>Shipping time?</summary>
-      <p>7–14 days depending on fulfillment.</p>
-    </details>
-  </div>
-</section>
+        <div class="card-body">
 
-<footer class="footer">
-  <p class="muted">© <span id="year"></span> HUGS. All rights reserved.</p>
-</footer>
+          <div class="card-top">
+            <h3>Time 4 Healing Hoodie</h3>
+            <div class="price">$88</div>
+          </div>
+
+          <p class="muted">Featured Drop • Original Healing Collection</p>
+
+          <div class="card-actions">
+            <a class="btn primary" href="/shop.html">Buy Now</a>
+            <a class="btn" href="/shop.html">View</a>
+          </div>
+
+        </div>
+
+      </article>
+
+      <!-- 🧡 COMMUNITY HOODIE -->
+      <article class="card">
+
+        <div class="card-img">
+          <img src="/assets/hugs-hoodie-promo.JPEG" alt="Community Hoodie">
+        </div>
+
+        <div class="card-body">
+          <div class="card-top">
+            <h3>Community Hoodie</h3>
+            <div class="price">$72</div>
+          </div>
+          <p class="muted">Core community drop</p>
+
+          <div class="card-actions">
+            <a class="btn primary" href="/shop.html">Buy</a>
+            <a class="btn" href="/shop.html">View</a>
+          </div>
+        </div>
+
+      </article>
+
+      <!-- PRODUCT 3 -->
+      <article class="card">
+        <div class="card-img">
+          <img src="/assets/hugs-shirt.JPEG">
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>HUGS Tee</h3>
+            <div class="price">$38</div>
+          </div>
+          <p class="muted">Everyday wear</p>
+          <div class="card-actions">
+            <a class="btn primary" href="/shop.html">Buy</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRODUCT 4 -->
+      <article class="card">
+        <div class="card-img">
+          <img src="/assets/hugs-hat.JPEG">
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>HUGS Hat</h3>
+            <div class="price">$25</div>
+          </div>
+          <p class="muted">Street drop</p>
+          <div class="card-actions">
+            <a class="btn primary" href="/shop.html">Buy</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRODUCT 5 -->
+      <article class="card">
+        <div class="card-img">
+          <img src="/assets/hugs-bundle.JPEG">
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>HUGS Bundle</h3>
+            <div class="price">$120</div>
+          </div>
+          <p class="muted">Full set deal</p>
+          <div class="card-actions">
+            <a class="btn primary" href="/shop.html">Buy</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRODUCT 6 -->
+      <article class="card">
+        <div class="card-img">
+          <img src="/assets/hugs-hoodie-black.JPEG">
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>Black Hoodie</h3>
+            <div class="price">$78</div>
+          </div>
+          <p class="muted">Minimal drop</p>
+          <div class="card-actions">
+            <a class="btn primary" href="/shop.html">Buy</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PRODUCT 7 -->
+      <article class="card">
+        <div class="card-img">
+          <img src="/assets/hugs-white-tee.JPEG">
+        </div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3>White Tee</h3>
+            <div class="price">$35</div>
+          </div>
+          <p class="muted">Clean edition</p>
+          <div class="card-actions">
+            <a class="btn primary" href="/shop.html">Buy</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </section>
 
 </main>
-
-<script src="/products.js"></script>
-
-<script>
-/* =========================
-   INIT
-========================= */
-
-document.getElementById("year").textContent = new Date().getFullYear();
-
-const grid = document.getElementById("productGrid");
-
-/* =========================
-   FEATURED PRODUCT (FORCED FIRST)
-   THIS GUARANTEES TIME 4 HEALING IS ALWAYS FIRST
-========================= */
-
-const featuredProduct = {
-  id: "featured-hoodie",
-  name: "Time 4 Healing Hoodie",
-  price: 88,
-  description: "Featured Drop • Original Healing Collection",
-  image: "/assets/time-4-healing-hoodie.JPEG",
-  gallery: ["/assets/time-4-healing-hoodie.JPEG"]
-};
-
-/* =========================
-   MONEY FORMAT
-========================= */
-function money(n){
-  return `$${Number(n).toFixed(0)}`;
-}
-
-/* =========================
-   PRODUCT CARD RENDER
-========================= */
-function card(p){
-return `
-<article class="card">
-
-  <div class="card-img">
-    <img src="${p.image}" alt="${p.name}">
-  </div>
-
-  <div class="card-body">
-
-    <div class="card-top">
-      <h3>${p.name}</h3>
-      <div class="price">${money(p.price)}</div>
-    </div>
-
-    <p class="muted">${p.description}</p>
-
-    <div class="card-actions">
-
-      <button class="btn primary add-cart" data-id="${p.id}">
-        Buy Now
-      </button>
-
-      <button class="btn"
-        onclick='openGallery(${JSON.stringify(p.gallery || [p.image])})'>
-        View
-      </button>
-
-    </div>
-
-  </div>
-</article>`;
-}
-
-/* =========================
-   BUILD GRID (FEATURED FIRST ALWAYS)
-========================= */
-
-grid.innerHTML =
-  card(featuredProduct) +
-  products.map(card).join("");
-
-/* =========================
-   GALLERY MODAL (UNCHANGED)
-========================= */
-function openGallery(images){
-  const modal=document.createElement("div");
-  modal.className="modal";
-
-  modal.innerHTML=`
-    <div onclick="this.parentElement.remove()" style="
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.88);
-      backdrop-filter:blur(10px);
-      z-index:99;"></div>
-
-    <div style="
-      position:fixed;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      max-width:900px;
-      width:92%;
-      max-height:90%;
-      overflow:auto;
-      background:#07111f;
-      border-radius:20px;
-      padding:25px;
-      z-index:100;
-      box-shadow:0 0 40px rgba(0,153,255,.25);">
-
-      <button onclick="this.closest('.modal').remove()" style="
-        float:right;
-        padding:8px 14px;
-        border:none;
-        border-radius:10px;
-        cursor:pointer;">✕</button>
-
-      ${images.map(src => `
-        <img src="${src}" style="width:100%;margin:12px 0;border-radius:14px;">
-      `).join("")}
-
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-}
-
-/* =========================
-   HEARTS (UNCHANGED)
-========================= */
-
-const heartsContainer = document.getElementById("blueHearts");
-
-function createHeart(){
-  const heart = document.createElement("div");
-  heart.classList.add("blue-heart");
-  heart.innerHTML = "❤";
-
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.fontSize = (10 + Math.random()*18) + "px";
-  heart.style.animationDuration = (10 + Math.random()*12) + "s";
-
-  heartsContainer.appendChild(heart);
-
-  setTimeout(()=>heart.remove(),22000);
-}
-
-setInterval(createHeart,1200);
-
-</script>
 
 </body>
 </html>
