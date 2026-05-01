@@ -9,7 +9,52 @@
 <link rel="stylesheet" href="/styles.css" />
 
 </head>
+<script>
 
+/* =========================
+   HEART SYSTEM
+========================= */
+const hearts = document.getElementById("blueHearts");
+
+function createHeart(){
+  const el = document.createElement("div");
+  el.className = "blue-heart";
+  el.innerHTML = "❤";
+
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.fontSize = (10 + Math.random() * 18) + "px";
+  el.style.animationDuration = (8 + Math.random() * 10) + "s";
+
+  hearts.appendChild(el);
+
+  setTimeout(() => el.remove(), 20000);
+}
+
+setInterval(createHeart, 900);
+
+
+/* =========================
+   GOLD LOGO SYSTEM
+========================= */
+const logoLayer = document.getElementById("logoLayer");
+
+function createLogo(){
+  const img = document.createElement("img");
+  img.src = "/assets/hugs-gold-logo.png";
+  img.className = "floating-logo";
+
+  img.style.left = Math.random() * 100 + "vw";
+  img.style.width = (28 + Math.random() * 30) + "px";
+  img.style.animationDuration = (10 + Math.random() * 10) + "s";
+
+  logoLayer.appendChild(img);
+
+  setTimeout(() => img.remove(), 20000);
+}
+
+setInterval(createLogo, 1400);
+
+</script>
 <body>
 
 <!-- FLOATING EFFECTS (CLEAN - NO DUPLICATES) -->
