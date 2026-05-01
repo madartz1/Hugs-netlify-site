@@ -3,18 +3,79 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <title>HUGS Shop</title>
 <meta name="description" content="Shop HUGS hoodies. Support the mission through community-first merch." />
+
 <link rel="stylesheet" href="/styles.css" />
+
+<style>
+/* =========================
+   FEATURED HERO FIX
+========================= */
+
+.featured-hero {
+  grid-column: 1 / -1;
+  border: 2px solid rgba(0,194,255,0.7);
+  box-shadow: 0 0 50px rgba(0,194,255,0.25);
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+}
+
+.featured-hero img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+/* overlay glow */
+.featured-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(5,10,31,0.95),
+    rgba(0,194,255,0.25)
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  color: white;
+}
+
+.featured-hero h2 {
+  margin: 0;
+  color: #5AF0FF;
+}
+
+.featured-hero p {
+  opacity: 0.85;
+}
+
+/* BUTTON FIX */
+.featured-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2F80FF, #00C2FF);
+  color: white;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(0,194,255,0.6);
+}
+</style>
+
 </head>
 
 <body>
 
-<!-- BACKGROUND EFFECTS -->
+<!-- BACKGROUND EFFECTS (UNCHANGED) -->
 <div class="gold-particles"></div>
 <div class="blue-hearts-container" id="blueHearts"></div>
 
-<!-- 🛒 CART DRAWER (FIXED POSITION INSIDE BODY) -->
+<!-- CART DRAWER (UNCHANGED) -->
 <div id="cartDrawer" class="cart-drawer">
   <div class="cart-header">
     <h3>Your Cart</h3>
@@ -39,10 +100,12 @@
     <nav class="nav">
       <a href="/" class="nav-link">Home</a>
       <a href="/shop.html" class="nav-link active">Shop</a>
-      <a href="/open-store.html" class="nav-link">Open Store</a>
+
+      <!-- FIXED OPEN STORE LINK -->
+      <a href="/shop.html" class="nav-link">Open Store</a>
+
       <a href="/Books1.html" class="nav-link">Books</a>
 
-      <!-- 🛒 CART BUTTON -->
       <a href="#" class="nav-link" onclick="openCart()">
         Cart (<span id="cartCount">0</span>)
       </a>
@@ -53,28 +116,31 @@
 
 <main class="wrap">
 
+<!-- HERO -->
 <section class="hero">
   <h1>HUGS Hoodies</h1>
-  <p class="muted">
-    Premium community merch that supports real-world initiatives.
-  </p>
+  <p class="muted">Premium community merch that supports real-world healing initiatives.</p>
 
   <div class="hero-actions">
-    <a class="btn primary" href="/open-store.html">Open Store</a>
+    <a class="btn primary" href="/shop.html">Open Store</a>
     <a class="btn" href="#products">View Products</a>
     <a class="btn primary" href="/Books1.html">Buy Book</a>
   </div>
 </section>
 
+<!-- PRODUCTS -->
 <section id="products" class="section">
+
   <div class="section-head">
     <h2>Featured</h2>
-    <p class="muted">Launch collection (2 hero hoodies).</p>
+    <p class="muted">Launch collection (Time 4 Healing featured drop).</p>
   </div>
 
   <div id="productGrid" class="grid"></div>
+
 </section>
 
+<!-- FAQ -->
 <section class="section" id="faq">
   <div class="section-head">
     <h2>FAQ</h2>
@@ -83,17 +149,17 @@
   <div class="faq">
     <details>
       <summary>Is this a donation?</summary>
-      <p>This is a retail product. Proceeds help support community initiatives.</p>
+      <p>This is a retail product. Proceeds support community initiatives.</p>
     </details>
 
     <details>
       <summary>How does ordering work?</summary>
-      <p>Clicking “Buy Now” takes you to our secure checkout/store link.</p>
+      <p>Click Buy Now → secure checkout page.</p>
     </details>
 
     <details>
-      <summary>How long does shipping take?</summary>
-      <p>Typically 7–14 days depending on fulfillment.</p>
+      <summary>Shipping time?</summary>
+      <p>7–14 days depending on fulfillment.</p>
     </details>
   </div>
 </section>
@@ -116,6 +182,20 @@ document.getElementById("year").textContent = new Date().getFullYear();
 const grid = document.getElementById("productGrid");
 
 /* =========================
+   FEATURED PRODUCT (FORCED FIRST)
+   THIS GUARANTEES TIME 4 HEALING IS ALWAYS FIRST
+========================= */
+
+const featuredProduct = {
+  id: "featured-hoodie",
+  name: "Time 4 Healing Hoodie",
+  price: 88,
+  description: "Featured Drop • Original Healing Collection",
+  image: "/assets/time-4-healing-hoodie.JPEG",
+  gallery: ["/assets/time-4-healing-hoodie.JPEG"]
+};
+
+/* =========================
    MONEY FORMAT
 ========================= */
 function money(n){
@@ -123,7 +203,7 @@ function money(n){
 }
 
 /* =========================
-   PRODUCT CARD
+   PRODUCT CARD RENDER
 ========================= */
 function card(p){
 return `
@@ -144,14 +224,12 @@ return `
 
     <div class="card-actions">
 
-      <!-- 🛒 CART BUTTON (FIXED) -->
-      <button class="btn primary add-cart"
-        data-id="${p.id}">
+      <button class="btn primary add-cart" data-id="${p.id}">
         Buy Now
       </button>
 
       <button class="btn"
-        onclick='openGallery(${JSON.stringify(p.gallery)})'>
+        onclick='openGallery(${JSON.stringify(p.gallery || [p.image])})'>
         View
       </button>
 
@@ -161,10 +239,16 @@ return `
 </article>`;
 }
 
-grid.innerHTML = products.map(card).join("");
+/* =========================
+   BUILD GRID (FEATURED FIRST ALWAYS)
+========================= */
+
+grid.innerHTML =
+  card(featuredProduct) +
+  products.map(card).join("");
 
 /* =========================
-   GALLERY MODAL
+   GALLERY MODAL (UNCHANGED)
 ========================= */
 function openGallery(images){
   const modal=document.createElement("div");
@@ -201,11 +285,7 @@ function openGallery(images){
         cursor:pointer;">✕</button>
 
       ${images.map(src => `
-        <img src="${src}" style="
-          width:100%;
-          margin:12px 0;
-          border-radius:14px;
-          box-shadow:0 0 20px rgba(0,0,0,.4);">
+        <img src="${src}" style="width:100%;margin:12px 0;border-radius:14px;">
       `).join("")}
 
     </div>
@@ -215,8 +295,9 @@ function openGallery(images){
 }
 
 /* =========================
-   HEARTS ANIMATION
+   HEARTS (UNCHANGED)
 ========================= */
+
 const heartsContainer = document.getElementById("blueHearts");
 
 function createHeart(){
@@ -234,11 +315,6 @@ function createHeart(){
 }
 
 setInterval(createHeart,1200);
-
-/* =========================
-   CART SYSTEM HOOKS
-   (handled in products.js)
-========================= */
 
 </script>
 
