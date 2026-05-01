@@ -1,48 +1,34 @@
 (function () {
 
-  if (window.__HUGS_ROUTER_V3__) return;
-  window.__HUGS_ROUTER_V3__ = true;
+  if (window.__HUGS_ROUTER_V4__) return;
+  window.__HUGS_ROUTER_V4__ = true;
 
   const app = document.getElementById("app");
 
   /* =========================
-     ROUTES
+     ROUTES (STATIC PAGES)
   ========================= */
 
   const routes = {
     "/": "/pages/home.html",
-    "/shop": "/pages/shop.html",
-    "/product": "/pages/product.html"
+    "/shop": "/pages/shop.html"
   };
 
   /* =========================
-     FETCH VIEW
+     CLEAN PATH
   ========================= */
 
-  async function loadView(path) {
-
-    let file = routes[path];
-
-    if (!file) {
-      app.innerHTML = "<h1>404 Not Found</h1>";
-      return;
-    }
-
-    const res = await fetch(file);
-    const html = await res.text();
-
-    app.innerHTML = html;
-
-    runPageScripts(path);
+  function cleanPath(path) {
+    if (!path) return "/";
+    return path.replace(/\/+$/, "") || "/";
   }
 
   /* =========================
-     PRODUCT ROUTING (/product/:id)
+     PRODUCT ROUTE PARSER
   ========================= */
 
-  function parseProductRoute(url) {
-    const parts = url.split("/");
-
+  function getProductId(path) {
+    const parts = cleanPath(path).split("/");
     if (parts[1] === "product" && parts[2]) {
       return parts[2];
     }
@@ -50,7 +36,33 @@
   }
 
   /* =========================
-     NAVIGATION OVERRIDE
+     LOAD HTML VIEW
+  ========================= */
+
+  async function loadView(file, path) {
+
+    try {
+      const res = await fetch(file);
+
+      if (!res.ok) throw new Error("Page not found");
+
+      const html = await res.text();
+      app.innerHTML = html;
+
+      runPageScripts(path);
+
+    } catch (err) {
+      app.innerHTML = `
+        <div style="padding:40px;text-align:center">
+          <h1>404</h1>
+          <p>Page not found</p>
+        </div>
+      `;
+    }
+  }
+
+  /* =========================
+     NAVIGATION
   ========================= */
 
   function navigate(path) {
@@ -64,9 +76,10 @@
 
   async function handleRoute() {
 
-    const path = window.location.pathname;
+    const path = cleanPath(window.location.pathname);
 
-    const productId = parseProductRoute(path);
+    /* PRODUCT ROUTE */
+    const productId = getProductId(path);
 
     if (productId) {
       const res = await fetch("/pages/product.html");
@@ -74,11 +87,27 @@
 
       app.innerHTML = html;
 
-      window.renderProduct(productId);
+      if (window.renderProduct) {
+        window.renderProduct(productId);
+      }
+
       return;
     }
 
-    await loadView(path);
+    /* STATIC ROUTES */
+    const file = routes[path];
+
+    if (!file) {
+      app.innerHTML = `
+        <div style="padding:40px;text-align:center">
+          <h1>404</h1>
+          <p>Route not found</p>
+        </div>
+      `;
+      return;
+    }
+
+    await loadView(file, path);
   }
 
   /* =========================
@@ -88,31 +117,25 @@
   document.addEventListener("click", (e) => {
 
     const a = e.target.closest("a");
-
     if (!a) return;
 
     const href = a.getAttribute("href");
 
-    if (!href || href.startsWith("http")) return;
+    if (!href) return;
+    if (href.startsWith("http") || href.startsWith("#")) return;
 
     e.preventDefault();
     navigate(href);
   });
 
   /* =========================
-     BACK/FORWARD SUPPORT
+     BACK/FORWARD
   ========================= */
 
   window.addEventListener("popstate", handleRoute);
 
   /* =========================
-     PAGE INIT
-  ========================= */
-
-  handleRoute();
-
-  /* =========================
-     PAGE SCRIPTS HOOK
+     PAGE HOOK SYSTEM
   ========================= */
 
   function runPageScripts(path) {
@@ -122,5 +145,20 @@
     }
 
   }
+
+  /* =========================
+     INIT
+  ========================= */
+
+  handleRoute();
+
+  /* =========================
+     GLOBAL API (optional)
+  ========================= */
+
+  window.HUGSRouter = {
+    go: navigate,
+    refresh: handleRoute
+  };
 
 })();
