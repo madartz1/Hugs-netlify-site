@@ -55,6 +55,49 @@
     0 0 30px rgba(255,215,0,.22),
     0 20px 60px rgba(0,0,0,.65);
 }
+  .floating-logos{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+}
+
+.float{
+  position:absolute;
+  width:60px;
+  opacity:.12;
+  filter:drop-shadow(0 0 10px rgba(255,215,0,.4));
+  animation:floatUp linear infinite, glowPulse 4s ease-in-out infinite;
+}
+
+/* positions */
+.f1{ left:10%; animation-duration:18s; animation-delay:0s; }
+.f2{ left:30%; animation-duration:22s; animation-delay:4s; }
+.f3{ left:55%; animation-duration:20s; animation-delay:2s; }
+.f4{ left:75%; animation-duration:24s; animation-delay:6s; }
+.f5{ left:90%; animation-duration:19s; animation-delay:1s; }
+
+@keyframes floatUp{
+  0%{
+    transform:translateY(100vh) scale(.6) rotate(0deg);
+    opacity:0;
+  }
+  20%{ opacity:.15; }
+  80%{ opacity:.2; }
+  100%{
+    transform:translateY(-20vh) scale(1) rotate(180deg);
+    opacity:0;
+  }
+}
+
+@keyframes glowPulse{
+  0%,100%{
+    filter:drop-shadow(0 0 6px rgba(255,215,0,.3));
+  }
+  50%{
+    filter:drop-shadow(0 0 16px rgba(255,215,0,.6));
+  }
+}
 </style>
 </head>
 
