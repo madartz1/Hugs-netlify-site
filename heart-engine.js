@@ -1,48 +1,13 @@
 /* =========================
-   💙 GLOBAL FLOATING HEART ENGINE
-   SAFE FOR ALL PAGES
+   💙 HUGS UNIFIED HEART SYSTEM
+   (BASE + REACTIVE MERGED)
 ========================= */
 
 (function () {
 
-  // prevent duplicate intervals if script loads twice
-  if (window.__HUGS_HEART_ENGINE__) return;
-  window.__HUGS_HEART_ENGINE__ = true;
-
-  const container = document.querySelector(".blue-hearts-container");
-
-  if (!container) return;
-
-  function createHeart() {
-    const el = document.createElement("div");
-    el.className = "blue-heart";
-    el.innerHTML = "❤";
-
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.fontSize = (10 + Math.random() * 18) + "px";
-    el.style.animationDuration = (8 + Math.random() * 10) + "s";
-
-    // soft glow variation
-    el.style.opacity = (0.4 + Math.random() * 0.6);
-
-    container.appendChild(el);
-
-    setTimeout(() => el.remove(), 20000);
-  }
-
-  // spawn rate (balanced for performance)
-  setInterval(createHeart, 900);
-
-})();
-/* =========================
-   💙 HUGS REACTIVE HEART SYSTEM
-   (CLICK + PAGE + CART REACTIONS)
-========================= */
-
-(function () {
-
-  if (window.__HUGS_REACTIVE_HEARTS__) return;
-  window.__HUGS_REACTIVE_HEARTS__ = true;
+  // prevent duplicates
+  if (window.__HUGS_HEART_SYSTEM__) return;
+  window.__HUGS_HEART_SYSTEM__ = true;
 
   const container = document.querySelector(".blue-hearts-container");
   if (!container) return;
@@ -66,12 +31,8 @@
     color = "#00f0ff";
   }
 
-  if (path === "/" || path === "/index.html") {
-    intensity = 1.2;
-  }
-
   /* =========================
-     CREATE HEART
+     CORE HEART CREATOR
   ========================= */
 
   function createHeart(x = null, y = null, boost = 1) {
@@ -95,7 +56,7 @@
   }
 
   /* =========================
-     BASE HEART FLOW
+     BASE FLOW (CLEAN)
   ========================= */
 
   setInterval(() => {
@@ -103,26 +64,26 @@
   }, 900 / intensity);
 
   /* =========================
-     CLICK REACTION SYSTEM
+     CLICK REACTIONS
   ========================= */
 
   document.addEventListener("click", (e) => {
 
     const target = e.target;
 
-    // 🛒 BUY BUTTON
+    // BUY
     if (target.closest(".btn.primary")) {
       burst(e.pageX, e.pageY, 12);
       return;
     }
 
-    // 🛍 ADD TO CART
+    // CART
     if (target.closest(".add-cart")) {
       burst(e.pageX, e.pageY, 18);
       return;
     }
 
-    // 🌐 OPEN STORE BUTTON
+    // STORE NAVIGATION
     if (target.closest("a[href*='shop'], a[href*='open-store']")) {
       burst(e.pageX, e.pageY, 25);
       return;
@@ -131,7 +92,7 @@
   });
 
   /* =========================
-     HEART BURST EFFECT
+     HEART BURST SYSTEM
   ========================= */
 
   function burst(x, y, count) {
@@ -140,14 +101,14 @@
         createHeart(
           x + (Math.random() * 60 - 30),
           y + (Math.random() * 60 - 30),
-          1.5
+          1.6
         );
-      }, i * 30);
+      }, i * 25);
     }
   }
 
   /* =========================
-     CART REACTION HOOK (GLOBAL)
+     GLOBAL ACCESS (FOR CART)
   ========================= */
 
   window.hugsHeartBurst = function (x, y) {
