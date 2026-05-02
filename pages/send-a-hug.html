@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Send a Hug |   <img
+    src="./assets/hugs_logo.jpg"
+    alt="HUGS logo"
+    class="h-9 w-auto rounded-lg bg-white/10 p-1 ring-1 ring-hugs-border"
+  /></title>
+
+  <style>
+    .site-header{
+  padding:10px 0;
+  border-bottom:1px solid #E8DDD3;
+  background:#F7F6F3;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.header-inner{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.logo-link{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-decoration:none;
+}
+
+.logo-img{
+  height:60px;          /* banner size */
+  width:auto;
+  object-fit:contain;
+  cursor:pointer;
+  transition:0.2s ease;
+}
+
+.logo-img:hover{
+  transform:scale(1.05);
+}
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#F7F6F3;
+      color:#2B2B2B;
+    }
+
+    .wrap{
+      width:min(900px, calc(100% - 32px));
+      margin:0 auto;
+      padding:40px 0;
+      text-align:center;
+    }
+
+    header{
+      padding:20px 0;
+      border-bottom:1px solid #E8DDD3;
+      background:# F7F6F3;
+      position:sticky;
+      top:0;
+    }
+
+    .brand{
+      font-weight:900;
+      color:#8B3A2B;
+      letter-spacing:.1em;
+    }
+
+    h1{
+      color:#0B2A4A;
+      font-size:2.6rem;
+      margin:20px 0 10px;
+    }
+
+    p{
+      color:#6B625C;
+      max-width:600px;
+      margin:0 auto 20px;
+    }
+
+ .card {
+  background:#FFFDF9;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 12px 35px rgba(0,0,0,.08);
+  margin-top:30px;
+
+  /* ✅ FIX CENTERING */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+
+.btn {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  max-width:360px; /* keeps it clean like a modern app */
+  padding:18px;
+  border-radius:999px;
+  font-size:18px;
+  font-weight:800;
+  text-decoration:none;
+  transition:0.3s ease;
+}
+
+    .buy{
+      background:#8B3A2B;
+      color:white;
+    }
+
+    .buy:hover{
+      background:#B85C46;
+      transform:scale(1.03);
+    }
+
+    .secondary{
+      border:1px solid #0B2A4A;
+      color:#0B2A4A;
+    }
+
+    .secondary:hover{
+      background:#0B2A4A;
+      color:white;
+    }
+
+    .trust{
+      margin-top:25px;
+      background:#F2E8D8;
+      padding:20px;
+      border-radius:16px;
+    }
+
+    .trust img{
+      width:100px;
+      margin-top:10px;
+    }
+
+    .note{
+      font-size:12px;
+      color:#777;
+      margin-top:10px;
+    }
+
+    .flow{
+      font-size:14px;
+      margin-top:15px;
+      color:#8B3A2B;
+    }
+  </style>
+</head>
+<header class="site-header">
+  <div class="wrap header-inner">
+
+    <!-- CLICKABLE LOGO BANNER -->
+    <a href="/" class="logo-link">
+      <img src="/assets/hugs_logo.jpg" alt="HUGS Logo" class="logo-img" />
+    </a>
+
+  </div>
+</header>
+<body>
+
+
+
+<main class="wrap">
+
+  <h1>Send a Hug ❤️</h1>
+
+  <p>
+    No forms. No pressure. Just a real moment of care.  
+    Pay once — then share your Hug instantly.
+  </p>
+
+  <div class="card">
+
+    <!-- 🔥 STRIPE PAYMENT LINK BUTTON -->
+    <a class="btn buy"
+       href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00"
+       target="_blank" rel="noopener">
+      Pay $10 & Create Your Hug ❤️
+    </a>
+
+    <!-- PREVIEW -->
+    <a class="btn secondary"
+       href="https://hugscard.netlify.app/"
+       target="_blank">
+      Preview Hug Experience 💌
+    </a>
+
+    <div class="flow">
+      Tap → Pay → Share ❤️
+    </div>
+
+    <div class="trust">
+      <div><strong>Trusted by the HUGS community ❤️</strong></div>
+      <div style="font-size:13px;color:#666;">
+        Real people sharing real emotional support
+      </div>
+
+      <img src="/assets/hug-house-logo.jpg" alt="Hug House">
+
+    </div>
+
+    <div class="note">
+      After payment, return here to share your Hug link.
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>
