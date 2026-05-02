@@ -1,4 +1,11 @@
-/shop         /shop.html         200
-/open-store   /open-store.html   200
-/books        /Books1.html       200
-/             /index.html        200
+/shop              /shop.html              200
+/open-store        /open-store.html        200
+/books             /Books1.html            200
+/books1            /Books1.html            200
+/send-a-hug        /Send-a-hug.html        200
+/send-hug          /send-hug.html          200
+/hugs-reviews      /hugs-reviews.html      200
+/gift              /gift.html              200
+/receipt-rewards   /receipt-rewards.html   200
+/resources         /resources.html         200
+/                  /index.html             200

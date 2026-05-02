@@ -1,0 +1,25 @@
+{
+  "name": "HUGS — Help Under Good Service",
+  "short_name": "HUGS",
+  "description": "Community-driven initiative building systems of care that actually reach people.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0A1A2A",
+  "theme_color": "#0A1A2A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/hugs-logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/Hugs-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
