@@ -1,7 +1,7 @@
 (function () {
 
-  if (window.__HUGS_ROUTER_V4__) return;
-  window.__HUGS_ROUTER_V4__ = true;
+  if (window.__HUGS_ROUTER_V5__) return;
+  window.__HUGS_ROUTER_V5__ = true;
 
   const app = document.getElementById("app");
 
@@ -18,7 +18,7 @@
      CLEAN PATH
   ========================= */
 
-  function cleanPath(path) {
+  function clean(path) {
     if (!path) return "/";
     return path.replace(/\/+$/, "") || "/";
   }
@@ -28,7 +28,7 @@
   ========================= */
 
   function getProductId(path) {
-    const parts = cleanPath(path).split("/");
+    const parts = clean(path).split("/");
     if (parts[1] === "product" && parts[2]) {
       return parts[2];
     }
@@ -36,50 +36,21 @@
   }
 
   /* =========================
-     EXECUTE SCRIPTS (CRITICAL FIX)
-  ========================= */
-
-  function runScripts(container) {
-    const scripts = container.querySelectorAll("script");
-
-    scripts.forEach(oldScript => {
-      const newScript = document.createElement("script");
-
-      if (oldScript.src) {
-        newScript.src = oldScript.src;
-      } else {
-        newScript.textContent = oldScript.textContent;
-      }
-
-      document.body.appendChild(newScript);
-      oldScript.remove();
-    });
-  }
-
-  /* =========================
      LOAD VIEW
   ========================= */
 
-  async function loadView(file, path) {
+  async function load(file, path) {
+    const res = await fetch(file);
+    if (!res.ok) {
+      app.innerHTML = "<h1>Page not found</h1>";
+      return;
+    }
 
-    try {
-      const res = await fetch(file);
-      if (!res.ok) throw new Error();
+    const html = await res.text();
+    app.innerHTML = html;
 
-      const html = await res.text();
-      app.innerHTML = html;
-
-      runScripts(app); // 🔥 FIX
-
-      runPageScripts(path);
-
-    } catch {
-      app.innerHTML = `
-        <div style="padding:40px;text-align:center">
-          <h1>404</h1>
-          <p>Page not found</p>
-        </div>
-      `;
+    if (path === "/shop" && window.initShop) {
+      window.initShop();
     }
   }
 
@@ -87,25 +58,20 @@
      NAVIGATION
   ========================= */
 
-  function navigate(path) {
+  function go(path) {
     history.pushState({}, "", path);
-    handleRoute();
+    route();
   }
 
   /* =========================
-     ROUTE HANDLER
+     ROUTER CORE
   ========================= */
 
-  async function handleRoute() {
+  async function route() {
 
-    let path = cleanPath(window.location.pathname);
+    const path = clean(window.location.pathname);
 
-    // normalize .html routes
-    if (path.endsWith(".html")) {
-      path = path.replace(".html", "");
-    }
-
-    /* PRODUCT */
+    /* PRODUCT ROUTE */
     const productId = getProductId(path);
 
     if (productId) {
@@ -114,33 +80,25 @@
 
       app.innerHTML = html;
 
-      runScripts(app); // 🔥 FIX
-
       if (window.renderProduct) {
         window.renderProduct(productId);
       }
-
       return;
     }
 
-    /* STATIC */
+    /* NORMAL ROUTES */
     const file = routes[path];
 
     if (!file) {
-      app.innerHTML = `
-        <div style="padding:40px;text-align:center">
-          <h1>404</h1>
-          <p>Route not found</p>
-        </div>
-      `;
+      app.innerHTML = "<h1>404 Not Found</h1>";
       return;
     }
 
-    await loadView(file, path);
+    await load(file, path);
   }
 
   /* =========================
-     LINK INTERCEPTION (FIXED)
+     LINK INTERCEPT
   ========================= */
 
   document.addEventListener("click", (e) => {
@@ -152,52 +110,36 @@
 
     if (!href) return;
 
-    // ✅ allow external links + forced external
+    /* ignore external */
     if (
       href.startsWith("http") ||
       href.startsWith("#") ||
-      a.target === "_blank" ||
-      a.hasAttribute("data-external")
-    ) {
-      return;
-    }
+      href.includes(".html")
+    ) return;
 
     e.preventDefault();
-    navigate(href);
-
+    go(href);
   });
 
   /* =========================
-     BACK BUTTON
+     BACK/FORWARD
   ========================= */
 
-  window.addEventListener("popstate", handleRoute);
-
-  /* =========================
-     PAGE HOOKS
-  ========================= */
-
-  function runPageScripts(path) {
-
-    if (path === "/shop") {
-      if (window.initShop) window.initShop();
-    }
-
-  }
+  window.addEventListener("popstate", route);
 
   /* =========================
      INIT
   ========================= */
 
-  handleRoute();
+  route();
 
   /* =========================
      GLOBAL API
   ========================= */
 
-  window.HUGSRouter = {
-    go: navigate,
-    refresh: handleRoute
+  window.HUGS = {
+    go,
+    refresh: route
   };
 
 })();
