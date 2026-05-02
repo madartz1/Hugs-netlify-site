@@ -1,40 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HUGS Online Store</title>
+  <meta
+    name="description"
+    content="Shop HUGS community merch. Support healing, creativity, and purpose-driven projects through every purchase."
+  />
+  <style>
+    :root{
+      --bg: #f7f6f3;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --navy: #0B2A4A;
+      --blue: #3BAEDC;
+      --light-blue: #6ED3F5;
+      --beige: #F2E8D8;
+      --border: #e5e7eb;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 18px;
+      --max: 1200px;
+    }
 
-<!-- SHOP HEADER -->
-<section class="max-w-6xl mx-auto px-4 py-10">
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  <div class="mb-8">
-    <h1 class="text-3xl md:text-4xl font-semibold">Shop HUGS</h1>
-    <p class="text-hugs-muted mt-2">
-      Support the mission through wearable impact.
-    </p>
-  </div>
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
 
-  <!-- FEATURED PRODUCT -->
-  <div class="bg-hugs-card border border-hugs-border rounded-3xl overflow-hidden mb-8">
-    <img
-      src="/assets/time-4-healing-hoodie.JPEG"
-      alt="Featured Hoodie"
-      class="w-full object-cover max-h-[420px]"
-    />
+    img{
+      max-width: 100%;
+      display: block;
+    }
 
-    <div class="p-6">
-      <h2 class="text-2xl font-semibold">Time 4 Healing Hoodie</h2>
-      <p class="text-hugs-muted mt-1">Featured Drop</p>
+    a{
+      text-decoration: none;
+      color: inherit;
+    }
 
-      <div class="mt-3 text-hugs-light text-xl font-semibold">
-        $88
-      </div>
+    .wrap{
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
 
-      <a
-        href="/open-store.html"
-        class="inline-block mt-4 bg-hugs-light text-hugs-dark px-5 py-2 rounded-xl font-semibold hover:scale-[1.02] transition"
-      >
-        Buy Now
+    .site-header{
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-inner{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 76px;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 12px 0;
+    }
+
+    .brand{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-main{
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+    }
+
+    .brand-sub{
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .nav{
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav a{
+      color: var(--navy);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover{
+      background: var(--beige);
+    }
+
+    .hero{
+      padding: 64px 0 30px;
+      background:
+        linear-gradient(135deg, rgba(110,211,245,0.18), rgba(242,232,216,0.7)),
+        var(--bg);
+    }
+
+    .hero-grid{
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-copy h1{
+      font-size: clamp(2rem, 4vw, 3.7rem);
+      line-height: 1.05;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .hero-copy p{
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 650px;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions{
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary{
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .btn-primary:hover{
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary{
+      background: #fff;
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover{
+      background: var(--beige);
+    }
+
+    .hero-card{
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card img{
+      width: 100%;
+      aspect-ratio: 4 / 4;
+      object-fit: cover;
+    }
+
+    .hero-card-body{
+      padding: 18px;
+    }
+
+    .hero-card-body h3{
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .section{
+      padding: 56px 0;
+    }
+
+    .section-head{
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-head h2{
+      font-size: 2rem;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .section-head p{
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .product-grid{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .product-card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-main-image{
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #f2f2f2;
+    }
+
+    .thumbs{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 12px 12px 0;
+    }
+
+    .thumb{
+      border: 2px solid transparent;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #f8f8f8;
+    }
+
+    .thumb.active{
+      border-color: var(--blue);
+    }
+
+    .thumb img{
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .product-body{
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .product-title{
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .product-price{
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #111827;
+    }
+
+    .product-desc{
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .product-meta{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .badge{
+      background: var(--beige);
+      color: var(--navy);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 7px 10px;
+      border-radius: 999px;
+    }
+
+    .product-actions{
+      margin-top: auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 8px;
+    }
+
+    .support-box{
+      background: linear-gradient(135deg, rgba(11,42,74,1), rgba(59,174,220,0.92));
+      color: #fff;
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .support-box h2{
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .support-box p{
+      max-width: 800px;
+      opacity: 0.96;
+    }
+
+    .support-list{
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .support-item{
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .support-item h3{
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .site-footer{
+      padding: 30px 0 50px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .product-grid,
+      .support-list{
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .header-inner{
+        justify-content: center;
+        text-align: center;
+      }
+
+      .nav{
+        justify-content: center;
+      }
+
+      .hero{
+        padding-top: 44px;
+      }
+
+      .hero-actions,
+      .product-actions{
+        flex-direction: column;
+      }
+
+      .btn{
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a href="/" class="brand">
+        <span class="brand-main">HUGS</span>
+        <span class="brand-sub">Help Under Good Service</span>
       </a>
+
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/shop.html">Shop</a>
+        <a href="/open-store.html">Open Store</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <!-- PRODUCT GRID -->
-  <div id="productGrid" class="grid md:grid-cols-3 gap-6"></div>
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1>Wear the mission.<br>Support the movement.</h1>
+          <p>
+            Welcome to the HUGS online store. Every product is designed to represent
+            healing, love, community, and purpose. Shop premium merch that supports
+            the HUGS brand and future projects.
+          </p>
 
-</section>
+          <div class="hero-actions">
+            <a href="#products" class="btn btn-primary">Shop Now</a>
+            <a href="#support" class="btn btn-secondary">Why HUGS?</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <!-- Replace this image with your best launch image -->
+          <img src="/assets/hugs-time-4-healing-front.jpg" alt="HUGS featured hoodie">
+          <div class="hero-card-body">
+            <h3>Featured Launch Product</h3>
+            <p>HUGS – Time 4 Healing Hoodie</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="products">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Shop HUGS Merch</h2>
+          <p>
+            Choose your favorite HUGS hoodie and support healing-centered community
+            projects, digital art, and future HUGS initiatives.
+          </p>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="support">
+      <div class="wrap">
+        <div class="support-box">
+          <h2>Why your purchase matters</h2>
+          <p>
+            HUGS is more than merch. It is a purpose-driven brand focused on healing,
+            creativity, self-sufficiency, and building a strong community. Every
+            purchase helps support the growth of HUGS projects, awareness campaigns,
+            and future community initiatives.
+          </p>
+
+          <div class="support-list">
+            <div class="support-item">
+              <h3>Community Support</h3>
+              <p>Your order helps fund the expansion of HUGS brand projects and outreach.</p>
+            </div>
+            <div class="support-item">
+              <h3>Creative Growth</h3>
+              <p>Supports new designs, digital experiences, and future art-based campaigns.</p>
+            </div>
+            <div class="support-item">
+              <h3>Purpose-Driven Brand</h3>
+              <p>Wear a message of healing, love, service, and stronger community connection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      © 2026 HUGS — Help Under Good Service. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      {
+        id: "time-4-healing-hoodie",
+        name: "HUGS – Time 4 Healing Hoodie",
+        price: "$70",
+        description:
+          "A premium hoodie designed to represent patience, healing, and personal growth. A strong first-launch piece for the HUGS movement.",
+        badges: ["Premium Hoodie", "Healing Theme", "Launch Product"],
+        buyLink: "https://buy.stripe.com/your-link-1",
+        images: [
+          "/assets/hugs-time-4-healing-front.jpg",
+          "/assets/hugs-time-4-healing-back.jpg",
+          "/assets/hugs-time-4-healing-model-1.jpg",
+          "/assets/hugs-time-4-healing-model-2.jpg"
+        ]
+      },
+      {
+        id: "community-hoodie",
+        name: "HUGS Community Hoodie",
+        price: "$70",
+        description:
+          "A clean, community-driven design made for everyday wear. Built to represent unity, support, and the HUGS message.",
+        badges: ["Community", "Everyday Wear", "Signature"],
+        buyLink: "https://buy.stripe.com/your-link-2",
+        images: [
+          "/assets/hugs-community-front.jpg",
+          "/assets/hugs-community-back.jpg",
+          "/assets/hugs-community-model-1.jpg",
+          "/assets/hugs-community-model-2.jpg"
+        ]
+      },
+      {
+        id: "nyc-vibe-hoodie",
+        name: "HUGS NYC Vibe Hoodie",
+        price: "$75",
+        description:
+          "A bold HUGS hoodie with a city-inspired energy. Great for shoppers who want a statement piece with streetwear appeal.",
+        badges: ["NYC Vibe", "Streetwear", "Limited Feel"],
+        buyLink: "https://buy.stripe.com/your-link-3",
+        images: [
+          "/assets/hugs-nyc-front.jpg",
+          "/assets/hugs-nyc-back.jpg",
+          "/assets/hugs-nyc-model-1.jpg",
+          "/assets/hugs-nyc-model-2.jpg"
+        ]
+      }
+    ];
+
+    const productGrid = document.getElementById("productGrid");
+
+    function createProductCard(product, index) {
+      const card = document.createElement("article");
+      card.className = "product-card";
+
+      const badgeHTML = product.badges
+        .map(badge => `<span class="badge">${badge}</span>`)
+        .join("");
+
+      const thumbsHTML = product.images
+        .map((img, i) => `
+          <button class="thumb ${i === 0 ? "active" : ""}" type="button" data-index="${i}" aria-label="View image ${i + 1}">
+            <img src="${img}" alt="${product.name} thumbnail ${i + 1}">
+          </button>
+        `)
+        .join("");
+
+      card.innerHTML = `
+        <img
+          class="product-main-image"
+          src="${product.images[0]}"
+          alt="${product.name}"
+          id="main-image-${index}"
+        >
+
+        <div class="thumbs">
+          ${thumbsHTML}
+        </div>
+
+        <div class="product-body">
+          <h3 class="product-title">${product.name}</h3>
+          <div class="product-price">${product.price}</div>
+          <p class="product-desc">${product.description}</p>
+
+          <div class="product-meta">
+            ${badgeHTML}
+          </div>
+
+          <div class="product-actions">
+            <a class="btn btn-primary" href="${product.buyLink}" target="_blank" rel="noopener noreferrer">
+              Buy Now
+            </a>
+            <a class="btn btn-secondary" href="#support">
+              Support HUGS
+            </a>
+          </div>
+        </div>
+      `;
+
+      const mainImage = card.querySelector(`#main-image-${index}`);
+      const thumbs = card.querySelectorAll(".thumb");
+
+      thumbs.forEach((thumb, thumbIndex) => {
+        thumb.addEventListener("click", () => {
+          mainImage.src = product.images[thumbIndex];
+          thumbs.forEach(t => t.classList.remove("active"));
+          thumb.classList.add("active");
+        });
+      });
+
+      return card;
+    }
+
+    products.forEach((product, index) => {
+      productGrid.appendChild(createProductCard(product, index));
+    });
+  </script>
+</body>
+</html>
