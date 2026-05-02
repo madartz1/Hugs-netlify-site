@@ -6,7 +6,7 @@
   const app = document.getElementById("app");
 
   /* =========================
-     ROUTES (STATIC PAGES)
+     ROUTES
   ========================= */
 
   const routes = {
@@ -24,7 +24,7 @@
   }
 
   /* =========================
-     PRODUCT ROUTE PARSER
+     PRODUCT ROUTE
   ========================= */
 
   function getProductId(path) {
@@ -36,22 +36,44 @@
   }
 
   /* =========================
-     LOAD HTML VIEW
+     EXECUTE SCRIPTS (CRITICAL FIX)
+  ========================= */
+
+  function runScripts(container) {
+    const scripts = container.querySelectorAll("script");
+
+    scripts.forEach(oldScript => {
+      const newScript = document.createElement("script");
+
+      if (oldScript.src) {
+        newScript.src = oldScript.src;
+      } else {
+        newScript.textContent = oldScript.textContent;
+      }
+
+      document.body.appendChild(newScript);
+      oldScript.remove();
+    });
+  }
+
+  /* =========================
+     LOAD VIEW
   ========================= */
 
   async function loadView(file, path) {
 
     try {
       const res = await fetch(file);
-
-      if (!res.ok) throw new Error("Page not found");
+      if (!res.ok) throw new Error();
 
       const html = await res.text();
       app.innerHTML = html;
 
+      runScripts(app); // 🔥 FIX
+
       runPageScripts(path);
 
-    } catch (err) {
+    } catch {
       app.innerHTML = `
         <div style="padding:40px;text-align:center">
           <h1>404</h1>
@@ -76,9 +98,14 @@
 
   async function handleRoute() {
 
-    const path = cleanPath(window.location.pathname);
+    let path = cleanPath(window.location.pathname);
 
-    /* PRODUCT ROUTE */
+    // normalize .html routes
+    if (path.endsWith(".html")) {
+      path = path.replace(".html", "");
+    }
+
+    /* PRODUCT */
     const productId = getProductId(path);
 
     if (productId) {
@@ -87,6 +114,8 @@
 
       app.innerHTML = html;
 
+      runScripts(app); // 🔥 FIX
+
       if (window.renderProduct) {
         window.renderProduct(productId);
       }
@@ -94,7 +123,7 @@
       return;
     }
 
-    /* STATIC ROUTES */
+    /* STATIC */
     const file = routes[path];
 
     if (!file) {
@@ -111,7 +140,7 @@
   }
 
   /* =========================
-     INTERCEPT LINKS
+     LINK INTERCEPTION (FIXED)
   ========================= */
 
   document.addEventListener("click", (e) => {
@@ -122,20 +151,30 @@
     const href = a.getAttribute("href");
 
     if (!href) return;
-    if (href.startsWith("http") || href.startsWith("#")) return;
+
+    // ✅ allow external links + forced external
+    if (
+      href.startsWith("http") ||
+      href.startsWith("#") ||
+      a.target === "_blank" ||
+      a.hasAttribute("data-external")
+    ) {
+      return;
+    }
 
     e.preventDefault();
     navigate(href);
+
   });
 
   /* =========================
-     BACK/FORWARD
+     BACK BUTTON
   ========================= */
 
   window.addEventListener("popstate", handleRoute);
 
   /* =========================
-     PAGE HOOK SYSTEM
+     PAGE HOOKS
   ========================= */
 
   function runPageScripts(path) {
@@ -153,7 +192,7 @@
   handleRoute();
 
   /* =========================
-     GLOBAL API (optional)
+     GLOBAL API
   ========================= */
 
   window.HUGSRouter = {
