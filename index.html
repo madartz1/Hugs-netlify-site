@@ -1,243 +1,296 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>HUGS — Help Under Good Service</title>
-<meta name="description" content="HUGS is a community-driven initiative built to support people through direct action, creative empowerment, and long-term solutions." />
-<link rel="stylesheet" href="/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0A1A2A" />
+  <title>HUGS — Help Under Good Service</title>
+  <meta name="description" content="HUGS is a community-driven initiative supporting people through direct action, creative empowerment, and long-term solutions." />
+  <link rel="icon" href="/assets/hugs-logo.jpg" />
+  <link rel="apple-touch-icon" href="/assets/hugs-logo.jpg" />
+  <link rel="manifest" href="/manifest.webmanifest" />
 
-<style>
-.tile-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:22px;
-}
+  <style>
+    :root{
+      --bg:#0A1A2A;
+      --bg-2:#07111f;
+      --card:rgba(255,255,255,0.06);
+      --border:rgba(255,255,255,0.14);
+      --muted:rgba(255,255,255,0.72);
+      --text:#ffffff;
+      --accent:#6ED3F5;
+      --accent-2:#3BAEDC;
+      --warm:#8B3A2B;
+      --gold:#F2E8D8;
+    }
 
-.tile{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  padding:26px 24px 22px;
-  background:rgba(255,255,255,.03);
-  border:1px solid rgba(255,215,0,.12);
-  border-radius:20px;
-  box-shadow:0 0 22px rgba(0,0,0,.28);
-  color:inherit;
-  transition:.3s ease;
-  min-height:170px;
-}
+    *{ box-sizing:border-box; margin:0; padding:0; }
 
-.tile:hover{
-  transform:translateY(-6px);
-  border-color:rgba(255,215,0,.4);
-  box-shadow:0 0 28px rgba(255,215,0,.18);
-}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+      color:var(--text);
+      background:radial-gradient(circle at top,#102445 0%,#07111f 35%,#050814 100%);
+      min-height:100vh;
+      -webkit-font-smoothing:antialiased;
+    }
 
-.tile-emoji{
-  font-size:1.9rem;
-  margin-bottom:10px;
-}
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; }
 
-.tile-title{
-  color:#ffd700;
-  font-size:1.2rem;
-  font-weight:700;
-  margin-bottom:6px;
-  letter-spacing:.3px;
-}
+    .wrap{
+      width:min(1180px,92%);
+      margin:0 auto;
+    }
 
-.tile-text{
-  color:#c8d2e4;
-  font-size:.95rem;
-  line-height:1.55;
-}
+    /* HEADER */
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(12px);
+      background:rgba(3,8,20,0.6);
+      border-bottom:1px solid var(--border);
+    }
+    .header-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0; gap:14px;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; }
+    .brand img{ height:38px; width:auto; border-radius:10px; background:rgba(255,255,255,0.08); padding:4px; }
+    .brand-name{ font-weight:800; letter-spacing:0.06em; }
+    .nav{ display:flex; gap:8px; flex-wrap:wrap; }
+    .nav a{
+      padding:8px 12px; border-radius:999px;
+      color:var(--muted); font-size:0.92rem; font-weight:600;
+      transition:0.2s ease;
+    }
+    .nav a:hover, .nav a.active{
+      background:rgba(255,255,255,0.08); color:var(--text);
+    }
 
-.tile-arrow{
-  align-self:flex-end;
-  margin-top:14px;
-  color:#ffd700;
-  font-size:1.1rem;
-  opacity:.85;
-  transition:.3s ease;
-}
+    /* HERO */
+    .hero{
+      padding:64px 0 32px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; left:50%; top:-120px;
+      transform:translateX(-50%);
+      width:680px; height:280px;
+      background:rgba(110,211,245,0.35);
+      filter:blur(80px);
+      border-radius:50%;
+      pointer-events:none;
+    }
+    .hero h1{
+      font-size:clamp(2rem,4vw,3.4rem);
+      line-height:1.1;
+      max-width:900px;
+      margin:0 auto 14px;
+    }
+    .hero p{
+      color:var(--muted);
+      max-width:640px;
+      margin:0 auto 28px;
+      font-size:1.05rem;
+    }
+    .hero-actions{
+      display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:48px; padding:0 22px;
+      border-radius:999px; font-weight:700;
+      border:1px solid transparent; cursor:pointer;
+      transition:0.2s ease;
+    }
+    .btn-primary{
+      background:linear-gradient(90deg,#2F80FF,#00C2FF);
+      color:#04111e;
+      box-shadow:0 0 22px rgba(0,194,255,0.35);
+    }
+    .btn-primary:hover{ transform:translateY(-1px); }
+    .btn-ghost{
+      color:var(--text);
+      border-color:var(--border);
+      background:rgba(255,255,255,0.04);
+    }
+    .btn-ghost:hover{ background:rgba(255,255,255,0.08); }
 
-.tile:hover .tile-arrow{
-  transform:translateX(4px);
-  opacity:1;
-}
+    /* APP TILES */
+    .section{ padding:36px 0 56px; }
+    .section h2{
+      font-size:1.4rem; margin-bottom:18px; opacity:0.88;
+    }
+    .tiles{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+    }
+    .tile{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:20px;
+      display:flex; flex-direction:column; gap:8px;
+      transition:0.2s ease;
+      min-height:140px;
+    }
+    .tile:hover{
+      transform:translateY(-3px);
+      border-color:rgba(110,211,245,0.45);
+      box-shadow:0 14px 40px rgba(0,0,0,0.35);
+    }
+    .tile .icon{
+      width:42px; height:42px;
+      border-radius:12px;
+      display:grid; place-items:center;
+      background:rgba(110,211,245,0.18);
+      font-size:1.3rem;
+    }
+    .tile h3{ font-size:1.05rem; }
+    .tile p{ color:var(--muted); font-size:0.92rem; }
+    .tile .more{
+      margin-top:auto; padding-top:8px;
+      color:var(--accent); font-weight:700; font-size:0.9rem;
+    }
 
-.brand-logo{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
+    /* FOOTER */
+    .site-footer{
+      border-top:1px solid var(--border);
+      padding:22px 0;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.9rem;
+      margin-top:40px;
+    }
 
-.brand-logo img{
-  height:44px;
-  width:auto;
-  border-radius:10px;
-  box-shadow:0 0 14px rgba(255,215,0,.25);
-}
-</style>
+    @media (max-width:560px){
+      .nav a{ padding:6px 10px; font-size:0.85rem; }
+      .hero{ padding:48px 0 20px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="gold-particles"></div>
-<div class="gold-hearts-container" id="goldHearts"></div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/hugs-logo.jpg" alt="HUGS logo" />
+        <span class="brand-name">HUGS</span>
+      </a>
+      <nav class="nav">
+        <a href="/" class="active">Home</a>
+        <a href='/shop'>Shop</a>
+        <a href='/books1'>Books</a>
+        <a href='/send-a-hug'>Send a Hug</a>
+        <a href='/hugs-reviews'>Reviews</a>
+      </nav>
+    </div>
+  </header>
 
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand brand-logo" href="/">
-      <img src="/Assets/Hugs-logo.png" alt="HUGS logo" onerror="this.style.display='none'" />
-      <span>
-        <span class="brand-mark">HUGS</span>
-        <span class="brand-sub">Help Under Good Service</span>
-      </span>
-    </a>
-
-    <nav class="nav">
-      <a href="/" class="nav-link active">Home</a>
-      <a href="/shop.html" class="nav-link">Shop</a>
-      <a href="/Books1.html" class="nav-link">Books</a>
-      <a href="/Send-a-hug.html" class="nav-link">Send a Hug</a>
-      <a href="/hugs-reviews.html" class="nav-link">Reviews</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-<section class="hero wrap">
-  <h1>Building systems of care that actually reach people.</h1>
-  <p>
-    HUGS is a community-driven initiative built to support people through direct action,
-    creative empowerment, and long-term solutions. Every drop, card, and resource is
-    designed to put real care in real hands.
-  </p>
-  <div class="hero-actions">
-    <a class="btn primary" href="/shop.html">Shop the Drop</a>
-    <a class="btn" href="/Send-a-hug.html">Send a Hug</a>
-  </div>
-</section>
-
-<section class="section wrap">
-  <div class="tile-grid">
-
-    <a class="tile" href="/shop.html">
-      <div>
-        <div class="tile-emoji">🛍️</div>
-        <div class="tile-title">Shop</div>
-        <div class="tile-text">Browse the latest hoodie drops and HUGS merch.</div>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>Building systems of care that actually reach people.</h1>
+        <p>HUGS is a community-driven initiative built to support people through direct action, creative empowerment, and long-term solutions.</p>
+        <div class="hero-actions">
+          <a class='btn btn-primary' href='/shop'>Shop the Drop</a>
+          <a class='btn btn-ghost' href='/send-a-hug'>Send a Hug</a>
+        </div>
       </div>
-      <div class="tile-arrow">→</div>
-    </a>
+    </section>
 
-    <a class="tile" href="/open-store.html">
-      <div>
-        <div class="tile-emoji">🚪</div>
-        <div class="tile-title">Open Store</div>
-        <div class="tile-text">Direct access to the full store and featured drops.</div>
+    <section class="section">
+      <div class="wrap">
+        <h2>Open the app</h2>
+        <div class="tiles">
+          <a class='tile' href='/shop'>
+            <div class="icon">🛍️</div>
+            <h3>Shop</h3>
+            <p>Browse the HUGS hoodie drops and community merch.</p>
+            <span class="more">Open Shop →</span>
+          </a>
+
+          <a class='tile' href='/open-store'>
+            <div class="icon">🚪</div>
+            <h3>Open Store</h3>
+            <p>Quick launchpad to the live HUGS store.</p>
+            <span class="more">Open Store →</span>
+          </a>
+
+          <a class='tile' href='/books1'>
+            <div class="icon">📖</div>
+            <h3>Books</h3>
+            <p>Crushed but Not Silenced — a story of healing and hope.</p>
+            <span class="more">Read more →</span>
+          </a>
+
+          <a class='tile' href='/send-a-hug'>
+            <div class="icon">💌</div>
+            <h3>Send a Hug</h3>
+            <p>Pay once, then share a digital hug with someone who needs it.</p>
+            <span class="more">Send now →</span>
+          </a>
+
+          <a class='tile' href='/send-hug'>
+            <div class="icon">✉️</div>
+            <h3>Send a Hug Card</h3>
+            <p>Customize your message and send a digital hug card.</p>
+            <span class="more">Create card →</span>
+          </a>
+
+          <a class='tile' href='/gift'>
+            <div class="icon">🎁</div>
+            <h3>Open a Gift</h3>
+            <p>Received a HUG code? Open it here to see your card.</p>
+            <span class="more">Open gift →</span>
+          </a>
+
+          <a class='tile' href='/hugs-reviews'>
+            <div class="icon">⭐</div>
+            <h3>Reviews</h3>
+            <p>Read and share community feedback.</p>
+            <span class="more">View reviews →</span>
+          </a>
+
+          <a class='tile' href='/receipt-rewards'>
+            <div class="icon">🎟️</div>
+            <h3>Rewards</h3>
+            <p>Save your receipt — early supporters unlock community rewards.</p>
+            <span class="more">Learn more →</span>
+          </a>
+
+          <a class='tile' href='/resources'>
+            <div class="icon">🧰</div>
+            <h3>Resources</h3>
+            <p>Helpful resources curated by the HUGS community.</p>
+            <span class="more">Browse →</span>
+          </a>
+        </div>
       </div>
-      <div class="tile-arrow">→</div>
-    </a>
+    </section>
+  </main>
 
-    <a class="tile" href="/Books1.html">
-      <div>
-        <div class="tile-emoji">📖</div>
-        <div class="tile-title">Books</div>
-        <div class="tile-text"><em>Crushed but Not Silenced</em> — a healing narrative of resilience and hope.</div>
-      </div>
-      <div class="tile-arrow">→</div>
-    </a>
+  <footer class="site-footer">
+    <div class="wrap">
+      © <span id="year"></span> HUGS — Help Under Good Service
+    </div>
+  </footer>
 
-    <a class="tile" href="/Send-a-hug.html">
-      <div>
-        <div class="tile-emoji">💌</div>
-        <div class="tile-title">Send a Hug</div>
-        <div class="tile-text">A simple, real moment of care — pay once and share instantly.</div>
-      </div>
-      <div class="tile-arrow">→</div>
-    </a>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    <a class="tile" href="/hug-card.html">
-      <div>
-        <div class="tile-emoji">✉️</div>
-        <div class="tile-title">Send a Hug Card</div>
-        <div class="tile-text">Customize and share a digital hug card with someone you love.</div>
-      </div>
-      <div class="tile-arrow">→</div>
-    </a>
-
-    <a class="tile" href="/gift.html">
-      <div>
-        <div class="tile-emoji">🎁</div>
-        <div class="tile-title">Open a Gift</div>
-        <div class="tile-text">Got a HUG code? Redeem it here to open your card.</div>
-      </div>
-      <div class="tile-arrow">→</div>
-    </a>
-
-    <a class="tile" href="/hugs-reviews.html">
-      <div>
-        <div class="tile-emoji">⭐</div>
-        <div class="tile-title">Reviews</div>
-        <div class="tile-text">Hear from the community — share your own experience.</div>
-      </div>
-      <div class="tile-arrow">→</div>
-    </a>
-
-    <a class="tile" href="/receipt-rewards.html">
-      <div>
-        <div class="tile-emoji">🎟️</div>
-        <div class="tile-title">Rewards</div>
-        <div class="tile-text">Save your receipt — early supporters unlock community rewards.</div>
-      </div>
-      <div class="tile-arrow">→</div>
-    </a>
-
-    <a class="tile" href="/resources.html">
-      <div>
-        <div class="tile-emoji">🧰</div>
-        <div class="tile-title">Resources</div>
-        <div class="tile-text">Community-curated tools, support links, and healing resources.</div>
-      </div>
-      <div class="tile-arrow">→</div>
-    </a>
-
-  </div>
-</section>
-
-</main>
-
-<footer class="footer">
-  <div class="wrap">
-    © <span id="year"></span> HUGS — Help Under Good Service
-  </div>
-</footer>
-
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
-
-const heartsContainer = document.getElementById("goldHearts");
-
-function spawnHeart(){
-  if(!heartsContainer) return;
-  const h = document.createElement("div");
-  h.className = "gold-heart";
-  h.innerHTML = "❤";
-  h.style.left = Math.random()*100 + "vw";
-  h.style.fontSize = (10 + Math.random()*18) + "px";
-  h.style.animationDuration = (10 + Math.random()*12) + "s";
-  h.style.opacity = .45 + Math.random()*.4;
-  heartsContainer.appendChild(h);
-  setTimeout(()=>h.remove(), 22000);
-}
-
-setInterval(spawnHeart, 1300);
-</script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+  </script>
 
 </body>
 </html>

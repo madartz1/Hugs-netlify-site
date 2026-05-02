@@ -101,19 +101,6 @@ const OPEN_STORE_URL = "/shop.html";
 const btn = document.getElementById("openStoreBtn");
 btn.href = OPEN_STORE_URL;
 
-btn.addEventListener("click", (e) => {
-  e.preventDefault();
-  window.location.href = OPEN_STORE_URL;
-});
-
-/* =========================
-   OPTIONAL AUTO REDIRECT
-   (feels like app navigation)
-========================= */
-setTimeout(() => {
-  window.location.href = OPEN_STORE_URL;
-}, 1500);
-
 /* =========================
    PRODUCT DISPLAY
 ========================= */
@@ -123,7 +110,7 @@ const featured = {
   name: "Time 4 Healing Hoodie",
   price: 88,
   description: "Featured Drop",
-  image: "/assets/time-4-healing-hoodie.JPEG"
+  image: "/assets/hugs-time-4-healing-front.png"
 };
 
 function card(p){
