@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HUGS — Help Under Good Service</title>
+<meta name="description" content="HUGS is a community-driven initiative built to support people through direct action, creative empowerment, and long-term solutions." />
+<link rel="stylesheet" href="/styles.css" />
+
+<style>
+.tile-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+}
+
+.tile{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:26px 24px 22px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,215,0,.12);
+  border-radius:20px;
+  box-shadow:0 0 22px rgba(0,0,0,.28);
+  color:inherit;
+  transition:.3s ease;
+  min-height:170px;
+}
+
+.tile:hover{
+  transform:translateY(-6px);
+  border-color:rgba(255,215,0,.4);
+  box-shadow:0 0 28px rgba(255,215,0,.18);
+}
+
+.tile-emoji{
+  font-size:1.9rem;
+  margin-bottom:10px;
+}
+
+.tile-title{
+  color:#ffd700;
+  font-size:1.2rem;
+  font-weight:700;
+  margin-bottom:6px;
+  letter-spacing:.3px;
+}
+
+.tile-text{
+  color:#c8d2e4;
+  font-size:.95rem;
+  line-height:1.55;
+}
+
+.tile-arrow{
+  align-self:flex-end;
+  margin-top:14px;
+  color:#ffd700;
+  font-size:1.1rem;
+  opacity:.85;
+  transition:.3s ease;
+}
+
+.tile:hover .tile-arrow{
+  transform:translateX(4px);
+  opacity:1;
+}
+
+.brand-logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand-logo img{
+  height:44px;
+  width:auto;
+  border-radius:10px;
+  box-shadow:0 0 14px rgba(255,215,0,.25);
+}
+</style>
+</head>
+
+<body>
+
+<div class="gold-particles"></div>
+<div class="gold-hearts-container" id="goldHearts"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand brand-logo" href="/">
+      <img src="/Assets/Hugs-logo.png" alt="HUGS logo" onerror="this.style.display='none'" />
+      <span>
+        <span class="brand-mark">HUGS</span>
+        <span class="brand-sub">Help Under Good Service</span>
+      </span>
+    </a>
+
+    <nav class="nav">
+      <a href="/" class="nav-link active">Home</a>
+      <a href="/shop.html" class="nav-link">Shop</a>
+      <a href="/Books1.html" class="nav-link">Books</a>
+      <a href="/Send-a-hug.html" class="nav-link">Send a Hug</a>
+      <a href="/hugs-reviews.html" class="nav-link">Reviews</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero wrap">
+  <h1>Building systems of care that actually reach people.</h1>
+  <p>
+    HUGS is a community-driven initiative built to support people through direct action,
+    creative empowerment, and long-term solutions. Every drop, card, and resource is
+    designed to put real care in real hands.
+  </p>
+  <div class="hero-actions">
+    <a class="btn primary" href="/shop.html">Shop the Drop</a>
+    <a class="btn" href="/Send-a-hug.html">Send a Hug</a>
+  </div>
+</section>
+
+<section class="section wrap">
+  <div class="tile-grid">
+
+    <a class="tile" href="/shop.html">
+      <div>
+        <div class="tile-emoji">🛍️</div>
+        <div class="tile-title">Shop</div>
+        <div class="tile-text">Browse the latest hoodie drops and HUGS merch.</div>
+      </div>
+      <div class="tile-arrow">→</div>
+    </a>
+
+    <a class="tile" href="/open-store.html">
+      <div>
+        <div class="tile-emoji">🚪</div>
+        <div class="tile-title">Open Store</div>
+        <div class="tile-text">Direct access to the full store and featured drops.</div>
+      </div>
+      <div class="tile-arrow">→</div>
+    </a>
+
+    <a class="tile" href="/Books1.html">
+      <div>
+        <div class="tile-emoji">📖</div>
+        <div class="tile-title">Books</div>
+        <div class="tile-text"><em>Crushed but Not Silenced</em> — a healing narrative of resilience and hope.</div>
+      </div>
+      <div class="tile-arrow">→</div>
+    </a>
+
+    <a class="tile" href="/Send-a-hug.html">
+      <div>
+        <div class="tile-emoji">💌</div>
+        <div class="tile-title">Send a Hug</div>
+        <div class="tile-text">A simple, real moment of care — pay once and share instantly.</div>
+      </div>
+      <div class="tile-arrow">→</div>
+    </a>
+
+    <a class="tile" href="/hug-card.html">
+      <div>
+        <div class="tile-emoji">✉️</div>
+        <div class="tile-title">Send a Hug Card</div>
+        <div class="tile-text">Customize and share a digital hug card with someone you love.</div>
+      </div>
+      <div class="tile-arrow">→</div>
+    </a>
+
+    <a class="tile" href="/gift.html">
+      <div>
+        <div class="tile-emoji">🎁</div>
+        <div class="tile-title">Open a Gift</div>
+        <div class="tile-text">Got a HUG code? Redeem it here to open your card.</div>
+      </div>
+      <div class="tile-arrow">→</div>
+    </a>
+
+    <a class="tile" href="/hugs-reviews.html">
+      <div>
+        <div class="tile-emoji">⭐</div>
+        <div class="tile-title">Reviews</div>
+        <div class="tile-text">Hear from the community — share your own experience.</div>
+      </div>
+      <div class="tile-arrow">→</div>
+    </a>
+
+    <a class="tile" href="/receipt-rewards.html">
+      <div>
+        <div class="tile-emoji">🎟️</div>
+        <div class="tile-title">Rewards</div>
+        <div class="tile-text">Save your receipt — early supporters unlock community rewards.</div>
+      </div>
+      <div class="tile-arrow">→</div>
+    </a>
+
+    <a class="tile" href="/resources.html">
+      <div>
+        <div class="tile-emoji">🧰</div>
+        <div class="tile-title">Resources</div>
+        <div class="tile-text">Community-curated tools, support links, and healing resources.</div>
+      </div>
+      <div class="tile-arrow">→</div>
+    </a>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    © <span id="year"></span> HUGS — Help Under Good Service
+  </div>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const heartsContainer = document.getElementById("goldHearts");
+
+function spawnHeart(){
+  if(!heartsContainer) return;
+  const h = document.createElement("div");
+  h.className = "gold-heart";
+  h.innerHTML = "❤";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (10 + Math.random()*18) + "px";
+  h.style.animationDuration = (10 + Math.random()*12) + "s";
+  h.style.opacity = .45 + Math.random()*.4;
+  heartsContainer.appendChild(h);
+  setTimeout(()=>h.remove(), 22000);
+}
+
+setInterval(spawnHeart, 1300);
+</script>
+
+</body>
+</html>
