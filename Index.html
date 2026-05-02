@@ -1,262 +1,153 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>HUGS - Help Under Good Service</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HUGS — Help Under Good Service</title>
+    <meta name="description" content="HUGS is a community-driven initiative built to support people through direct action, creative empowerment, and long-term solutions." />
 
-<style>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-/* =========================
-   BASE
-========================= */
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  color:white;
+    <!-- HUGS Brand Colors (from logo) -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              hugs: {
+                light: "#6ED3F5",
+                mid: "#3BAEDC",
+                navy: "#0B2A4A",
+                dark: "#0A1A2A",
+                silver: "#C9CCD1",
 
-  background:linear-gradient(180deg, #0B2A4A 0%, #163B63 50%, #EAF3FF 100%);
-  overflow-x:hidden;
-}
+                bg: "#0A1A2A",
+                card: "rgba(255,255,255,0.06)",
+                border: "rgba(255,255,255,0.14)",
+                glow: "rgba(110,211,245,0.45)",
+                text: "rgba(255,255,255,0.92)",
+                muted: "rgba(255,255,255,0.70)"
+              }
+            },
+            boxShadow: {
+              soft: "0 20px 55px rgba(0,0,0,0.45)"
+            }
+          }
+        }
+      }
+    </script>
 
-a{text-decoration:none;color:inherit}
+    <style>
+      .bg-grid {
+        background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
+        background-size: 26px 26px;
+      }
+    </style>
+  </head>
 
-/* =========================
-   HEADER
-========================= */
-header{
-  position:sticky;
-  top:0;
-  background:rgba(11,42,74,.7);
-  backdrop-filter:blur(10px);
-  padding:12px 20px;
-  z-index:1000;
-}
+  <body class="bg-hugs-bg text-white min-h-screen">
 
-.header-inner{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 border-b border-hugs-border bg-hugs-bg/80 backdrop-blur">
+      <nav class="mx-auto max-w-6xl flex items-center justify-between px-4 py-3">
+        <div class="flex items-center gap-3">
+          <img src="./assets/hugs-logo.jpg" alt="HUGS logo" class="h-9 w-auto rounded-lg bg-white/10 p-1 ring-1 ring-hugs-border">
+          <span class="font-semibold">HUGS</span>
+        </div>
 
-.logo img{
-  height:48px;
-  transition:.2s;
-}
+        <div class="hidden md:flex gap-6 text-sm">
+          <a href="#about" class="text-hugs-muted hover:text-white">About</a>
+          <a href="#how" class="text-hugs-muted hover:text-white">How We Help</a>
+          <a href="#funds" class="text-hugs-muted hover:text-white">Funds</a>
+        </div>
+      </nav>
+    </header>
 
-.logo img:hover{
-  transform:scale(1.05);
-}
+    <!-- HERO -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-grid opacity-60"></div>
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 h-72 w-[40rem] bg-hugs-glow blur-3xl rounded-full"></div>
 
-nav a{
-  margin-left:20px;
-  font-weight:700;
-}
+      <div class="relative max-w-6xl mx-auto px-4 py-20">
+        <h1 class="text-4xl md:text-5xl font-semibold max-w-3xl">
+          Building systems of care that actually reach people.
+        </h1>
+        <p class="mt-4 max-w-xl text-hugs-muted">
+          HUGS is a community-driven initiative built to support people through direct action,
+          creative empowerment, and long-term solutions.
+        </p>
+      </div>
+    </section>
 
-/* =========================
-   HERO
-========================= */
-.hero{
-  text-align:center;
-  padding:80px 20px 40px;
-  position:relative;
-  z-index:2;
-}
+    <!-- ABOUT -->
+    <section id="about" class="max-w-6xl mx-auto px-4 py-16">
+      <div class="grid md:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-3xl font-semibold">About HUGS</h2>
+          <p class="mt-4 text-hugs-muted">
+            We believe impact should be transparent and human-centered — not performative.
+          </p>
+        </div>
 
-.hero h1{
-  font-size:3rem;
-  margin-bottom:10px;
-}
+        <div class="bg-hugs-card border border-hugs-border rounded-3xl p-8">
+          <p>
+            <strong>Our mission is simple:</strong><br>
+            Create systems of care that actually reach people.
+          </p>
 
-.hero p{
-  max-width:600px;
-  margin:0 auto 20px;
-  color:#d6e6ff;
-}
+          <p class="mt-4 text-hugs-muted">
+            Merchandise sales help fund outreach, programs, and infrastructure that allow
+            HUGS to continue serving communities with integrity.
+          </p>
+        </div>
+      </div>
+    </section>
 
-/* BUTTONS */
-.btn{
-  display:inline-block;
-  padding:16px 22px;
-  border-radius:999px;
-  font-weight:800;
-  margin:8px;
-}
+    <!-- HOW WE HELP -->
+    <section id="how" class="max-w-6xl mx-auto px-4 pb-16">
+      <h2 class="text-3xl font-semibold">How We Help</h2>
 
-.btn-primary{
-  background:#8B3A2B;
-}
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="bg-hugs-card border border-hugs-border rounded-3xl p-6">
+          <h3 class="font-semibold">Direct Action</h3>
+          <p class="mt-2 text-hugs-muted">Immediate, respectful, real-world support.</p>
+        </div>
 
-.btn-primary:hover{
-  background:#B85C46;
-}
+        <div class="bg-hugs-card border border-hugs-border rounded-3xl p-6">
+          <h3 class="font-semibold">Creative Empowerment</h3>
+          <p class="mt-2 text-hugs-muted">Tools and expression that open new pathways.</p>
+        </div>
 
-.btn-secondary{
-  border:1px solid white;
-}
+        <div class="bg-hugs-card border border-hugs-border rounded-3xl p-6">
+          <h3 class="font-semibold">Long-Term Solutions</h3>
+          <p class="mt-2 text-hugs-muted">Infrastructure that lasts beyond moments.</p>
+        </div>
+      </div>
+    </section>
 
-/* =========================
-   HERO IMAGE CARD
-========================= */
-.hero-card{
-  max-width:500px;
-  margin:40px auto 0;
-  background:white;
-  color:#111;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.3);
-}
+    <!-- FUNDS -->
+    <section id="funds" class="max-w-6xl mx-auto px-4 pb-20">
+      <div class="bg-hugs-card border border-hugs-border rounded-3xl p-8">
+        <h2 class="text-3xl font-semibold">Where Merch Funds Go</h2>
 
-.hero-card img{
-  width:100%;
-  display:block;
-}
+        <ul class="mt-6 space-y-2 text-hugs-muted">
+          <li>• Outreach & supplies</li>
+          <li>• Community programs</li>
+          <li>• Infrastructure & tools</li>
+        </ul>
+      </div>
+    </section>
 
-.hero-card .content{
-  padding:18px;
-  text-align:left;
-}
+    <!-- FOOTER -->
+    <footer class="border-t border-hugs-border py-10">
+      <div class="max-w-6xl mx-auto px-4 flex items-center gap-3">
+        <img src="./assets/hugs-logo.jpg" class="h-8 w-auto rounded-lg bg-white/10 p-1 ring-1 ring-hugs-border">
+        <p class="text-sm text-hugs-muted">
+          © HUGS — Impact that’s transparent and human-centered
+        </p>
+      </div>
+    </footer>
 
-.hero-card h3{
-  margin:0 0 8px;
-  color:#0B2A4A;
-}
-
-.hero-card p{
-  color:#555;
-}
-
-/* =========================
-   FLOATING HEARTS
-========================= */
-.hearts{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:0;
-}
-
-.heart{
-  position:absolute;
-  bottom:-20px;
-  animation:floatUp linear forwards;
-}
-
-@keyframes floatUp{
-  from{transform:translateY(0);opacity:0;}
-  10%{opacity:.7;}
-  to{transform:translateY(-120vh);opacity:0;}
-}
-
-/* =========================
-   SECTION BELOW
-========================= */
-.section{
-  background:white;
-  color:#111;
-  padding:60px 20px;
-  text-align:center;
-}
-
-.section h2{
-  color:#0B2A4A;
-}
-
-</style>
-</head>
-
-<body>
-
-<!-- FLOATING HEARTS -->
-<div class="hearts"></div>
-
-<header>
-  <div class="header-inner">
-
-    <a href="/" class="logo">
-      <img src="/assets/hug-logo.jpg" alt="HUGS Logo">
-    </a>
-
-    <nav>
-      <a href="/">Home</a>
-      <a href="/send-a-hug">Send a Hug</a>
-      <a href="/shop.html">Shop</a>
-    </nav>
-
-  </div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-
-  <h1>Send a Hug ❤️</h1>
-
-  <p>
-    Real connection. Real impact.  
-    A simple $10 hug can change someone’s day.
-  </p>
-
-  <!-- WORKING BUTTON (NO JS BREAKS) -->
-  <a class="btn btn-primary"
-     href="https://buy.stripe.com/dRm9ASa56deM7GvaIM8ww00"
-     target="_blank">
-     Send $10 Hug ❤️
-  </a>
-
-  <a class="btn btn-secondary"
-     href="https://hugscard.netlify.app/"
-     target="_blank">
-     Preview Experience 💌
-  </a>
-
-  <!-- HERO HOODIE CARD -->
-  <div class="hero-card">
-
-    <!-- 🔥 IMPORTANT: FIX YOUR IMAGE PATH -->
-    <img src="/assets/hero-hoodie.jpg" alt="Time for Healing Hoodie">
-
-    <div class="content">
-      <h3>Time for Healing Hoodie</h3>
-      <p>
-        Designed to represent strength, recovery, and emotional support.
-        Wear the message. Spread the mission.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- LOWER SECTION -->
-<section class="section">
-  <h2>Built for Real People</h2>
-  <p>
-    HUGS is more than a product — it’s a movement of emotional support,
-    connection, and real human care.
-  </p>
-</section>
-
-<!-- HEART SCRIPT -->
-<script>
-const heartsContainer = document.querySelector(".hearts");
-
-function spawnHeart(){
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💙";
-
-  heart.style.left = Math.random()*100 + "%";
-  heart.style.fontSize = (12 + Math.random()*20) + "px";
-  heart.style.animationDuration = (5 + Math.random()*5) + "s";
-
-  heartsContainer.appendChild(heart);
-
-  setTimeout(()=>heart.remove(),8000);
-}
-
-setInterval(spawnHeart, 500);
-</script>
-
-</body>
+  </body>
 </html>
