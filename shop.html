@@ -218,7 +218,7 @@
 
     .product-grid{
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 22px;
     }
 
@@ -428,7 +428,7 @@
 
         <div class="hero-card">
           <!-- Replace this image with your best launch image -->
-          <img src="/assets/hugs-time-4-healing-front.png" alt="HUGS featured hoodie">
+          <img src="Assets/hugs-time-4-healing-front.png" alt="HUGS featured hoodie">
           <div class="hero-card-body">
             <h3>Featured Launch Product</h3>
             <p>HUGS – Time 4 Healing Hoodie</p>
@@ -498,10 +498,10 @@
         badges: ["Premium Hoodie", "Healing Theme", "Launch Product"],
         buyLink: "https://buy.stripe.com/your-link-1",
         images: [
-          "/assets/hugs-time-4-healing-front.jpg",
-          "/assets/hugs-time-4-healing-back.jpg",
-          "/assets/hugs-time-4-healing-model-1.jpg",
-          "/assets/hugs-time-4-healing-model-2.jpg"
+          "Assets/hugs-time-4-healing-front.png",
+          "Assets/hugs-time-4-healing-back.jpg",
+          "Assets/hugs-time-4-healing-model-1.jpg",
+          "Assets/hugs-time-4-healing-model-2.png"
         ]
       },
       {
@@ -513,25 +513,9 @@
         badges: ["Community", "Everyday Wear", "Signature"],
         buyLink: "https://buy.stripe.com/your-link-2",
         images: [
-          "/assets/hugs-community-front.jpg",
-          "/assets/hugs-community-back.jpg",
-          "/assets/hugs-community-model-1.jpg",
-          "/assets/hugs-community-model-2.jpg"
-        ]
-      },
-      {
-        id: "nyc-vibe-hoodie",
-        name: "HUGS NYC Vibe Hoodie",
-        price: "$75",
-        description:
-          "A bold HUGS hoodie with a city-inspired energy. Great for shoppers who want a statement piece with streetwear appeal.",
-        badges: ["NYC Vibe", "Streetwear", "Limited Feel"],
-        buyLink: "https://buy.stripe.com/your-link-3",
-        images: [
-          "/assets/hugs-nyc-front.jpg",
-          "/assets/hugs-nyc-back.jpg",
-          "/assets/hugs-nyc-model-1.jpg",
-          "/assets/hugs-nyc-model-2.jpg"
+          "Assets/hugs-community-front.jpg",
+          "Assets/hugs-community-back.jpg",
+          "Assets/hugs-community-model-1.jpg"
         ]
       }
     ];
@@ -562,7 +546,7 @@
           id="main-image-${index}"
         >
 
-        <div class="thumbs">
+        <div class="thumbs" style="grid-template-columns: repeat(${product.images.length}, 1fr);">
           ${thumbsHTML}
         </div>
 
