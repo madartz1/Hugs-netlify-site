@@ -1,7 +1,7 @@
 {
   "name": "HUGS — Help Under Good Service",
   "short_name": "HUGS",
-  "description": "Community-driven initiative building systems of care that actually reach people.",
+  "description": "Community-driven initiative building systems of care that reach people.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
